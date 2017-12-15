@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var categories = [Result]() {
+    var categories = [Category]() {
         didSet {
             pickerView.reloadAllComponents()
         }
@@ -22,12 +22,13 @@ class SearchViewController: UIViewController {
         }
     }
     
+    var isbnBooks = [ISBNBook]()
+    
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.delegate = self
             collectionView.dataSource = self
-            
             collectionView.backgroundColor = UIColor(red:0.59, green:0.65, blue:0.96, alpha:1.00)
             
             guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
@@ -56,6 +57,7 @@ class SearchViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         fetchCategories()
     }
+    
     
 }
 
@@ -89,20 +91,21 @@ extension SearchViewController: UICollectionViewDataSource {
         return books.count
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
         let index = indexPath.item
         let book = books[index]
-//        dump(book)
+        //        dump(book)
         cell.imageView.image = nil
         cell.bestSellingLabel.text = book.bookDetails.first?.title.capitalized
         cell.summaryLabel.text = book.bookDetails.first!.description.isEmpty ? book.bookDetails.first?.description : "No summary!"
         
-        let endpoint = "https://www.googleapis.com/books/v1/volumes?q=+isbn:" + ( book.bookDetails.first?.primaryIsbn10 ?? book.isbns.first?.isbn10.description ?? "nil")
         
         var isbnBook: ISBNBook? {
             didSet {
-//                print("book is \(isbnBook?.items?.first?.volumeInfo.title)")
+                //                print("book is \(isbnBook?.items?.first?.volumeInfo.title)")
                 dump(isbnBook)
                 ISBNAPIClient.manager.addISBNbook(book: isbnBook!)
                 ImageDownloader.manager.getImage(from: isbnBook?.items?.first?.volumeInfo.imageLinks.thumbnail ?? "",
@@ -111,9 +114,13 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
         
-        ISBNAPIClient.manager.fetchISBNBook(from: endpoint,
-                                          completionHandler: {isbnBook = $0},
-                                          errorHandler: {print($0)})
+        if let validISBNEndpoint = ISBNEndpintFromBook(book) {
+            ISBNAPIClient.manager.fetchISBNBook(from: validISBNEndpoint,
+                                                completionHandler: {isbnBook = $0},
+                                                errorHandler: {print($0)})
+        }
+        
+        
         return cell
     }
 }
@@ -121,16 +128,27 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
-        let book = ISBNAPIClient.manager.getISBNbooks()[index]
+        let book = books[index]
         let alertVC = UIAlertController(title: "Adding " + (books[index].bookDetails.first?.title ?? "No title") , message: "Are you sure?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            KeyedArchiverClient.shared.addFavBook(book: book)
-            print(ISBNAPIClient.manager.getISBNbooks().first)
+            self.addPictureToBook(book: book, indexPath: indexPath)
+//            KeyedArchiverClient.shared.addFavBook(book: book)
+//            print(ISBNAPIClient.manager.getISBNbooks().first)
         }))
         alertVC.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
+    
+    func addPictureToBook(book: Book, indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! BookCell
+        let image = cell.imageView.image
+        let bookWithImage = BookWithImage(book: book, image: image)
+        dump(bookWithImage)
+    }
+    
 }
+
+
 
 // MARK: - PICKERVIEW
 extension SearchViewController: UIPickerViewDataSource {
@@ -144,14 +162,30 @@ extension SearchViewController: UIPickerViewDataSource {
 }
 
 extension SearchViewController: UIPickerViewDelegate {
-   
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row].listName
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         ISBNAPIClient.manager.removeISBNbooks()
-        let categoryName = categories[row].listName
+        let category = categories[row]
+        let categoryEndpoint = APIEndpintFromCategory(category)
+        
+        BookAPIClient.manager.getBooks(from: categoryEndpoint,
+                                       completionHandler: {self.books = $0.results},
+                                       errorHandler: {print($0)})
+    }
+    
+    
+}
+
+extension SearchViewController {
+    
+    // MARK: - Helper Functions
+    
+    func APIEndpintFromCategory(_ category: Category) -> String {
+        let categoryName = category.listName
         let categoryWithHyphens = categoryName.replacingOccurrences(of: " ", with: "-")
         
         var endpoint = URLComponents(string: "https://api.nytimes.com/svc/books/v3/lists.json")
@@ -160,9 +194,18 @@ extension SearchViewController: UIPickerViewDelegate {
             URLQueryItem(name: "list", value: categoryWithHyphens)
         ]
         
-        BookAPIClient.manager.getBooks(from: endpoint?.url?.absoluteString ?? "" ,
-                                       completionHandler: {self.books = $0.results},
-                                       errorHandler: {print($0)})
+        return endpoint?.url?.absoluteString ?? ""
+    }
+    
+    func ISBNEndpintFromBook(_ book: Book) -> String? {
+        let endpointHost = "https://www.googleapis.com/books/v1/volumes?q=+isbn:"
+        if let primaryISBN = book.bookDetails.first?.primaryIsbn10 {
+            return endpointHost + primaryISBN
+        } else if let secondaryISBN = book.isbns.first?.isbn10 {
+            return endpointHost + secondaryISBN
+        } else {
+            return nil
+        }
     }
 }
 

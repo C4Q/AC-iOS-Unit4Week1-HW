@@ -79,6 +79,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
 }
 
 extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width / 2.1, height: collectionView.bounds.height / 2.1)
     }

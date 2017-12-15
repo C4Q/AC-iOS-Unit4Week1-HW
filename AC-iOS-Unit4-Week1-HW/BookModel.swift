@@ -6,7 +6,7 @@
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct BookAPIClient {
     private init() {}
@@ -26,6 +26,11 @@ struct BookAPIClient {
                                               completionHandler: completion,
                                               errorHandler: {print($0)})
     }
+}
+
+struct BookWithImage {
+    let book: Book
+    let image: UIImage?
 }
 
 struct BookResult: Codable {
@@ -50,6 +55,7 @@ struct Book: Codable {
     let isbns: [Isbn]
     let bookDetails: [BookDetail]
     let reviews: [Review]
+    var imageLinks: ImageLinks?
 }
 
 struct Review: Codable {
@@ -102,6 +108,7 @@ extension Book {
         case isbns = "isbns"
         case bookDetails = "book_details"
         case reviews = "reviews"
+        case imageLinks
     }
 }
 

@@ -11,11 +11,11 @@ import Foundation
 struct CategoryAPIClient {
     private init() {}
     static let manager = CategoryAPIClient()
-    func getCategories(from urlStr: String, completionHandler: @escaping (Category) -> Void, errorHandler: (Error) -> Void) {
+    func getCategories(from urlStr: String, completionHandler: @escaping (CategoryResult) -> Void, errorHandler: (Error) -> Void) {
         guard let url = URL(string: urlStr) else {return}
         let completion: (Data) -> Void = {(data: Data) in
             do {
-                let categories = try JSONDecoder().decode(Category.self, from: data)
+                let categories = try JSONDecoder().decode(CategoryResult.self, from: data)
                 completionHandler(categories)
             }
             catch {
@@ -28,14 +28,14 @@ struct CategoryAPIClient {
     }
 }
 
-struct Category: Codable {
+struct CategoryResult: Codable {
     let status: String
     let copyright: String
     let numResults: Int
-    let results: [Result]
+    let results: [Category]
 }
 
-struct Result: Codable {
+struct Category: Codable {
     let listName: String
     let displayName: String
     let listNameEncoded: String
@@ -44,7 +44,7 @@ struct Result: Codable {
     let updated: String
 }
 
-extension Category {
+extension CategoryResult {
     enum CodingKeys: String, CodingKey {
         case status = "status"
         case copyright = "copyright"
@@ -53,7 +53,7 @@ extension Category {
     }
 }
 
-extension Result {
+extension Category {
     enum CodingKeys: String, CodingKey {
         case listName = "list_name"
         case displayName = "display_name"
