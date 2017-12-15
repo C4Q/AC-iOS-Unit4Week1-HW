@@ -35,12 +35,14 @@ struct BestSellersWrapper: Codable {
 }
 
 struct BestSellers: Codable {
+    var listName: String
     var rank: Int
     var weeksOnList: Int
     //var isbns: [ISBNWrapper]
     var bookDetails: [BookDetails]
     
     enum CodingKeys: String, CodingKey {
+        case listName = "list_name" //Category to filter by for the KeyedArchiver Function
         case rank = "rank"
         case weeksOnList = "weeksOnList"
         //case isbns = "isbns"

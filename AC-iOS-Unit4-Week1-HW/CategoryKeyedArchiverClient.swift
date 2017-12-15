@@ -1,62 +1,62 @@
 //
-//  KeyedArchiverClient.swift
-//  CollectionViewsMorning
+//  CategoryKeyedArchiverClient.swift
+//  AC-iOS-Unit4-Week1-HW
 //
-//  Created by Richard Crichlow on 12/14/17.
-//  Copyright © 2017 Richard Crichlow. All rights reserved.
+//  Created by Richard Crichlow on 12/15/17.
+//  Copyright © 2017 C4Q . All rights reserved.
 //
 
 import Foundation
 
-class KeyedArchiverClient {
+class CategoriesKeyedArchiverClient {
     private init() {}
-    static let manager = KeyedArchiverClient()
+    static let manager = CategoriesKeyedArchiverClient()
     static let pathName = "FavoriteCards.plist"
-    private var books = [BookDetails]() {
+    private var categories = [CategoriesWrapper]() {
         didSet {
-            saveBooks()
+            saveCategories()
         }
     }
-
-    func add(book: BookDetails) {
-        books.append(book)
+    
+    func add(category: CategoriesWrapper) {
+        categories.append(category)
     }
-
-    func getCards() -> [BookDetails] {
-        return self.books
+    
+    func getCategories() -> [CategoriesWrapper] {
+        return self.categories
     }
-
+    
     func loadData() {
         let path = dataFilePath(withPathName: KeyedArchiverClient.pathName)
         do {
             let data = try Data(contentsOf: path)
-            let books = try PropertyListDecoder().decode([BookDetails].self, from: data)
-            self.books = books
+            let categories = try PropertyListDecoder().decode([CategoriesWrapper].self, from: data)
+            self.categories = categories
         }
         catch {
             print(error)
         }
     }
-
-    func saveBooks() {
+    
+    func saveCategories() {
         let path = dataFilePath(withPathName: KeyedArchiverClient.pathName)
         do {
-            let data = try PropertyListEncoder().encode(books)
+            let data = try PropertyListEncoder().encode(categories)
             try data.write(to: path, options: .atomic)
         }
         catch {
             print(error)
         }
     }
-
+    
     private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-
+    
     // returns the path for supplied name from the dcouments directory
     private func dataFilePath(withPathName path: String) -> URL {
-        return KeyedArchiverClient.manager.documentsDirectory().appendingPathComponent(path)
+        return CategoriesKeyedArchiverClient.manager.documentsDirectory().appendingPathComponent(path)
     }
-
+    
 }
