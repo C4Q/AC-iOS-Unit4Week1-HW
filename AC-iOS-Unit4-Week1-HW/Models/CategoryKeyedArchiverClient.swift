@@ -11,7 +11,7 @@ import Foundation
 class CategoriesKeyedArchiverClient {
     private init() {}
     static let manager = CategoriesKeyedArchiverClient()
-    static let pathName = "FavoriteCards.plist"
+    static let pathName = "Categories.plist"
     private var categories = [CategoriesWrapper]() {
         didSet {
             saveCategories()

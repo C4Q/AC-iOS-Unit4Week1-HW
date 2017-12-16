@@ -11,7 +11,7 @@ import Foundation
 class KeyedArchiverClient {
     private init() {}
     static let manager = KeyedArchiverClient()
-    static let pathName = "FavoriteCards.plist"
+    static let pathName = "FavoriteBooks.plist"
     private var books = [BookDetails]() {
         didSet {
             saveBooks()
