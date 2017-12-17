@@ -8,20 +8,50 @@
 
 /* Begin PBXBuildFile section */
 		54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F137DC1FE302CD00EA22AA /* AppDelegate.swift */; };
-		54F137DF1FE302CD00EA22AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F137DE1FE302CD00EA22AA /* ViewController.swift */; };
 		54F137E21FE302CD00EA22AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E01FE302CD00EA22AA /* Main.storyboard */; };
 		54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E31FE302CE00EA22AA /* Assets.xcassets */; };
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
+		819B25631FE33F860099E7C0 /* BestSellersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B25621FE33F860099E7C0 /* BestSellersViewController.swift */; };
+		819B25651FE33FBD0099E7C0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B25641FE33FBD0099E7C0 /* FavoritesViewController.swift */; };
+		819B25671FE340960099E7C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B25661FE340960099E7C0 /* SettingsViewController.swift */; };
+		819B25691FE340FE0099E7C0 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B25681FE340FE0099E7C0 /* BookDetailViewController.swift */; };
+		81B1C4EB1FE3454400E77D23 /* BestSellerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4EA1FE3454400E77D23 /* BestSellerCollectionViewCell.swift */; };
+		81B1C4ED1FE3455300E77D23 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4EC1FE3455300E77D23 /* FavoritesCollectionViewCell.swift */; };
+		81B1C4F01FE3464400E77D23 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4EF1FE3464400E77D23 /* NetworkHelper.swift */; };
+		81B1C4F21FE346A900E77D23 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4F11FE346A900E77D23 /* ImageHelper.swift */; };
+		81B1C4F51FE3495F00E77D23 /* NYTimesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4F41FE3495F00E77D23 /* NYTimesAPIClient.swift */; };
+		81B1C4F71FE3497000E77D23 /* GoogleBooksAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4F61FE3497000E77D23 /* GoogleBooksAPIClient.swift */; };
+		81B1C4F91FE349B800E77D23 /* BestSellerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4F81FE349B800E77D23 /* BestSellerCategory.swift */; };
+		81B1C4FB1FE35A3E00E77D23 /* BestSellerBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C4FA1FE35A3E00E77D23 /* BestSellerBook.swift */; };
+		81B1C57B1FE4570800E77D23 /* GoogleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C57A1FE4570800E77D23 /* GoogleBook.swift */; };
+		81B1C57D1FE5E50000E77D23 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C57C1FE5E50000E77D23 /* UserDefaultsHelper.swift */; };
+		81B1C57F1FE660E700E77D23 /* NSKeyedArchiverClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C57E1FE660E700E77D23 /* NSKeyedArchiverClient.swift */; };
+		81B1C5811FE7155100E77D23 /* HTMLToPlainText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1C5801FE7155100E77D23 /* HTMLToPlainText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		54F137D91FE302CD00EA22AA /* AC-iOS-Unit4-Week1-HW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC-iOS-Unit4-Week1-HW.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F137DC1FE302CD00EA22AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		54F137DE1FE302CD00EA22AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		54F137E11FE302CD00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54F137E31FE302CE00EA22AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F137E61FE302CE00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		819B25621FE33F860099E7C0 /* BestSellersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellersViewController.swift; sourceTree = "<group>"; };
+		819B25641FE33FBD0099E7C0 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		819B25661FE340960099E7C0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		819B25681FE340FE0099E7C0 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		81B1C4EA1FE3454400E77D23 /* BestSellerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerCollectionViewCell.swift; sourceTree = "<group>"; };
+		81B1C4EC1FE3455300E77D23 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		81B1C4EF1FE3464400E77D23 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		81B1C4F11FE346A900E77D23 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		81B1C4F41FE3495F00E77D23 /* NYTimesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTimesAPIClient.swift; sourceTree = "<group>"; };
+		81B1C4F61FE3497000E77D23 /* GoogleBooksAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBooksAPIClient.swift; sourceTree = "<group>"; };
+		81B1C4F81FE349B800E77D23 /* BestSellerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerCategory.swift; sourceTree = "<group>"; };
+		81B1C4FA1FE35A3E00E77D23 /* BestSellerBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerBook.swift; sourceTree = "<group>"; };
+		81B1C57A1FE4570800E77D23 /* GoogleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBook.swift; sourceTree = "<group>"; };
+		81B1C57C1FE5E50000E77D23 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		81B1C57E1FE660E700E77D23 /* NSKeyedArchiverClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSKeyedArchiverClient.swift; sourceTree = "<group>"; };
+		81B1C5801FE7155100E77D23 /* HTMLToPlainText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLToPlainText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +85,52 @@
 			isa = PBXGroup;
 			children = (
 				54F137DC1FE302CD00EA22AA /* AppDelegate.swift */,
-				54F137DE1FE302CD00EA22AA /* ViewController.swift */,
 				54F137E01FE302CD00EA22AA /* Main.storyboard */,
+				81B1C4F31FE346B500E77D23 /* Models */,
+				81B1C4EE1FE3456600E77D23 /* Custom Collection View Cells */,
+				819B256A1FE341080099E7C0 /* View Controllers */,
 				54F137E31FE302CE00EA22AA /* Assets.xcassets */,
 				54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */,
 				54F137E81FE302CE00EA22AA /* Info.plist */,
 			);
 			path = "AC-iOS-Unit4-Week1-HW";
+			sourceTree = "<group>";
+		};
+		819B256A1FE341080099E7C0 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				819B25621FE33F860099E7C0 /* BestSellersViewController.swift */,
+				819B25641FE33FBD0099E7C0 /* FavoritesViewController.swift */,
+				819B25661FE340960099E7C0 /* SettingsViewController.swift */,
+				819B25681FE340FE0099E7C0 /* BookDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		81B1C4EE1FE3456600E77D23 /* Custom Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				81B1C4EC1FE3455300E77D23 /* FavoritesCollectionViewCell.swift */,
+				81B1C4EA1FE3454400E77D23 /* BestSellerCollectionViewCell.swift */,
+			);
+			path = "Custom Collection View Cells";
+			sourceTree = "<group>";
+		};
+		81B1C4F31FE346B500E77D23 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81B1C4F81FE349B800E77D23 /* BestSellerCategory.swift */,
+				81B1C57A1FE4570800E77D23 /* GoogleBook.swift */,
+				81B1C4FA1FE35A3E00E77D23 /* BestSellerBook.swift */,
+				81B1C4EF1FE3464400E77D23 /* NetworkHelper.swift */,
+				81B1C4F11FE346A900E77D23 /* ImageHelper.swift */,
+				81B1C4F41FE3495F00E77D23 /* NYTimesAPIClient.swift */,
+				81B1C57C1FE5E50000E77D23 /* UserDefaultsHelper.swift */,
+				81B1C5801FE7155100E77D23 /* HTMLToPlainText.swift */,
+				81B1C57E1FE660E700E77D23 /* NSKeyedArchiverClient.swift */,
+				81B1C4F61FE3497000E77D23 /* GoogleBooksAPIClient.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +205,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F137DF1FE302CD00EA22AA /* ViewController.swift in Sources */,
+				81B1C57D1FE5E50000E77D23 /* UserDefaultsHelper.swift in Sources */,
+				81B1C4F01FE3464400E77D23 /* NetworkHelper.swift in Sources */,
+				81B1C57B1FE4570800E77D23 /* GoogleBook.swift in Sources */,
+				81B1C4ED1FE3455300E77D23 /* FavoritesCollectionViewCell.swift in Sources */,
+				81B1C4F71FE3497000E77D23 /* GoogleBooksAPIClient.swift in Sources */,
+				81B1C4FB1FE35A3E00E77D23 /* BestSellerBook.swift in Sources */,
+				81B1C4F21FE346A900E77D23 /* ImageHelper.swift in Sources */,
 				54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */,
+				819B25651FE33FBD0099E7C0 /* FavoritesViewController.swift in Sources */,
+				81B1C4F51FE3495F00E77D23 /* NYTimesAPIClient.swift in Sources */,
+				819B25631FE33F860099E7C0 /* BestSellersViewController.swift in Sources */,
+				81B1C4EB1FE3454400E77D23 /* BestSellerCollectionViewCell.swift in Sources */,
+				81B1C57F1FE660E700E77D23 /* NSKeyedArchiverClient.swift in Sources */,
+				819B25671FE340960099E7C0 /* SettingsViewController.swift in Sources */,
+				81B1C5811FE7155100E77D23 /* HTMLToPlainText.swift in Sources */,
+				81B1C4F91FE349B800E77D23 /* BestSellerCategory.swift in Sources */,
+				819B25691FE340FE0099E7C0 /* BookDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
