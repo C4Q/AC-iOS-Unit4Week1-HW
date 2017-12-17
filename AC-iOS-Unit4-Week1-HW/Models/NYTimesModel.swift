@@ -18,6 +18,7 @@ var categoriesEndpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?
 //(e.g Hardcover-Fiction)
 //For Example - "https://api.nytimes.com/svc/books/v3/lists.json?api-key=ac1cde81fb2147a59b8fc20e10ff70b2&list=Hardcover-Fiction"
 
+//Endpiont 1
 struct CategoriesWrapper: Codable {
     var results: [Categories]
 }
@@ -26,6 +27,11 @@ struct Categories: Codable {
     var listName: String?
     var displayName: String?
     var listNameEncoded: String?
+    var theEndpointLink: String {
+        var urlStr = ""
+        urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(listNameEncoded ?? "")"
+        return urlStr
+    }
     
     enum CodingKeys: String, CodingKey {
         case listName = "list_name"
@@ -33,6 +39,8 @@ struct Categories: Codable {
         case listNameEncoded = "list_name_encoded" //Use for BestSeller Call
     }
 }
+
+//Endpoint II
 //Results RETURN sorted :)
 struct BestSellersWrapper: Codable {
     var results: [BestSellers]
@@ -90,7 +98,7 @@ struct CategoriesAPIClient {
         let request = URLRequest(url: url)
         let parseDataIntoCards: (Data) -> Void = {(data) in
             do {
-                let results = try JSONDecoder().decode(CategoriesWrapper.self, from: data)
+                let results = try JSONDecoder().decode(CategoriesWrapper.self, from: data) //THIS IS ALWAYS THE TOP LAYER OF JSON
                 let categoriesArray = results.results
                 completionHandler(categoriesArray)
             }

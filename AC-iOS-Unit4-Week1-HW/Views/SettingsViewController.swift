@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var categoriesArray = [Categories]() {
         didSet {
             for elements in categoriesArray {
+                //To print the Categories and see how they are formatted
+                //TODO: pick the best property for the BestSellerAPI Call
                 print("\(elements.displayName ?? "BLANK") + \(elements.listName ?? "BLANK") + \(elements.listNameEncoded ?? "BLANK")")
             }
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
@@ -33,6 +35,11 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(categoriesArray[row].displayName ?? "Blank")"
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        print("This is Row: \(row) Component\(component)")
+        //TODO: func to set a UserDefault for picker start position
     }
     
     override func viewDidLoad() {
@@ -86,6 +93,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         //print("Categories loaded from KeyedArchive")
         //func to load from KSKeyedArchive
+        //func to load start position for pickerView
         
         
         
