@@ -11,10 +11,10 @@ import Foundation
 struct CategoryAPIClient {
     private init(){}
     static let shared = CategoryAPIClient()
-    func getCategories(completionHandler: @escaping ([Category]) -> Void,
+    func getCategories(completionHandler: @escaping ([BestSellerBook]) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
-        let myCategoryAPIKey = "99f973e47a244b3a8ee6b95a632550ae"
-        let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(myCategoryAPIKey)"
+        let myNYTAPIKey = "99f973e47a244b3a8ee6b95a632550ae"
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(myNYTAPIKey)"
         guard let url = URL(string: urlStr) else {
             errorHandler(AppError.badURL(str: urlStr)); return
         }

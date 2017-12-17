@@ -20,6 +20,7 @@
 		81A546A91FE5FFED003C9E6A /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A546A81FE5FFED003C9E6A /* NetworkHelper.swift */; };
 		81A546AC1FE601D3003C9E6A /* CategoryAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A546AB1FE601D3003C9E6A /* CategoryAPIClient.swift */; };
 		81A546AE1FE60E0C003C9E6A /* BestSellerBookAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A546AD1FE60E0C003C9E6A /* BestSellerBookAPIClient.swift */; };
+		81A546B01FE611C4003C9E6A /* BookDetailGoogleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A546AF1FE611C4003C9E6A /* BookDetailGoogleAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		81A546A81FE5FFED003C9E6A /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		81A546AB1FE601D3003C9E6A /* CategoryAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAPIClient.swift; sourceTree = "<group>"; };
 		81A546AD1FE60E0C003C9E6A /* BestSellerBookAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerBookAPIClient.swift; sourceTree = "<group>"; };
+		81A546AF1FE611C4003C9E6A /* BookDetailGoogleAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailGoogleAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				81A546A81FE5FFED003C9E6A /* NetworkHelper.swift */,
 				81A546AB1FE601D3003C9E6A /* CategoryAPIClient.swift */,
 				81A546AD1FE60E0C003C9E6A /* BestSellerBookAPIClient.swift */,
+				81A546AF1FE611C4003C9E6A /* BookDetailGoogleAPIClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				81A546A51FE5F737003C9E6A /* BestSellerBook.swift in Sources */,
 				81A546A11FE5F57B003C9E6A /* SettingsViewController.swift in Sources */,
 				81A546A31FE5F6A5003C9E6A /* Category.swift in Sources */,
+				81A546B01FE611C4003C9E6A /* BookDetailGoogleAPIClient.swift in Sources */,
 				81A546A71FE5F77D003C9E6A /* BookDetail-Google.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

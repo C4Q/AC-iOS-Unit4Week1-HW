@@ -1,5 +1,5 @@
 //
-//  BestSellerBookAPIClient.swift
+//  BookDetailGoogleAPIClient.swift
 //  AC-iOS-Unit4-Week1-HW
 //
 //  Created by C4Q on 12/16/17.
@@ -8,22 +8,21 @@
 
 import Foundation
 
-struct BestSellerBookAPIClient {
+struct BookDetailGoogleAPIClient {
     private init(){}
-    static let shared = BestSellerBookAPIClient()
-    func getNYTBooks(category: String,
-                       completionHandler: @escaping ([BestSellerBook]) -> Void,
+    static let shared = BookDetailGoogleAPIClient()
+    func getGoogleBooks(isbn: String,
+                       completionHandler: @escaping ([BookWrapper]) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
-        let myNYTAPIKey = "99f973e47a244b3a8ee6b95a632550ae"
-        let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(myNYTAPIKey)&list=\(category)"
+        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)"
         guard let url = URL(string: urlStr) else {
             errorHandler(AppError.badURL(str: urlStr)); return
         }
         let request = URLRequest(url: url)
         let completion: (Data) -> Void = {(data: Data) in
             do {
-                let response = try JSONDecoder().decode(BestSellerBookWrapper.self, from: data)
-                completionHandler(response.results)
+                let response = try JSONDecoder().decode(ResultsWrapper.self, from: data)
+                completionHandler(response.items)
             }
             catch {
                 errorHandler(AppError.codingError(rawError: error))
