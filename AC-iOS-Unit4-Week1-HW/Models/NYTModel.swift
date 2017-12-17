@@ -25,10 +25,9 @@ struct CategoryResultsWrapper: Codable {
 
 struct BookCategories: Codable {
     let categoryName: String
-    
     let listNameForInterpolationInAPICall: String
     
-    var endpointURL: String {
+    var categoryEndpointURL: String {
         let key = "0c769eb094e94bffa0b35d55b222d489"
         var urlStr = ""
         urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(self.listNameForInterpolationInAPICall)"
@@ -71,7 +70,13 @@ struct BookDetailsWrapper: Codable {
     let author: String
     let primaryISBN13: String
     let primaryISBN10: String
-
+    
+    var isbnNumbers: String {
+        var urlStr = ""
+        urlStr = "https://www.googleapis.com/books/v1/volumes?q=+\(primaryISBN13)"
+        return urlStr
+    }
+    
     enum CodingKeys: String, CodingKey{
         case title
         case shortDescription = "description"

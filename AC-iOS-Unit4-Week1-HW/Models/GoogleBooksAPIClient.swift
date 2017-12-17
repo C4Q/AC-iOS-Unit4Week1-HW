@@ -12,7 +12,7 @@ import Foundation
 class GoogleBooksInfoAPIClient{
     private init (){}
     static let manager = GoogleBooksInfoAPIClient()
-    private let urlStr = "https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239"
+    //private let urlStr = "https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239"
     
     func getBookImages(from urlStr: String,
                        completionHandler: @escaping ([GoogleBooks]) -> Void,

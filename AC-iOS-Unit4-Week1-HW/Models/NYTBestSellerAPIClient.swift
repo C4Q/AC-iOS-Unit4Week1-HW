@@ -14,7 +14,7 @@ import Foundation
 class NYTBestSellersAPIClient{
     private init(){}
     static let manager = NYTBestSellersAPIClient()
-    private let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=0c769eb094e94bffa0b35d55b222d489&list=\()"
+    //private let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=0c769eb094e94bffa0b35d55b222d489&list=\()"
     
     func getBestSellerISBN(from urlStr: String,
                            completionHandler: @escaping ([BestSellers]) -> Void,
