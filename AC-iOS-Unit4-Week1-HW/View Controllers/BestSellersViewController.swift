@@ -14,6 +14,13 @@ class BestSellersViewController: UIViewController {
     
     @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView!
     
+    var categories: [Category]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.bestSellersCollectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
