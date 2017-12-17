@@ -27,11 +27,11 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        <#code#>
+        return 0 /// TODO
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        <#code#>
+        return 0 /// TODO
     }
     
     

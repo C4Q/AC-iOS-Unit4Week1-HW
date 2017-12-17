@@ -24,7 +24,7 @@ struct BookDetail: Codable {
     let authors: [String]
     let publisher: String
     let publishedDate: String
-    let description: String
+    let description: String /// LONG DESCRIPTION
     let industryIdentifiers: [Identifier]
     let pageCount: Int
     let categories: [String]

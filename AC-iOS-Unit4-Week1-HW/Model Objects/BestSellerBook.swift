@@ -37,7 +37,7 @@ struct ISBNNum: Codable {
 
 struct Detail: Codable {
     let title: String
-    let description: String
+    let description: String /// SHORT DESCRIPTION
     let contributor: String
     let author: String
 }

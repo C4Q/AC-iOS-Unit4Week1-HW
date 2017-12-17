@@ -11,7 +11,7 @@ import Foundation
 struct CategoryAPIClient {
     private init(){}
     static let shared = CategoryAPIClient()
-    func getCategories(completionHandler: @escaping ([BestSellerBook]) -> Void,
+    func getCategories(completionHandler: @escaping ([Category]) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
         let myNYTAPIKey = "99f973e47a244b3a8ee6b95a632550ae"
         let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(myNYTAPIKey)"
@@ -33,7 +33,3 @@ struct CategoryAPIClient {
                                               errorHandler: errorHandler)
     }
 }
-
-
-
-

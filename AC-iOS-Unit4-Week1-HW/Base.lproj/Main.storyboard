@@ -29,7 +29,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Book Cover Cell" id="tgD-7a-aH9">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Book Cover Cell" id="tgD-7a-aH9" customClass="BestSellerCollectionViewCell" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="82.5" width="190" height="173"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -42,14 +42,14 @@
                                                         <constraint firstAttribute="height" constant="87" id="cVf-c4-b3o"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdC-h2-xbL">
-                                                    <rect key="frame" x="8" y="144" width="174" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weeks on List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raV-JS-odt" userLabel="Weeks on List Label">
+                                                    <rect key="frame" x="8" y="94.5" width="174" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weeks on List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raV-JS-odt">
-                                                    <rect key="frame" x="8" y="95" width="174" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdC-h2-xbL" userLabel="Short Description Label">
+                                                    <rect key="frame" x="8" y="143.5" width="174" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -71,6 +71,9 @@
                                             <constraint firstItem="gdC-h2-xbL" firstAttribute="bottom" secondItem="tgD-7a-aH9" secondAttribute="bottomMargin" id="xpO-S3-bFG"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="bestSellerImageView" destination="Z5R-Jp-dlb" id="7L6-VJ-ADp"/>
+                                            <outlet property="shortDescriptionLabel" destination="gdC-h2-xbL" id="FEx-bw-hi9"/>
+                                            <outlet property="weeksOnListLabel" destination="raV-JS-odt" id="GOI-rn-gEk"/>
                                             <segue destination="ixV-wN-agA" kind="show" id="GDx-Uj-NSf"/>
                                         </connections>
                                     </collectionViewCell>
@@ -198,14 +201,28 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Favorite Cell" id="Cg2-yD-4Ep">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Favorite Cell" id="Cg2-yD-4Ep" customClass="FavoriteCollectionViewCell" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target">
                                         <rect key="frame" x="55" y="0.0" width="265" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="265" height="203"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4t-u1-E7I">
+                                                    <rect key="frame" x="0.0" y="0.0" width="265" height="203"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.93748415399999996" blue="0.94634359140000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="e4t-u1-E7I" secondAttribute="bottom" id="YRl-ad-Q7j"/>
+                                            <constraint firstItem="e4t-u1-E7I" firstAttribute="leading" secondItem="Cg2-yD-4Ep" secondAttribute="leading" id="eCm-65-1bJ"/>
+                                            <constraint firstItem="e4t-u1-E7I" firstAttribute="top" secondItem="Cg2-yD-4Ep" secondAttribute="top" id="n7B-UG-za7"/>
+                                            <constraint firstAttribute="trailing" secondItem="e4t-u1-E7I" secondAttribute="trailing" id="nf6-8p-K3L"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="favoriteImageView" destination="e4t-u1-E7I" id="AfQ-Pa-kSx"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
