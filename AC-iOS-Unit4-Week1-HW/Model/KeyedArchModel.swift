@@ -8,9 +8,9 @@
 
 import Foundation
 
-class KeyedArchiverClient {
+class KeyedArchiverModel {
     
-    static let shared = KeyedArchiverClient()
+    static let shared = KeyedArchiverModel()
     private init() {}
     
     static let plistPathName = "FavoriteBooks.plist"
@@ -20,11 +20,11 @@ class KeyedArchiverClient {
         return paths.first!
     }
     
-    private func dataFilePath(pathName: String) -> URL {
-        return KeyedArchiverClient.shared.documentsDirectory().appendingPathComponent(pathName)
+    func dataFilePath(pathName: String) -> URL {
+        return KeyedArchiverModel.shared.documentsDirectory().appendingPathComponent(pathName)
     }
     
-    private var favBooks = [ISBNBook]() {
+    var favBooks = [ISBNBook]() {
         didSet {
             saveFavorites()
         }
@@ -35,7 +35,7 @@ class KeyedArchiverClient {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(favBooks)
-            try data.write(to: dataFilePath(pathName: KeyedArchiverClient.plistPathName), options: .atomic)
+            try data.write(to: dataFilePath(pathName: KeyedArchiverModel.plistPathName), options: .atomic)
         } catch {
             print("Encoder error: \(error.localizedDescription)")
         }
@@ -44,7 +44,7 @@ class KeyedArchiverClient {
     //    load
     func loadFavorites() {
         let decoder = PropertyListDecoder()
-        let path = dataFilePath(pathName: KeyedArchiverClient.plistPathName)
+        let path = dataFilePath(pathName: KeyedArchiverModel.plistPathName)
         do {
             let data = try Data.init(contentsOf: path)
             favBooks = try decoder.decode([ISBNBook].self, from: data)

@@ -27,8 +27,8 @@ class FavoriteViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        KeyedArchiverClient.shared.loadFavorites()
-        favoriteBooks = KeyedArchiverClient.shared.getFavBooks()
+        KeyedArchiverModel.shared.loadFavorites()
+        favoriteBooks = KeyedArchiverModel.shared.getFavBooks()
         collectionView.reloadData()
     }
     

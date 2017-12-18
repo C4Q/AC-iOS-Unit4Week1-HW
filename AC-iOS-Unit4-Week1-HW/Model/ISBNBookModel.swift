@@ -26,6 +26,25 @@ class ISBNAPIClient {
         isbnBooks = [ISBNBook]()
     }
     
+    func ISBNEndpintFromBook(_ book: Book) -> String? {
+        let endpointHost = "https://www.googleapis.com/books/v1/volumes?q=+isbn:"
+        if let primaryISBN = book.bookDetails.first?.primaryIsbn10 {
+            return endpointHost + primaryISBN
+        } else if let secondaryISBN = book.isbns.first?.isbn10 {
+            return endpointHost + secondaryISBN
+        } else {
+            return nil
+        }
+    }
+    
+    func hashingISBN(book: Book) -> String? {
+        guard let isbnEndpoint = ISBNAPIClient.manager.ISBNEndpintFromBook(book),
+            let isbnSubstring = String(isbnEndpoint.reversed()).split(separator: ":").first else { return nil }
+        
+        let isbn = String(isbnSubstring)
+        return isbn
+    }
+    
     func fetchISBNBook(from urlStr: String, completionHandler: @escaping (ISBNBook) -> Void, errorHandler: (Error) -> Void) {
         guard let url = URL(string: urlStr) else {return}
         let completion: (Data) -> Void = {(data: Data) in

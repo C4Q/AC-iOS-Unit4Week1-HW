@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
     }
     
     func fetchCategories() {
-        CategoryAPIClient.manager.getCategories(from: CategoryModel.shared.categoryEndpoint,
+        CategoryAPIClient.manager.getCategories(from: CategoryAPIClient.manager.endpointForCategoryList,
                                                 completionHandler: {self.categories = $0.results.sorted{$0.listName < $1.listName}},
                                                 errorHandler: {print($0)})
     }
@@ -114,7 +114,7 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
         
-        if let validISBNEndpoint = ISBNEndpintFromBook(book) {
+        if let validISBNEndpoint = ISBNAPIClient.manager.ISBNEndpintFromBook(book) {
             ISBNAPIClient.manager.fetchISBNBook(from: validISBNEndpoint,
                                                 completionHandler: {isbnBook = $0},
                                                 errorHandler: {print($0)})
@@ -131,7 +131,12 @@ extension SearchViewController: UICollectionViewDelegate {
         let book = books[index]
         let alertVC = UIAlertController(title: "Adding " + (books[index].bookDetails.first?.title ?? "No title") , message: "Are you sure?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            self.addPictureToBook(book: book, indexPath: indexPath)
+            if let image = self.imageFromCell(indexPath: indexPath) {
+                let result = FavoriteModel.manager.storeImageToDisk(image: image, book: book)
+                print(FavoriteModel.manager.imageFromDisk(book: book))
+            }
+            
+//            self.addPictureToBook(book: book, indexPath: indexPath)
 //            KeyedArchiverClient.shared.addFavBook(book: book)
 //            print(ISBNAPIClient.manager.getISBNbooks().first)
         }))
@@ -139,12 +144,12 @@ extension SearchViewController: UICollectionViewDelegate {
         present(alertVC, animated: true, completion: nil)
     }
     
-    func addPictureToBook(book: Book, indexPath: IndexPath) {
+    func imageFromCell(indexPath: IndexPath) -> UIImage? {
         let cell = collectionView.cellForItem(at: indexPath) as! BookCell
         let image = cell.imageView.image
-        let bookWithImage = BookWithImage(book: book, image: image)
-        dump(bookWithImage)
+        return image
     }
+    
     
 }
 
@@ -170,7 +175,7 @@ extension SearchViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         ISBNAPIClient.manager.removeISBNbooks()
         let category = categories[row]
-        let categoryEndpoint = APIEndpintFromCategory(category)
+        let categoryEndpoint = CategoryAPIClient.manager.endpointForBooksFromCategory(category)
         
         BookAPIClient.manager.getBooks(from: categoryEndpoint,
                                        completionHandler: {self.books = $0.results},
@@ -184,28 +189,10 @@ extension SearchViewController {
     
     // MARK: - Helper Functions
     
-    func APIEndpintFromCategory(_ category: Category) -> String {
-        let categoryName = category.listName
-        let categoryWithHyphens = categoryName.replacingOccurrences(of: " ", with: "-")
-        
-        var endpoint = URLComponents(string: "https://api.nytimes.com/svc/books/v3/lists.json")
-        endpoint?.queryItems = [
-            URLQueryItem(name: "api-key", value: "8e7c1c0a260344af8ea99339ed2f16f4"),
-            URLQueryItem(name: "list", value: categoryWithHyphens)
-        ]
-        
-        return endpoint?.url?.absoluteString ?? ""
-    }
     
-    func ISBNEndpintFromBook(_ book: Book) -> String? {
-        let endpointHost = "https://www.googleapis.com/books/v1/volumes?q=+isbn:"
-        if let primaryISBN = book.bookDetails.first?.primaryIsbn10 {
-            return endpointHost + primaryISBN
-        } else if let secondaryISBN = book.isbns.first?.isbn10 {
-            return endpointHost + secondaryISBN
-        } else {
-            return nil
-        }
-    }
+    
+    
+    
+    
 }
 

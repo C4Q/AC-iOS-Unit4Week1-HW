@@ -26,6 +26,8 @@ struct BookAPIClient {
                                               completionHandler: completion,
                                               errorHandler: {print($0)})
     }
+    
+    
 }
 
 struct BookWithImage {
