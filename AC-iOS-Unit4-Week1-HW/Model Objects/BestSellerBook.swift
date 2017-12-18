@@ -31,12 +31,12 @@ struct BestSellerBook: Codable {
 }
 
 struct ISBNNum: Codable {
-    let isbn10: String
-    let isbn13: String
+    let isbn10: String?
+    let isbn13: String?
 }
 
 struct Detail: Codable {
-    let title: String
+    let title: String?
     let shortDescription: String /// SHORT DESCRIPTION
     let contributor: String
     let author: String

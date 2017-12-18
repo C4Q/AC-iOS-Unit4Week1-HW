@@ -11,13 +11,12 @@ import UIKit
 class BestSellersViewController: UIViewController {
     
     @IBOutlet weak var bestSellersCollectionView: UICollectionView!
-    
     @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView!
     
-    
-    
+
     var categories = [Category]() {
         didSet {
+            print("catgories SET")
             DispatchQueue.main.async {
                 self.bestSellersCategoryPickerView.reloadAllComponents()
             }
@@ -26,14 +25,17 @@ class BestSellersViewController: UIViewController {
     
     var nytBooksWithISBN = [BestSellerBook]() {
         didSet {
+            print("nytBooksWithISBN SET")
             DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
+                
             }
         }
     }
     
     var googleBooksWithImages = [BookWrapper]() {
         didSet {
+            print("googleBooksWithImages SET")
             DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
             }
@@ -54,16 +56,47 @@ class BestSellersViewController: UIViewController {
     
     func loadCategories() {
         CategoryAPIClient.shared.getCategories(completionHandler: {self.categories = $0}, errorHandler: {print($0)})
+        
     }
-    
+
     /// load images from google
+    /*
+     
+    // call function to populate Google array in the nytBooksWithISBN didSet
     
-    //    func load
+    // populate Google Array:
+    // 1) Check each ISBN number from nytBooksWithISBN
+    func findImageFromGoogle() {
+        for book in nytBooksWithISBN {
+            for codes in book.isbns {
+                guard let image = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(codes.isbn10?.description)" else {
+                    let image = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(codes.isbn13?.description)"
+                }
+            }
+        }
+    }
+    BookDetailGoogleAPIClient.shared.getGoogleBooks(isbn: isbnNum, completionHandler: { self.googleBooksWithImages = $0 }, errorHandler: {print($0)})
+    
+    /// https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
+}
+// 2) Find image in googleBooksWithImages using the ISBN number
+// 3) Load the image attribute to the nytBooksWithISBN to load the collection view cell
+
+*/
+
+ /// segue from collection view cell to detail view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BookDetailViewController {
+            destination.nytBook = nytBooksWithISBN[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
+            destination.googleBook = googleBooksWithImages[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
+            
+            ///do i even have google stuff?
+            
+        }
+    }
     
     
 }
-
-
 /// Best Sellers Collection View
 extension BestSellersViewController: UICollectionViewDataSource {
     
@@ -75,8 +108,16 @@ extension BestSellersViewController: UICollectionViewDataSource {
         let bookCell = bestSellersCollectionView.dequeueReusableCell(withReuseIdentifier: "Book Cover Cell", for: indexPath) as! BestSellerCollectionViewCell
         let bookWithISBN = nytBooksWithISBN[indexPath.row]
         //        let bookWithImage = googleBooksWithImages[indexPath.row]
-        bookCell.shortDescriptionTextView.text = bookWithISBN.bookDetails[0].shortDescription
         
+        /// initialize a nil image
+        bookCell.bestSellerImageView.image = nil
+        //        let imageUrlStr: String = bookWithImage.volumeInfo.imageLinks.thumbnail
+        //        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
+        //            bookCell.bestSellerImageView.image = onlineImage
+        //        }
+        //        ImageAPIClient.manager.loadImage(from: imageUrlStr, completionHandler: completion, errorHandler: {print($0)})
+        
+        /// customize WEEKS ON BEST SELLER LIST label
         switch bookWithISBN.weeksOnList {
         case 1:
             bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Week On Best Sellers List"
@@ -84,12 +125,10 @@ extension BestSellersViewController: UICollectionViewDataSource {
             bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Weeks On Best Sellers List"
         }
         
-        bookCell.bestSellerImageView.image = nil
-        //        let imageUrlStr: String = bookWithImage.volumeInfo.imageLinks.thumbnail
-        //        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
-        //            bookCell.bestSellerImageView.image = onlineImage
-        //        }
-        //        ImageAPIClient.manager.loadImage(from: imageUrlStr, completionHandler: completion, errorHandler: {print($0)})
+        /// load book short description
+        bookCell.shortDescriptionTextView.text = bookWithISBN.bookDetails[0].shortDescription
+        
+        
         return bookCell
     }
     
@@ -123,18 +162,13 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
             self.nytBooksWithISBN = onlineBestSellers
         }
         
-        //        let errorHandler: (AppError) -> Void = {(error: AppError) in
-        //            switch error {
-        //                case
-        //            }
-        //        }
-        
-        
+        /// populating the Best Seller Book info
         BestSellerBookAPIClient.shared.getNYTBooks(category: category.listNameEncoded , completionHandler: completion, errorHandler: {print($0)})
     }
-    
-    
 }
+
+
+
 
 let spacingBetweenCells = UIScreen.main.bounds.size.width * 0.05
 
@@ -169,4 +203,3 @@ extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
-

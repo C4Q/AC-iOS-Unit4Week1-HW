@@ -10,7 +10,6 @@ import Foundation
 
 /// https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyB95KwMKwLmYQTorODVmOunlU-CsYnhsA4
 
-
 struct ResultsWrapper: Codable {
     let items: [BookWrapper]
 }
@@ -21,6 +20,7 @@ struct BookWrapper: Codable {
 
 struct BookDetail: Codable {
     let title: String
+    let subtitle: String?
     let authors: [String]
     let publisher: String
     let publishedDate: String
@@ -33,8 +33,8 @@ struct BookDetail: Codable {
 }
 
 struct Identifier: Codable {
-    let type: String
-    let identifier: String
+    let type: String? // type of ISBN
+    let identifier: String // actual ISBN code
 }
 
 struct Image: Codable {

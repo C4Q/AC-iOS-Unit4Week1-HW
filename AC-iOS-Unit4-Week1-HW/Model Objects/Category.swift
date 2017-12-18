@@ -16,7 +16,7 @@ struct CategoryWrapper: Codable {
 
 struct Category: Codable {
     let listName: String
-    let displayName: String
+    let displayName: String?
     let listNameEncoded: String
     
     enum CodingKeys: String, CodingKey {
