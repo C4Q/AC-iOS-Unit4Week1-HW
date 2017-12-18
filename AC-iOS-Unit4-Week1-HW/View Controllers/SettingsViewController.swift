@@ -16,6 +16,11 @@ class SettingsViewController: UIViewController {
     var categories = [BestSellerCategory]() {
         didSet {
             pickerView.reloadAllComponents()
+            
+            if let defaults = UserDefaultsHelper.manager.getValue() {
+                pickerView.selectRow(defaults.pickerPosition, inComponent:0, animated:true)
+            }
+            
         }
     }
     
