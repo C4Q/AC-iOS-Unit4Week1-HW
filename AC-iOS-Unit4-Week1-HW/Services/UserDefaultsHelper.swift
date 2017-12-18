@@ -11,25 +11,28 @@ struct UserDefaultsHelper {
     static let manager = UserDefaultsHelper()
     private init() {}
     
-    private let nameKey = "name"
-    private let signKey = "sign"
     private let indexKey = "index"
-    func getName() -> String? {
-        return UserDefaults.standard.string(forKey: nameKey)
-    }
-    func getSign() -> String? {
-        return UserDefaults.standard.string(forKey: signKey)
-    }
+    private let dateKey = "date"
+    private let ranAtLeastOnceKey = "ranAtLeastOnce"
+
+    
     func getPickerIndex() -> Int? {
         return Int(UserDefaults.standard.string(forKey: indexKey) ?? "0")
     }
-    func setName(to newName: String) {
-        UserDefaults.standard.setValue(newName, forKey: nameKey)
+    func getTomorrowDate() -> Date? {
+        return UserDefaults.standard.value(forKey: dateKey) as? Date
     }
-    func setSign(to newSign: String) {
-        UserDefaults.standard.setValue(newSign, forKey: signKey)
+    func didItRunAtLeastOnce() -> Bool? {
+        return UserDefaults.standard.bool(forKey: ranAtLeastOnceKey)
     }
+
     func setPickerIndex(to newIndex: String) {
         UserDefaults.standard.setValue(newIndex, forKey: indexKey)
+    }
+    func setTomorrowDate(to newDate: Date) {
+        UserDefaults.standard.setValue(newDate, forKey: dateKey)
+    }
+    func setRanAtLeastOnce(to newBool: Bool) {
+        UserDefaults.standard.setValue(newBool, forKey: ranAtLeastOnceKey)
     }
 }

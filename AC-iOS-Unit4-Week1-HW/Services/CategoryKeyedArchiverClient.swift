@@ -19,17 +19,21 @@ class CategoriesKeyedArchiverClient {
     static let pathName = "Categories.plist"
     //2. Create an array to store the data you want to be saved
     // property observer does saving to persistence on changes
-    private var categories = [Categories]() {
+    private var categories = [Category]() {
         didSet {
             saveCategories()
         }
     }
     
-    func add(category: Categories) {
+    func add(category: Category) {
         categories.append(category)
     }
     
-    func getCategories() -> [Categories] {
+    func addAllCategories(allCategories: [Category]) {
+        self.categories = allCategories
+    }
+    
+    func getCategories() -> [Category] {
         return categories
     }
     
@@ -37,7 +41,7 @@ class CategoriesKeyedArchiverClient {
         let path = dataFilePath(withPathName: CategoriesKeyedArchiverClient.pathName)
         do {
             let data = try Data(contentsOf: path)
-            let categories = try PropertyListDecoder().decode([Categories].self, from: data)
+            let categories = try PropertyListDecoder().decode([Category].self, from: data)
             self.categories = categories
         }
         catch {

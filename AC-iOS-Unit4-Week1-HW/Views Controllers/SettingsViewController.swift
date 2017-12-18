@@ -15,15 +15,14 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     var categoriesArray = [Category]() {
         didSet {
-            CategoriesKeyedArchiverClient.manager.saveCategories()
-            print("Saved Categories to UserDefaults")
-            
+            CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
             for elements in categoriesArray {
                 //To print the Categories and see how they are formatted
-                //TODO: pick the best property for the BestSellerAPI Call
                 print("\(elements.displayName ?? "BLANK") + \(elements.listName ?? "BLANK") + \(elements.listNameEncoded ?? "BLANK")")
             }
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
+            CategoriesKeyedArchiverClient.manager.saveCategories()
+            print("Saved Categories to KeyedArchive")
         }
     }
     
@@ -58,14 +57,20 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let CurrentDate = Date()
         print(CurrentDate)
         let plusOneDay: Double = 60*60*24 //One Day in Seconds
-        let TomorrowsDate = Date().addingTimeInterval(plusOneDay)
-        print(TomorrowsDate)
+        let newTomorrowDate = Date().addingTimeInterval(plusOneDay)
+        var storedDate = Date()
+        if let check = UserDefaultsHelper.manager.getTomorrowDate(){
+             storedDate = check
+        } else {
+             storedDate = newTomorrowDate
+        }
+        print(newTomorrowDate)
         
-        if CurrentDate == TomorrowsDate
+        if CurrentDate == storedDate
         {
             print("Equal")
         }
-        else if CurrentDate > TomorrowsDate
+        else if CurrentDate > storedDate
         {
             print("A Day has passed")
             print("CALL API")
@@ -76,17 +81,34 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
             
             CategoriesAPIClient.manager.getCategories(completionHandler: completion, errorHandler: {print($0)})
-            print("Save Categories to KeyedArchive")
             print("Set the UserDefault value for DateToCheck to TomorrowsDate")
+            UserDefaultsHelper.manager.setTomorrowDate(to: newTomorrowDate)
         }
-        else if CurrentDate < TomorrowsDate
+        else if CurrentDate < storedDate
         {
-            print("A day has not passed")
-            print("Load Categories from KeyedArchive")
-            // retrieve an array
-            if let theCategories = defaults.value(forKey: "Categories") as? [Category] {
-                print("Array Retrieved: \(theCategories)")
+            if UserDefaultsHelper.manager.didItRunAtLeastOnce() == true {
+                print("A day has not passed")
+                print("Load Categories from KeyedArchive")
+                CategoriesKeyedArchiverClient.manager.loadCategories()
+                self.categoriesArray = CategoriesKeyedArchiverClient.manager.getCategories()
+            } else {
+                print("First Time running app")
+                print("Called API for Categories")
+                let completion: ([Category]) -> Void = {(onlineCategories: [Category]) in
+                    self.categoriesArray = onlineCategories
+                    
+                    print("Called API for Categories")
+                }
+                
+                CategoriesAPIClient.manager.getCategories(completionHandler: completion, errorHandler: {print($0)})
+                print("Set the UserDefault value for DateToCheck to TomorrowsDate")
+                UserDefaultsHelper.manager.setTomorrowDate(to: newTomorrowDate)
+                UserDefaultsHelper.manager.setRanAtLeastOnce(to: true)
             }
+//            print("A day has not passed")
+//            print("Load Categories from KeyedArchive")
+//            CategoriesKeyedArchiverClient.manager.loadCategories()
+//            self.categoriesArray = CategoriesKeyedArchiverClient.manager.getCategories()
         }
         
     }
@@ -95,6 +117,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewWillDisappear(animated)
         let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
         UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
+        print("New Picker Index is \(newPickerIndex)")
     }
     
     
