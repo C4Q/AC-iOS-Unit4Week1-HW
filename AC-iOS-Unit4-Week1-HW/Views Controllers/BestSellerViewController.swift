@@ -9,9 +9,19 @@
 import UIKit
 
 class BestSellerViewController: UIViewController {
-
+    //let defaults = UserDefaults.standard
+    var categoriesArray = [Category]()
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ADD OUTLETS AND DELEGATES
+        //ADD PickerView Default Category Here
 
         // Do any additional setup after loading the view.
     }

@@ -19,11 +19,11 @@ var categoriesEndpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?
 //For Example - "https://api.nytimes.com/svc/books/v3/lists.json?api-key=ac1cde81fb2147a59b8fc20e10ff70b2&list=Hardcover-Fiction"
 
 //Endpiont 1
-struct CategoriesWrapper: Codable {
-    var results: [Categories]
+struct Categories: Codable {
+    var results: [Category]
 }
 
-struct Categories: Codable {
+struct Category: Codable {
     var listName: String?
     var displayName: String?
     var listNameEncoded: String?
@@ -87,7 +87,7 @@ struct CategoriesAPIClient {
     static let manager = CategoriesAPIClient()
     private let urlStr = categoriesEndpoint
     func getCategories(
-                  completionHandler: @escaping ([Categories]) -> Void,
+                  completionHandler: @escaping ([Category]) -> Void,
                   errorHandler: @escaping (Error) -> Void) {
 
         let fullUrlStr = urlStr
@@ -98,7 +98,7 @@ struct CategoriesAPIClient {
         let request = URLRequest(url: url)
         let parseDataIntoCards: (Data) -> Void = {(data) in
             do {
-                let results = try JSONDecoder().decode(CategoriesWrapper.self, from: data) //THIS IS ALWAYS THE TOP LAYER OF JSON
+                let results = try JSONDecoder().decode(Categories.self, from: data) //THIS IS ALWAYS THE TOP LAYER OF JSON
                 let categoriesArray = results.results
                 completionHandler(categoriesArray)
             }

@@ -8,10 +8,11 @@
 
 import Foundation
 
-class KeyedArchiverClient {
+//TODO
+class BestSellersKeyedArchiverClient {
     private init() {}
-    static let manager = KeyedArchiverClient()
-    static let pathName = "FavoriteBooks.plist"
+    static let manager = BestSellersKeyedArchiverClient()
+    static let pathName = "BestSellersBooks.plist"
     private var books = [BookDetails]() {
         didSet {
             saveBooks()
@@ -27,7 +28,7 @@ class KeyedArchiverClient {
     }
 
     func loadData() {
-        let path = dataFilePath(withPathName: KeyedArchiverClient.pathName)
+        let path = dataFilePath(withPathName: BestSellersKeyedArchiverClient.pathName)
         do {
             let data = try Data(contentsOf: path)
             let books = try PropertyListDecoder().decode([BookDetails].self, from: data)
@@ -39,7 +40,7 @@ class KeyedArchiverClient {
     }
 
     func saveBooks() {
-        let path = dataFilePath(withPathName: KeyedArchiverClient.pathName)
+        let path = dataFilePath(withPathName: BestSellersKeyedArchiverClient.pathName)
         do {
             let data = try PropertyListEncoder().encode(books)
             try data.write(to: path, options: .atomic)
@@ -56,7 +57,7 @@ class KeyedArchiverClient {
 
     // returns the path for supplied name from the dcouments directory
     private func dataFilePath(withPathName path: String) -> URL {
-        return KeyedArchiverClient.manager.documentsDirectory().appendingPathComponent(path)
+        return BestSellersKeyedArchiverClient.manager.documentsDirectory().appendingPathComponent(path)
     }
 
 }

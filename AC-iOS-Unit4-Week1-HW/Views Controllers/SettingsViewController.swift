@@ -10,11 +10,14 @@ import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    
+    let defaults = UserDefaults.standard
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var categoriesArray = [Categories]() {
+    var categoriesArray = [Category]() {
         didSet {
+            CategoriesKeyedArchiverClient.manager.saveCategories()
+            print("Saved Categories to UserDefaults")
+            
             for elements in categoriesArray {
                 //To print the Categories and see how they are formatted
                 //TODO: pick the best property for the BestSellerAPI Call
@@ -51,10 +54,10 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func loadData() {
-        /*
+        
         let CurrentDate = Date()
         print(CurrentDate)
-        var plusOneDay: Double = 60*60*24 //One Day in Seconds
+        let plusOneDay: Double = 60*60*24 //One Day in Seconds
         let TomorrowsDate = Date().addingTimeInterval(plusOneDay)
         print(TomorrowsDate)
         
@@ -66,6 +69,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         {
             print("A Day has passed")
             print("CALL API")
+            let completion: ([Category]) -> Void = {(onlineCategories: [Category]) in
+                self.categoriesArray = onlineCategories
+                
+                print("Called API for Categories")
+            }
+            
+            CategoriesAPIClient.manager.getCategories(completionHandler: completion, errorHandler: {print($0)})
             print("Save Categories to KeyedArchive")
             print("Set the UserDefault value for DateToCheck to TomorrowsDate")
         }
@@ -73,34 +83,19 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         {
             print("A day has not passed")
             print("Load Categories from KeyedArchive")
+            // retrieve an array
+            if let theCategories = defaults.value(forKey: "Categories") as? [Category] {
+                print("Array Retrieved: \(theCategories)")
+            }
         }
-        
-        //If the date is different from today do this
-        */
-        
-        
-        let completion: ([Categories]) -> Void = {(onlineCategories: [Categories]) in
-            self.categoriesArray = onlineCategories
-            //Add funcKeyedArchiverSaver here to Save Categories
-            //print("Called API for Categories")
-        }
-        
-        CategoriesAPIClient.manager.getCategories(completionHandler: completion, errorHandler: {print($0)})
-        
-        
-        
-        //ELSE Load the data up from the Keyed Archiver
-        
-        //print("Categories loaded from KeyedArchive")
-        //func to load from KSKeyedArchive
-        //func to load start position for pickerView
-        
-        
-        
-        
         
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
+        UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
+    }
     
     
 

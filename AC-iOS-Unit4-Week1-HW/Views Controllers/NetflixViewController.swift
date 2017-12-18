@@ -10,6 +10,10 @@ import UIKit
 
 class NetflixViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

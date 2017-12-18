@@ -50,7 +50,7 @@
         <!--All Genres-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="All Genres" id="BYZ-38-t0r" customClass="ViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="All Genres" id="BYZ-38-t0r" customClass="NetflixViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -115,6 +115,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="KOR-BP-amv"/>
+                    <connections>
+                        <outlet property="tableView" destination="xMR-JQ-RFW" id="1h4-98-Eol"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -180,7 +183,7 @@
         <!--Favorites-->
         <scene sceneID="ifD-t3-hMA">
             <objects>
-                <viewController title="Favorites" id="ZfI-8E-5SH" sceneMemberID="viewController">
+                <viewController title="Favorites" id="ZfI-8E-5SH" customClass="FavoritesViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lt4-1m-RJn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,6 +234,9 @@
                         <viewLayoutGuide key="safeArea" id="eEK-N4-tNO"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" id="3iq-fJ-YLM"/>
+                    <connections>
+                        <outlet property="collectionView" destination="29u-Ox-44V" id="9sd-YS-82g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKP-JT-jGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,7 +262,7 @@
         <!--Best Sellers-->
         <scene sceneID="nmK-pn-c5x">
             <objects>
-                <viewController id="ESd-PH-bgw" sceneMemberID="viewController">
+                <viewController id="ESd-PH-bgw" customClass="BestSellerViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W6B-ZJ-Spv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -303,6 +309,10 @@
                         <viewLayoutGuide key="safeArea" id="ZA9-10-nGY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Best Sellers" id="vXc-hN-5wy"/>
+                    <connections>
+                        <outlet property="collectionView" destination="qqN-ny-TeP" id="Udy-Bi-J7r"/>
+                        <outlet property="pickerView" destination="dPA-xK-3jS" id="cmq-ut-Ces"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8w-4d-XQP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -317,23 +327,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-kw-rcT">
-                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-19-FSV">
-                                <rect key="frame" x="10" y="332" width="300" height="138"/>
+                                <rect key="frame" x="10" y="311" width="300" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bJ-Zq-tgU">
-                                <rect key="frame" x="10" y="301" width="42" height="21"/>
+                                <rect key="frame" x="10" y="280" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-qo-Wv5">
-                                <rect key="frame" x="10" y="270" width="42" height="21"/>
+                                <rect key="frame" x="10" y="249" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -365,6 +375,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iA5-I3-dmO"/>
+        <segue reference="gqN-Jn-Xia"/>
     </inferredMetricsTieBreakers>
 </document>
