@@ -37,8 +37,15 @@ struct ISBNNum: Codable {
 
 struct Detail: Codable {
     let title: String
-    let description: String /// SHORT DESCRIPTION
+    let shortDescription: String /// SHORT DESCRIPTION
     let contributor: String
     let author: String
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case shortDescription = "description"
+        case contributor
+        case author
+    }
 }
 

@@ -46,6 +46,7 @@ class BestSellersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bestSellersCollectionView.dataSource = self
+        self.bestSellersCollectionView.delegate = self
         self.bestSellersCategoryPickerView.dataSource = self
         self.bestSellersCategoryPickerView.delegate = self
         loadCategories()
@@ -55,9 +56,9 @@ class BestSellersViewController: UIViewController {
         CategoryAPIClient.shared.getCategories(completionHandler: {self.categories = $0}, errorHandler: {print($0)})
     }
     
-/// load images from google
+    /// load images from google
     
-//    func load
+    //    func load
     
     
 }
@@ -73,15 +74,22 @@ extension BestSellersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let bookCell = bestSellersCollectionView.dequeueReusableCell(withReuseIdentifier: "Book Cover Cell", for: indexPath) as! BestSellerCollectionViewCell
         let bookWithISBN = nytBooksWithISBN[indexPath.row]
-//        let bookWithImage = googleBooksWithImages[indexPath.row]
-        bookCell.shortDescriptionLabel.text = bookWithISBN.bookDetails.description
-        bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Weeks On Best Sellers List"
+        //        let bookWithImage = googleBooksWithImages[indexPath.row]
+        bookCell.shortDescriptionTextView.text = bookWithISBN.bookDetails[0].shortDescription
+        
+        switch bookWithISBN.weeksOnList {
+        case 1:
+            bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Week On Best Sellers List"
+        default:
+            bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Weeks On Best Sellers List"
+        }
+        
         bookCell.bestSellerImageView.image = nil
-//        let imageUrlStr: String = bookWithImage.volumeInfo.imageLinks.thumbnail
-//        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
-//            bookCell.bestSellerImageView.image = onlineImage
-//        }
-//        ImageAPIClient.manager.loadImage(from: imageUrlStr, completionHandler: completion, errorHandler: {print($0)})
+        //        let imageUrlStr: String = bookWithImage.volumeInfo.imageLinks.thumbnail
+        //        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
+        //            bookCell.bestSellerImageView.image = onlineImage
+        //        }
+        //        ImageAPIClient.manager.loadImage(from: imageUrlStr, completionHandler: completion, errorHandler: {print($0)})
         return bookCell
     }
     
@@ -107,7 +115,7 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     
-        /// loadCollectionView
+    /// loadCollectionView
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let category = categories[row]
         
@@ -115,11 +123,11 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
             self.nytBooksWithISBN = onlineBestSellers
         }
         
-//        let errorHandler: (AppError) -> Void = {(error: AppError) in
-//            switch error {
-//                case
-//            }
-//        }
+        //        let errorHandler: (AppError) -> Void = {(error: AppError) in
+        //            switch error {
+        //                case
+        //            }
+        //        }
         
         
         BestSellerBookAPIClient.shared.getNYTBooks(category: category.listNameEncoded , completionHandler: completion, errorHandler: {print($0)})
@@ -137,12 +145,12 @@ extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
     /// size of the item in the collection view
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let numOfCells: CGFloat = 3
+        let numOfCells: CGFloat = 1
         let numOfSpaces: CGFloat = numOfCells + 1 // spaces between the cells left and right
         
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
-        return CGSize(width: (screenWidth - (spacingBetweenCells * numOfSpaces)) / numOfCells, height: screenHeight * 0.25)
+        return CGSize(width: (screenWidth - (spacingBetweenCells * numOfSpaces)) / numOfCells, height: screenHeight * 0.50) // this Double changes the height of the cells
     }
     
     /// insets for collection view - borders at the ENDS of the entire collection view
