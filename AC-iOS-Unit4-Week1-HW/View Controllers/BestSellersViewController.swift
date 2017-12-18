@@ -46,11 +46,6 @@ class BestSellersViewController: UIViewController {
     }
 
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -122,6 +117,7 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
             cell.bestSellerTimeLabel.text = "Weeks on List: " + book.weeksOnList.description
             cell.bestSellerTitleLabel.text = book.bookDetails[0].title
             loadImage(book: book, for: cell)
+            cell.setNeedsLayout()
         }
         return cell
     }
@@ -133,11 +129,16 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
         
         // In the completion handler the getImage function is called to set the cells image
         GoogleBooksAPIClient.manager.getBookData(isbn: isbn, completionHandler: {
-            cell.bestSellerSummaryTextView.text = $0[0].searchInfo.textSnippet.html2String
-            let imageUrl = $0[0].volumeInfo.imageLinks.thumbnail
+            if let gbook = $0 {
+            cell.bestSellerSummaryTextView.text = gbook[0].searchInfo.textSnippet.html2String
+            cell.bestSellerSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
+            let imageUrl = gbook[0].volumeInfo.imageLinks.thumbnail
             
             ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: { cell.bestSellerImageView.image = $0; cell.setNeedsLayout() }, errorHandler: { print($0) })
-            
+            } else {
+                cell.bestSellerSummaryTextView.text = "No information available."
+                cell.bestSellerImageView.image = #imageLiteral(resourceName: "no-image")
+            }
             }, errorHandler: { print($0) })
     }
     

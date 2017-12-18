@@ -9,7 +9,7 @@
 import Foundation
 
 struct BooksData: Codable {
-    let items: [GoogleBook]
+    let items: [GoogleBook]?
 }
 
 struct GoogleBook: Codable {

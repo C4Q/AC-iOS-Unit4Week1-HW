@@ -12,17 +12,25 @@ class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    lazy var refreshControl = UIRefreshControl()
+    
+    var favBooks = [DataPersistenceHelper.FavoritedBook]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading favorites.")
+        refreshControl.addTarget(self, action: Selector(("refresh:")), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        
+        loadFavs()
     }
     
+    func refresh(_ sender: AnyObject) {
+        
+    }
+
 
     /*
     // MARK: - Navigation
@@ -35,3 +43,27 @@ class FavoritesViewController: UIViewController {
     */
 
 }
+
+extension FavoritesViewController {
+    
+    func loadFavs() {
+        DataPersistenceHelper.manager.loadFavorites()
+        self.favBooks = DataPersistenceHelper.manager.getFavorites()
+    }
+    
+}
+
+//extension FavoritesViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
+//
+//
+//
+//}
+

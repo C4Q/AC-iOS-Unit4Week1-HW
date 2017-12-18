@@ -231,6 +231,9 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ymy-y2-WRX">
+                                                    <rect key="frame" x="135" y="110" width="37" height="37"/>
+                                                </activityIndicatorView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mnu-mL-YE0">
                                                     <rect key="frame" x="0.0" y="5" width="307" height="128.5"/>
                                                 </imageView>
@@ -245,8 +248,10 @@
                                             <constraint firstItem="sHx-3z-1tr" firstAttribute="top" secondItem="Mnu-mL-YE0" secondAttribute="bottom" constant="5" id="N2a-0p-hGu"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="4QM-Ye-kWc" secondAttribute="trailing" id="T1Q-Zv-XLz"/>
                                             <constraint firstItem="sHx-3z-1tr" firstAttribute="leading" secondItem="jV8-w2-nYl" secondAttribute="leadingMargin" id="U4e-vR-IkX"/>
+                                            <constraint firstItem="Ymy-y2-WRX" firstAttribute="centerX" secondItem="jV8-w2-nYl" secondAttribute="centerX" id="YaV-Ze-vMn"/>
                                             <constraint firstItem="Mnu-mL-YE0" firstAttribute="height" secondItem="jV8-w2-nYl" secondAttribute="height" multiplier="1:2" id="Yhn-1l-O4r"/>
                                             <constraint firstAttribute="trailing" secondItem="jzB-jr-lqU" secondAttribute="trailing" id="bIx-0r-wjI"/>
+                                            <constraint firstItem="Ymy-y2-WRX" firstAttribute="centerY" secondItem="jV8-w2-nYl" secondAttribute="centerY" id="g5S-fw-Z8N"/>
                                             <constraint firstItem="4QM-Ye-kWc" firstAttribute="leading" secondItem="jV8-w2-nYl" secondAttribute="leadingMargin" id="icm-MC-N73"/>
                                             <constraint firstItem="Mnu-mL-YE0" firstAttribute="centerX" secondItem="jV8-w2-nYl" secondAttribute="centerX" id="lZX-4E-u3c"/>
                                             <constraint firstAttribute="bottom" secondItem="jzB-jr-lqU" secondAttribute="bottom" id="xZb-on-zFb"/>

@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
         didSet {
             pickerView.reloadAllComponents()
             
+            // Rotates the picker view to the saved position if available
             if let defaults = UserDefaultsHelper.manager.getValue() {
                 pickerView.selectRow(defaults.pickerPosition, inComponent:0, animated:true)
             }
@@ -28,24 +29,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         pickerView.dataSource = self; pickerView.delegate = self
         loadCategories()
-
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -75,4 +59,5 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let settings = UserDefaultsHelper.MyDefaults(pickerPosition: row, title: categories[row].displayName)
         UserDefaultsHelper.manager.createDefaultSetting(value: settings)
     }
+    
 }

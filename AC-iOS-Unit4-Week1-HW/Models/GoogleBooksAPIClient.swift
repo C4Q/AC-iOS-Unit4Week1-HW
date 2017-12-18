@@ -20,7 +20,7 @@ class GoogleBooksAPIClient {
     // Function that takes in an isbn, a completion handler, and an error handler.
     // The completion handler turns data into an array of GoogleBook objects with Codable
     func getBookData(isbn: String,
-                     completionHandler: @escaping ([GoogleBook]) -> Void,
+                     completionHandler: @escaping ([GoogleBook]?) -> Void,
                      errorHandler: @escaping (Error) -> Void) {
         
         let endpoint = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)&key=\(apiKey)"
@@ -30,8 +30,13 @@ class GoogleBooksAPIClient {
         let completion: (Data) -> Void = { (data: Data) in
             do {
                 let json = try JSONDecoder().decode(BooksData.self, from: data)
-                completionHandler(json.items)
+                if let items = json.items {
+                    completionHandler(items)
+                } else {
+                    completionHandler(nil)
+                }
             } catch {
+                print(endpoint)
                 errorHandler(AppError.codingError(rawError: error))
             }
         }
