@@ -24,12 +24,12 @@ struct Categories: Codable {
 }
 
 struct Category: Codable {
-    var listName: String?
-    var displayName: String?
-    var listNameEncoded: String?
+    var listName: String
+    var displayName: String
+    var listNameEncoded: String
     var theEndpointLink: String {
         var urlStr = ""
-        urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(listNameEncoded ?? "")"
+        urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(listNameEncoded)"
         return urlStr
     }
     
@@ -56,7 +56,7 @@ struct BestSellers: Codable {
     enum CodingKeys: String, CodingKey {
         case listName = "list_name" //TODO: Category to filter by for the KeyedArchiver Function
         case rank = "rank"
-        case weeksOnList = "weeksOnList"
+        case weeksOnList = "weeks_on_list"
         //case isbns = "isbns"
         case bookDetails = "book_details"
     }
@@ -109,41 +109,29 @@ struct CategoriesAPIClient {
         NetworkHelper.manager.performDataTask(with: request, completionHandler: parseDataIntoCards, errorHandler: errorHandler)
     }
 }
-/*
-//APIClients go here
-struct CategoriesAPIClient {
+
+struct BestSellersAPIClient {
     private init() {}
-    static let manager = CategoriesAPIClient()
-    private let urlStr = categoriesEndpoint
-    func getCategories(matching searchTerm: String,
-                       completionHandler: @escaping ([Card]) -> Void,
+    static let manager = BestSellersAPIClient()
+    func getBestSellers(matching endpoint: String,
+                       completionHandler: @escaping ([BestSellers]) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
-        guard let formattedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
-            errorHandler(AppError.badURL(str: searchTerm))
-            return
-        }
-        let fullUrlStr = urlStr + formattedSearchTerm
-        guard let url = URL(string: fullUrlStr) else {
-            errorHandler(AppError.badURL(str: fullUrlStr))
+
+        guard let url = URL(string: endpoint) else {
+            errorHandler(AppError.badURL(str: endpoint))
             return
         }
         let request = URLRequest(url: url)
-        let parseDataIntoCards: (Data) -> Void = {(data) in
+        let parseDataIntoBestSellers: (Data) -> Void = {(data) in
             do {
-                let results = try JSONDecoder().decode(ResultsWrapper.self, from: data)
-                let cards = results.cards
-                completionHandler(cards)
+                let results = try JSONDecoder().decode(BestSellersWrapper.self, from: data)
+                let bestSellersArray = results.results
+                completionHandler(bestSellersArray)
             }
             catch {
                 errorHandler(AppError.codingError(rawError: error))
             }
         }
-        NetworkHelper.manager.performDataTask(with: request, completionHandler: parseDataIntoCards, errorHandler: errorHandler)
+        NetworkHelper.manager.performDataTask(with: request, completionHandler: parseDataIntoBestSellers, errorHandler: errorHandler)
     }
 }
-*/
-
-
-
-
-

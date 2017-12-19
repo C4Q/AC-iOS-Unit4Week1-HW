@@ -25,9 +25,9 @@ class CategoriesKeyedArchiverClient {
         }
     }
     
-    func add(category: Category) {
-        categories.append(category)
-    }
+//    func add(category: Category) {
+//        categories.append(category)
+//    }
     
     func addAllCategories(allCategories: [Category]) {
         self.categories = allCategories

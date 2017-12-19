@@ -16,10 +16,10 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var categoriesArray = [Category]() {
         didSet {
             CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
-            for elements in categoriesArray {
-                //To print the Categories and see how they are formatted
-                print("\(elements.displayName ?? "BLANK") + \(elements.listName ?? "BLANK") + \(elements.listNameEncoded ?? "BLANK")")
-            }
+//            for elements in categoriesArray {
+//                //To print the Categories and see how they are formatted
+//                print("\(elements.displayName) + \(elements.listName ?? "BLANK") + \(elements.listNameEncoded)")
+//            }
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
             CategoriesKeyedArchiverClient.manager.saveCategories()
             print("Saved Categories to KeyedArchive")
@@ -36,12 +36,14 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(categoriesArray[row].displayName ?? "Blank")"
+        return "\(categoriesArray[row].displayName)"
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         print("This is Row: \(row) Component\(component)")
-        //TODO: func to set a UserDefault for picker start position
+        let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
+        UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
+        print("New Saved Picker Index is \(newPickerIndex)")
     }
     
     override func viewDidLoad() {
@@ -49,11 +51,9 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         loadData()
-        
     }
     
     func loadData() {
-        
         let CurrentDate = Date()
         print(CurrentDate)
         let plusOneDay: Double = 60*60*24 //One Day in Seconds
@@ -64,16 +64,11 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         } else {
              storedDate = newTomorrowDate
         }
-        print(newTomorrowDate)
-        
-        if CurrentDate == storedDate
-        {
-            print("Equal")
+        if CurrentDate == storedDate { print("Equal")
         }
         else if CurrentDate > storedDate
         {
-            print("A Day has passed")
-            print("CALL API")
+            print("A Day has passed. CALL API")
             let completion: ([Category]) -> Void = {(onlineCategories: [Category]) in
                 self.categoriesArray = onlineCategories
                 
@@ -87,13 +82,11 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         else if CurrentDate < storedDate
         {
             if UserDefaultsHelper.manager.didItRunAtLeastOnce() == true {
-                print("A day has not passed")
-                print("Load Categories from KeyedArchive")
+                print("A day has not passed. Load Categories from KeyedArchive")
                 CategoriesKeyedArchiverClient.manager.loadCategories()
                 self.categoriesArray = CategoriesKeyedArchiverClient.manager.getCategories()
             } else {
                 print("First Time running app")
-                print("Called API for Categories")
                 let completion: ([Category]) -> Void = {(onlineCategories: [Category]) in
                     self.categoriesArray = onlineCategories
                     
@@ -105,12 +98,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 UserDefaultsHelper.manager.setTomorrowDate(to: newTomorrowDate)
                 UserDefaultsHelper.manager.setRanAtLeastOnce(to: true)
             }
-//            print("A day has not passed")
-//            print("Load Categories from KeyedArchive")
-//            CategoriesKeyedArchiverClient.manager.loadCategories()
-//            self.categoriesArray = CategoriesKeyedArchiverClient.manager.getCategories()
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,9 +107,10 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
         print("New Picker Index is \(newPickerIndex)")
     }
-    
-    
-
-    
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let pickerIndex = UserDefaultsHelper.manager.getPickerIndex() {
+            pickerView.selectRow(Int(pickerIndex), inComponent: 0, animated: true)
+        }
+    }
 }

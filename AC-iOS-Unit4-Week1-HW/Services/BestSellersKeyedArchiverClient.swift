@@ -8,41 +8,49 @@
 
 import Foundation
 
-//TODO
 class BestSellersKeyedArchiverClient {
+    
+    //using a singleton to manage the model
     private init() {}
     static let manager = BestSellersKeyedArchiverClient()
-    static let pathName = "BestSellersBooks.plist"
-    private var books = [BookDetails]() {
-        didSet {
-            saveBooks()
-        }
+    
+    //pathName should be the category
+    //static let pathName = "BestSellersBooks.plist"
+    private var aSpecificCategoryOfBestSellerArray = [BestSellers]() //{
+//        didSet {
+//            saveBestSellers()
+//        }
+//    }
+
+//    func add(bestSeller: BestSellers) {
+//        aSpecificCategoryOfBestSellerArray.append(bestSeller)
+//    }
+    func addBestSellersArray(BestSellers: [BestSellers]) {
+        self.aSpecificCategoryOfBestSellerArray = BestSellers
+    }
+    
+    func getBestSellers() -> [BestSellers] {//Populate the VC's array with the current array of Books
+        return self.aSpecificCategoryOfBestSellerArray
     }
 
-    func add(book: BookDetails) {
-        books.append(book)
-    }
-
-    func getCards() -> [BookDetails] {
-        return self.books
-    }
-
-    func loadData() {
-        let path = dataFilePath(withPathName: BestSellersKeyedArchiverClient.pathName)
+    func loadData(encoded category: String) {//Load Data based on the category
+        let correctedPath = category + "plist"
+        let path = dataFilePath(withPathName: correctedPath)
         do {
             let data = try Data(contentsOf: path)
-            let books = try PropertyListDecoder().decode([BookDetails].self, from: data)
-            self.books = books
+            let books = try PropertyListDecoder().decode([BestSellers].self, from: data)
+            self.aSpecificCategoryOfBestSellerArray = books
         }
         catch {
             print(error)
         }
     }
 
-    func saveBooks() {
-        let path = dataFilePath(withPathName: BestSellersKeyedArchiverClient.pathName)
+    func saveBestSellers(encoded category: String) {//Save Data with the category as the path name
+        let correctedPath = category + "plist"
+        let path = dataFilePath(withPathName: correctedPath)
         do {
-            let data = try PropertyListEncoder().encode(books)
+            let data = try PropertyListEncoder().encode(aSpecificCategoryOfBestSellerArray)
             try data.write(to: path, options: .atomic)
         }
         catch {
