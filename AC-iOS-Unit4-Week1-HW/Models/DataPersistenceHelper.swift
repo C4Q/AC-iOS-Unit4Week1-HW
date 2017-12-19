@@ -31,7 +31,7 @@ class DataPersistenceHelper {
         }
     }
     
-    private func documentsDirectory() -> URL {
+    func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
@@ -46,6 +46,7 @@ class DataPersistenceHelper {
             data = try Data.init(contentsOf: DataPersistenceHelper.manager.dataFilePath(withPathName: filePath))
         } catch {
             print("Error retrieving data. \(error.localizedDescription)")
+            return
         }
         
         do {
@@ -66,10 +67,12 @@ class DataPersistenceHelper {
             data = try PropertyListEncoder().encode(myBooks)
         } catch {
             print("Plist encoding error. \(error.localizedDescription)")
+            return
         }
 
         do {
             try data.write(to: DataPersistenceHelper.manager.dataFilePath(withPathName: filePath), options: .atomic)
+            
         } catch {
             print("Writing to disk error. \(error.localizedDescription)")
         }
@@ -79,15 +82,17 @@ class DataPersistenceHelper {
     func addFavorite(isbn: String, bookTitle: String, image: UIImage) {
         let currentTime = Date()
         let imgPng = UIImagePNGRepresentation(image)!
+
         let imgPath = DataPersistenceHelper.manager.dataFilePath(withPathName: "\(bookTitle)\(isbn)")
         
         do {
             try imgPng.write(to: imgPath, options: .atomic)
         } catch {
             print("Error saving image. \(error.localizedDescription)")
+            return
         }
         
-        let favoriteBook = FavoritedBook(bookImagePath: isbn, title: bookTitle, isbn: isbn, timeSaved: currentTime)
+        let favoriteBook = FavoritedBook(bookImagePath: imgPath.description, title: bookTitle, isbn: isbn, timeSaved: currentTime)
         
         myBooks.append(favoriteBook)
     }
@@ -97,10 +102,11 @@ class DataPersistenceHelper {
         
         do {
             try FileManager.default.removeItem(at: imageURL)
+            myBooks.remove(at: index)
         } catch {
-            print("error removing: \(error.localizedDescription)")
+            print("Error removing favorite. \(error.localizedDescription)")
+            return
         }
-        myBooks.remove(at: index)
     }
     
     

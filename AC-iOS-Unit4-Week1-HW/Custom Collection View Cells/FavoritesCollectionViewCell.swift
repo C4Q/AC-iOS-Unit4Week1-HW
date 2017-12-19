@@ -9,6 +9,10 @@
 import UIKit
 
 class FavoritesCollectionViewCell: UICollectionViewCell {
+
     @IBOutlet weak var bookImageView: UIImageView!
+    
+    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+    }
     
 }

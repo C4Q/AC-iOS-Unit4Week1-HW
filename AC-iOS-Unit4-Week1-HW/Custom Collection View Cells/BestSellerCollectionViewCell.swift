@@ -18,4 +18,6 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var bestSellerTimeLabel: UILabel!
     
+    var gBook: GoogleBook?
+    
 }

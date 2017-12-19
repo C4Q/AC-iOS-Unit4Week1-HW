@@ -47,15 +47,18 @@ class BestSellersViewController: UIViewController {
 
 
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? BookDetailViewController {
+            if let cell = sender as? BestSellerCollectionViewCell {
+                let book = books[(collectionView.indexPath(for: cell)?.row)!]
+                destination.nyTimesBook = book
+                destination.bookImage = cell.bestSellerImageView.image
+                destination.googleBook = cell.gBook
+            }
+        }
     }
-    */
 
 }
 
@@ -130,16 +133,17 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
         // In the completion handler the getImage function is called to set the cells image
         GoogleBooksAPIClient.manager.getBookData(isbn: isbn, completionHandler: {
             if let gbook = $0 {
-            cell.bestSellerSummaryTextView.text = gbook[0].searchInfo.textSnippet.html2String
-            cell.bestSellerSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
-            let imageUrl = gbook[0].volumeInfo.imageLinks.thumbnail
-            
-            ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: { cell.bestSellerImageView.image = $0; cell.setNeedsLayout() }, errorHandler: { print($0) })
+                cell.gBook = gbook[0]
+                cell.bestSellerSummaryTextView.text = gbook[0].searchInfo.textSnippet.html2String
+                cell.bestSellerSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
+                let imageUrl = gbook[0].volumeInfo.imageLinks.thumbnail
+                
+                ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: { cell.bestSellerImageView.image = $0; cell.setNeedsLayout() }, errorHandler: { print($0) })
             } else {
                 cell.bestSellerSummaryTextView.text = "No information available."
                 cell.bestSellerImageView.image = #imageLiteral(resourceName: "no-image")
             }
-            }, errorHandler: { print($0) })
+        }, errorHandler: { print($0) })
     }
     
     // Makes the item size of the collection view equal to the collection view's bounds

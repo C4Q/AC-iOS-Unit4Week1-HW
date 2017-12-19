@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 enum ImageError: Error {
     case badUrl
     case badData
