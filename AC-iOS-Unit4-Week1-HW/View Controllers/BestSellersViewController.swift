@@ -16,42 +16,61 @@ class BestSellersViewController: UIViewController {
     var bookCategories = [BookCategory]() {
         didSet {
             categoriesPickerView.reloadAllComponents()
+            if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
+                categoriesPickerView.selectRow(index, inComponent: 0, animated: true)
+            } else {
+                UserDefaults.standard.set(0, forKey: UserDefaultsKeys.categoryIndex.rawValue)
+            }
         }
     }
     
-    var bestSellers = [BestSellers]() {
+    var bestSellers = [BestSeller]() {
         didSet {
-
+            booksCollectionView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //booksCollectionView.delegate = self
-        //booksCollectionView.dataSource = self
+        booksCollectionView.delegate = self
+        booksCollectionView.dataSource = self
         categoriesPickerView.delegate = self
         categoriesPickerView.dataSource = self
         loadBookCategories()
     }
     
-    func loadBookCategories() {
-        BookCategoryAPI.manager.getBookCategories(completionHandler: { self.bookCategories = $0 }, errorHandler: { print($0) })
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard bookCategories.count != 0 else { return }
+        if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
+            categoriesPickerView.selectRow(index, inComponent: 0, animated: true)
+            BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[index].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+        } else {
+            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.categoryIndex.rawValue)
+            BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[0].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func loadBookCategories() {
+        BookCategoryAPIClient.manager.getBookCategories(completionHandler: {
+            self.bookCategories = $0
+            if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
+                BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[index].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+            } else {
+                BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[0].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+            }
+        }, errorHandler: { print($0) })
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBestSellerDetails" {
+            let bestSellerDetails = segue.destination as! BestSellerDetailViewController
+            let bestSellerCell = sender as! BestSellerCollectionViewCell
+            if let indexPath = booksCollectionView.indexPath(for: bestSellerCell) {
+                bestSellerDetails.bestSeller = bestSellers[indexPath.row]
+            }
+        }
+    }
 
 }
 
@@ -70,7 +89,8 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        BestSellersAPIClient.manager.getBookCategories(with: bookCategories[row].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+        BestSellersAPIClient.manager.getBestSellers(with: bookCategories[row].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
+        UserDefaults.standard.set(row, forKey: UserDefaultsKeys.categoryIndex.rawValue)
     }
     
 }
@@ -78,17 +98,40 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
 extension BestSellersViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return bestSellers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let bookCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Book Cell", for: indexPath)
+        let selectedBook = bestSellers[indexPath.row]
+        if let bookCell = bookCell as? BestSellerCollectionViewCell {
+            bookCell.weeksInListLabel.text = "\(selectedBook.weeks_on_list) weeks in Best Seller List"
+            let bookDescription = selectedBook.book_details[0].description
+            if bookDescription == "" { bookCell.bookShortDescription.text = "No short description found." }
+            else { bookCell.bookShortDescription.text = bookDescription }
+            //bookCell.bookShortDescription.text = selectedBook.book_details[0].description
+            bookCell.bookImageView.image = nil
+            GoogleBookAPIClient.manager.getGoogleBook(with: selectedBook.book_details[0].primary_isbn13, completionHandler: {
+                    ImageFetchHelper.manager.getImage(from: $0.volumeInfo.imageLinks.smallThumbnail, completionHandler: {
+                            bookCell.bookImageView.image = $0
+                            bookCell.bookImageView.setNeedsLayout()
+                        }, errorHandler: { print($0) })
+                }, errorHandler: {_ in
+                    bookCell.bookImageView.image = #imageLiteral(resourceName: "coverNotFound")
+                    bookCell.bookImageView.setNeedsLayout()
+                })
+        }
+        return bookCell
     }
     
 }
 
 extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        return CGSize(width: screenWidth, height: screenHeight * 0.5)
+    }
+    
 }
-
-//AIzaSyAnbRfnkNiDr6ZusJ5eT2VAnseUm0dano8 google books api

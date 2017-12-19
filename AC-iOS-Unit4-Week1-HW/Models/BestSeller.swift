@@ -10,10 +10,10 @@ import Foundation
 
 struct BestSellersResponse: Codable {
     let num_results: Int
-    let results: [BestSellers]
+    let results: [BestSeller]
 }
 
-struct BestSellers: Codable {
+struct BestSeller: Codable {
     let list_name: String
     let display_name: String
     let bestsellers_date: String
@@ -27,7 +27,7 @@ struct BestSellers: Codable {
 
 struct Book: Codable {
     let title: String
-    let description: String?
+    let description: String
     let contributor: String
     let author: String
     let price: Double
@@ -42,11 +42,12 @@ struct BestSellersAPIClient {
     
     let apiKey = "625d90145c754087a4e16200c1bbdfb6"
     let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?"
-    func getBookCategories(with category: String, completionHandler: @escaping ([BestSellers]) -> Void, errorHandler: @escaping (Error) -> Void) {
+    func getBestSellers(with category: String, completionHandler: @escaping ([BestSeller]) -> Void, errorHandler: @escaping (Error) -> Void) {
         // TODO: rename variables better
         let formattedCategory = category.replacingOccurrences(of: " ", with: "-")
         let options = "api-key=\(apiKey)&list=\(formattedCategory)"
         let fullUrl = urlStr + options
+        print(fullUrl)
         guard let url = URL(string: fullUrl) else {
             errorHandler(AppError.badURL(str: fullUrl))
             return

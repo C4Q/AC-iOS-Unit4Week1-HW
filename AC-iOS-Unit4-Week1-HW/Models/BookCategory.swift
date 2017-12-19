@@ -22,9 +22,9 @@ struct BookCategory: Codable {
     let updated: String
 }
 
-struct BookCategoryAPI {
+struct BookCategoryAPIClient {
     private init() {}
-    static let manager = BookCategoryAPI()
+    static let manager = BookCategoryAPIClient()
     
     let apiKey = "625d90145c754087a4e16200c1bbdfb6"
     let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key="
