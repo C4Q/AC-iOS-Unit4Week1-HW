@@ -10,6 +10,11 @@ import UIKit
 
 class NetflixTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    @IBOutlet weak var netflixCollectionView: UICollectionView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

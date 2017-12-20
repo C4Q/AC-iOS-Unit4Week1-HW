@@ -14,6 +14,11 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pickerView: UIPickerView!
     
+    //constant for our cell spacing which will be consistent around  our cells
+    let cellSpacing: CGFloat = 20.0
+    
+    
+    
     var categoriesArray = [Category]() {
         didSet {
             CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
@@ -37,8 +42,10 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         super.viewDidLoad()
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
-        //TODO: ADD OUTLETS AND DELEGATES
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
         loadPickerView()
+        loadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,6 +82,25 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
             pickerView.selectRow(Int(pickerIndex), inComponent: 0, animated: true)
         }
     }
+    func loadData() {
+        //This is to set the BestSellersCollectionView to the last Category the PickerView was on when the screen loads
+        
+        let startingPickerIndex = pickerView.selectedRow(inComponent: 0)
+        let firstLoadedCategory = categoriesArray[startingPickerIndex]
+        let endPointForCategory = firstLoadedCategory.theEndpointLink
+        
+        let completion: ([BestSellers]) -> Void = {(onlineBestSellers: [BestSellers]) in
+            
+            self.displayedBestSellers = onlineBestSellers //This should trigger the didSet and add to the Best Seller Array
+            print("Finished API CAll for Best Sellers in \(firstLoadedCategory.displayName)")
+            BestSellersKeyedArchiverClient.manager.saveBestSellers(encoded: firstLoadedCategory.listNameEncoded)
+            print("Best Seller for \(firstLoadedCategory.displayName) saved to phone")
+        }
+        
+        BestSellersAPIClient.manager.getBestSellers(matching: endPointForCategory, completionHandler: completion, errorHandler: {print($0)})
+    }
+    
+    
     
     //MARK: PickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -90,6 +116,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("This is Row: \(row) Component\(component)")
+        
         let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
         UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
         print("New Saved Picker Index is \(newPickerIndex)")
@@ -97,6 +124,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         let selectedCategory = categoriesArray[pickerView.selectedRow(inComponent: 0)]
         let endpoint = selectedCategory.theEndpointLink
         
+        //THIS IS WHERE THE BEST SELLER API IS CALLED
         BestSellersKeyedArchiverClient.manager.loadData(encoded: selectedCategory.listNameEncoded)
         //If a value for the endpoint returns nil from the archiver, call the API ELSE load from archive
         if BestSellersKeyedArchiverClient.manager.getBestSellers().isEmpty {
@@ -105,6 +133,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
                 self.displayedBestSellers = onlineBestSellers //This should trigger the didSet and add to the Best Seller Array
                 print("Finished API CAll for Best Sellers in \(selectedCategory.displayName)")
                 BestSellersKeyedArchiverClient.manager.saveBestSellers(encoded: selectedCategory.listNameEncoded)
+                print("Best Seller for \(selectedCategory.displayName) saved to phone")
             }
             BestSellersAPIClient.manager.getBestSellers(matching: endpoint, completionHandler: completion, errorHandler: {print($0)})
         } else {
@@ -112,3 +141,44 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         }
     }
 }
+//MARK: Collection View Delegate and DataSource
+extension BestSellerViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedBestSellers.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "booksCell", for: indexPath) as? BestSellerCollectionViewCell else {return UICollectionViewCell() }
+        
+        let aBook = displayedBestSellers[indexPath.row]
+        cell.shortDescriptionLabel.text = aBook.bookDetails[0].description
+        cell.weeksOnBestSellerLabel.text = "Weeks On: \(aBook.weeksOnList)"
+        
+        //IMAGE API HERE
+        //ADD SAVE IMAGE TO DETAILEDVIEWCONTROLLER. NOT HERE.
+        
+        
+        return cell
+        
+    }
+    
+    //FLOW LAYOUT DELEGATES
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let numCells: CGFloat = 2.0 // cells visible in row
+        let numSpaces: CGFloat = numCells + 1
+        let screenWidth = UIScreen.main.bounds.width // screen width of the device
+        
+        //return item size
+        return CGSize(width: (screenWidth - (cellSpacing * numSpaces)) / numCells, height: collectionView.bounds.height - (cellSpacing * 2))
+    }
+    
+    //Padding around collection cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: cellSpacing, left: 0, bottom: cellSpacing, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return cellSpacing
+    }
+}
+
