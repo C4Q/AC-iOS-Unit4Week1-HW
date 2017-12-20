@@ -23,7 +23,6 @@ class CategoryData {
     
     //save
     func saveCategories() {
-        self.categories = self.categories.sorted{$0 < $1}
         userDefaults.set(self.categories, forKey: categoryKey)
     }
     
@@ -35,8 +34,8 @@ class CategoryData {
     }
     
     //add
-    func addCategory(_ newCategory: String) {
-        self.categories.append(newCategory)
+    func addCategories(_ newCategories: [String]) {
+        self.categories = newCategories
     }
     
     //get
