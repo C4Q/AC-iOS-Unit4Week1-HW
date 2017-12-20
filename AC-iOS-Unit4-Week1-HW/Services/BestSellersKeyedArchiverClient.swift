@@ -34,7 +34,7 @@ class BestSellersKeyedArchiverClient {
     }
 
     func loadData(encoded category: String) {//Load Data based on the category
-        let correctedPath = category + "plist"
+        let correctedPath = category + ".plist"
         let path = dataFilePath(withPathName: correctedPath)
         do {
             let data = try Data(contentsOf: path)
@@ -47,7 +47,7 @@ class BestSellersKeyedArchiverClient {
     }
 
     func saveBestSellers(encoded category: String) {//Save Data with the category as the path name
-        let correctedPath = category + "plist"
+        let correctedPath = category + ".plist"
         let path = dataFilePath(withPathName: correctedPath)
         do {
             let data = try PropertyListEncoder().encode(aSpecificCategoryOfBestSellerArray)

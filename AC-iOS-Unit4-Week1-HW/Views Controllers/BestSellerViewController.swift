@@ -23,6 +23,13 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         didSet {
             CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
             
+            //for element in categoriesArray {
+                //Call API with element.theEndpointLink
+                //Save each category
+                //Only run this once in Friday OR if the app never ran before
+                //All other times load from saved data
+            //}
+            
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
             CategoriesKeyedArchiverClient.manager.saveCategories()
             print("Saved Categories to KeyedArchive")
@@ -75,7 +82,9 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
             
             CategoriesAPIClient.manager.getCategories(completionHandler: completion, errorHandler: {print($0)})
             
+            //To stop the API calls until tomorrow
             UserDefaultsHelper.manager.setTomorrowDate(to: newTomorrowDate)
+            //To confirm the app has run at least once
             UserDefaultsHelper.manager.setRanAtLeastOnce(to: true)
         }
         if let pickerIndex = UserDefaultsHelper.manager.getPickerIndex() {
