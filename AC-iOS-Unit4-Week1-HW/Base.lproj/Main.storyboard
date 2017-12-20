@@ -14,7 +14,7 @@
         <!--Best Sellers-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BestSellerViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,6 +92,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Best Sellers" id="yvM-TR-sFZ"/>
+                    <connections>
+                        <outlet property="bestSellerCollectionView" destination="rY0-De-ITm" id="b5n-Zc-VMf"/>
+                        <outlet property="categoriesPickerView" destination="3R3-DI-C9W" id="ZsV-hG-Kv2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,7 +104,7 @@
         <!--Favorites-->
         <scene sceneID="PgA-m9-7wt">
             <objects>
-                <viewController id="RnJ-0j-qlV" sceneMemberID="viewController">
+                <viewController id="RnJ-0j-qlV" customClass="FavoriteBooksViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1xs-aF-nu1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,21 +155,24 @@
                         <viewLayoutGuide key="safeArea" id="RMb-Lq-9MW"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="Y5N-jV-rQF"/>
+                    <connections>
+                        <outlet property="favoriteBooksCollectionView" destination="lf4-7r-Lhl" id="XHw-X4-ohP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhF-vB-2v1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1833" y="133"/>
         </scene>
-        <!--View Controller-->
+        <!--Book Detail View Controller-->
         <scene sceneID="nB4-Us-S0n">
             <objects>
-                <viewController id="pEZ-Vm-kHI" sceneMemberID="viewController">
+                <viewController id="pEZ-Vm-kHI" customClass="BookDetailViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ak2-09-Tje">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P4h-cP-4Jp">
-                                <rect key="frame" x="113" y="64" width="150" height="221.5"/>
+                                <rect key="frame" x="112.5" y="64" width="150" height="221.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitleLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuH-zm-eqc">
                                 <rect key="frame" x="20" y="346.5" width="335" height="21"/>
@@ -214,6 +221,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mwx-YG-2Dp"/>
                     </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="2Ye-mg-VFz" id="j9Y-YE-pfP"/>
+                        <outlet property="bookImageView" destination="P4h-cP-4Jp" id="fSA-ea-7ZU"/>
+                        <outlet property="descriptionTextView" destination="jZu-aC-JjM" id="DkS-WI-JEq"/>
+                        <outlet property="subtitleLabel" destination="ZuH-zm-eqc" id="kuC-MT-ys9"/>
+                        <outlet property="titleLabel" destination="E9y-IO-nY2" id="X6h-JI-Cyn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7M-Ry-QZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -222,7 +236,7 @@
         <!--Settings-->
         <scene sceneID="DID-4f-2wj">
             <objects>
-                <viewController id="bCi-DA-jNm" sceneMemberID="viewController">
+                <viewController id="bCi-DA-jNm" customClass="SettingsViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FY3-NO-19d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -249,6 +263,9 @@
                         <viewLayoutGuide key="safeArea" id="BLi-7M-Ixf"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="VMC-po-JUp"/>
+                    <connections>
+                        <outlet property="categoriesPickerView" destination="BcK-nj-JFf" id="RZk-Op-adJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hY-Vq-EHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

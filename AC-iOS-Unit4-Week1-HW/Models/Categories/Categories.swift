@@ -9,10 +9,10 @@
 import Foundation
 
 struct CategoryWrapper: Codable {
-    let results: [Results]
+    let results: [Category]
 }
 
-struct Results: Codable {
+struct Category: Codable {
     let listName: String
     
     enum CodingKeys: String, CodingKey {

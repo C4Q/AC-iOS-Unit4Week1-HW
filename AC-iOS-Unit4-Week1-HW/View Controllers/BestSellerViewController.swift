@@ -8,8 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BestSellerViewController: UIViewController {
 
+    @IBOutlet weak var bestSellerCollectionView: UICollectionView!
+    
+    @IBOutlet weak var categoriesPickerView: UIPickerView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
