@@ -60,6 +60,24 @@ class BestSellersViewController: UIViewController {
     
     /// TODO: segue from collection view cell to detail view
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BookDetailViewController {
+            if let cell = sender as? BestSellerCollectionViewCell {
+                if let selectedIndexPath = self.bestSellersCollectionView.indexPathsForSelectedItems?[0] {
+                    let row = selectedIndexPath.row
+                    let selectedBook = nytBooksWithISBN[row]
+                    
+                    destination.detailedBook = selectedBook
+                    destination.myGoogleBook = cell.myGoogleBook
+                    destination.bookImage = cell.bestSellerImageView.image
+                }
+            }
+        }
+    }
+    
+    
+    
+    
 }
 
 
@@ -103,11 +121,15 @@ extension BestSellersViewController: UICollectionViewDataSource {
     func loadBookDetails(from book: BestSellerBook, cell: BestSellerCollectionViewCell) {
         
         // import isbn from the book
-        guard let isbn = book.isbns[0].isbn13 else {return}
+        guard let isbn = book.isbns[0].isbn13 else {
+            return
+        }
         
         BookDetailGoogleAPIClient.shared.getBookDetails(isbn: isbn, completionHandler: {
             guard let details = $0 else {return} // populates the individual book details
             guard let imageURL = details[0].volumeInfo.imageLinks?.thumbnail else {return}
+            
+            cell.myGoogleBook = details[0]
             
             ImageAPIClient.manager.loadImage(from: imageURL, completionHandler: {
                 cell.bestSellerImageView.image = $0

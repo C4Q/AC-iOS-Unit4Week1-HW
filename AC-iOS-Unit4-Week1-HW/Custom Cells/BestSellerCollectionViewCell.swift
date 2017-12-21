@@ -15,4 +15,7 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weeksOnListLabel: UILabel!
     @IBOutlet weak var shortDescriptionTextView: UITextView!
     
+    var myGoogleBook: BookWrapper?
+    
+    
 }

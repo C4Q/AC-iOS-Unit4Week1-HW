@@ -158,6 +158,7 @@
                     </view>
                     <connections>
                         <outlet property="bookImageView" destination="ivv-vB-Q9C" id="tLn-xK-7wY"/>
+                        <outlet property="bookLongDescriptionTextView" destination="gMp-Ai-5Ym" id="9xh-dt-0js"/>
                         <outlet property="bookSubtitleLabel" destination="3gD-88-3Eo" id="FJx-kI-gIA"/>
                         <outlet property="bookTitleLabel" destination="wCT-oF-JVv" id="Und-gH-uzH"/>
                     </connections>

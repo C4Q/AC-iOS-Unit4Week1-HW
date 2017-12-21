@@ -9,29 +9,35 @@
 import UIKit
 
 class BookDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var bookImageView: UIImageView!
     
     @IBOutlet weak var bookTitleLabel: UILabel!
     
     @IBOutlet weak var bookSubtitleLabel: UILabel!
     
+    @IBOutlet weak var bookLongDescriptionTextView: UITextView!
     
     /// segue from collection view cell to this detail view controller
     
-    var nytBook: BestSellerBook!
-    var googleBook: BookWrapper!
+    var detailedBook: BestSellerBook?
+    var myGoogleBook: BookWrapper?
+    var bookImage: UIImage?
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        guard let bookTitle = nytBook.bookDetails[0].title else { return }
-//        guard let bookTitle = nytBook.bookDetails[0].title else {return}
-//        self.bookTitleLabel.text = bookTitle
-//        guard let bookSubtitle = googleBook.volumeInfo.subtitle else { return }
-//        self.bookSubtitleLabel.text = bookSubtitle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadDetails()
     }
-    /// LOAD THE IMAGE OF THE BOOK
-//            self.bookImageView.image =
-//}
+    
+    func loadDetails() {
+        bookImageView.image = bookImage
+        bookTitleLabel.text = detailedBook?.bookDetails[0].title
+        if let myGoogleBook = myGoogleBook {
+            bookSubtitleLabel.text = myGoogleBook.volumeInfo.subtitle ?? ""
+            bookLongDescriptionTextView.text = myGoogleBook.volumeInfo.description ?? ""
+        }
+    }
+    
+}
 
 
