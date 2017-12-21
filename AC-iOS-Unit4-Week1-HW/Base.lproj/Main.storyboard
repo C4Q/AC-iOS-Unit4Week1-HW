@@ -114,7 +114,7 @@
                                                                 <constraint firstItem="F1d-ef-Qdu" firstAttribute="leading" secondItem="15P-Ok-R7M" secondAttribute="leading" constant="2" id="w5p-Dv-hHf"/>
                                                             </constraints>
                                                             <connections>
-                                                                <segue destination="sx1-ro-Kjs" kind="show" identifier="allGenresSegue" id="gqN-Jn-Xia"/>
+                                                                <segue destination="zlB-Wi-3ju" kind="show" identifier="allGenresSegue" id="gqN-Jn-Xia"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -258,7 +258,7 @@
                                             <constraint firstItem="D2V-4k-jVj" firstAttribute="top" secondItem="hQM-vg-XCY" secondAttribute="top" id="wtz-Xa-s9z"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="sx1-ro-Kjs" kind="show" identifier="favoritesSegue" id="iA5-I3-dmO"/>
+                                            <segue destination="zlB-Wi-3ju" kind="show" identifier="favoritesSegue" id="iA5-I3-dmO"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -358,7 +358,7 @@
                                             <outlet property="bookImageView" destination="vlt-AT-1xq" id="79K-sd-YV5"/>
                                             <outlet property="shortDescriptionLabel" destination="zxT-wX-piv" id="UWR-kI-9dX"/>
                                             <outlet property="weeksOnBestSellerLabel" destination="eGK-Wk-C9m" id="avT-zQ-tUf"/>
-                                            <segue destination="sx1-ro-Kjs" kind="show" identifier="bestSellerSegue" id="GXH-RZ-tz0"/>
+                                            <segue destination="zlB-Wi-3ju" kind="show" identifier="bestSellerSegue" id="GXH-RZ-tz0"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -393,12 +393,12 @@
         <!--Detailed View Controller-->
         <scene sceneID="l7L-es-ZRY">
             <objects>
-                <viewController title="Detailed View Controller" id="sx1-ro-Kjs" sceneMemberID="viewController">
+                <viewController title="Detailed View Controller" id="sx1-ro-Kjs" customClass="DetailedViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nmt-ms-2cO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-kw-rcT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-kw-rcT">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YOk-19-FSV">
@@ -408,13 +408,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bJ-Zq-tgU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bJ-Zq-tgU">
                                 <rect key="frame" x="10" y="280" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-qo-Wv5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-qo-Wv5">
                                 <rect key="frame" x="10" y="249" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -440,13 +440,49 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NGL-TY-iae"/>
                     </view>
+                    <navigationItem key="navigationItem" id="f91-wX-aP0">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="WlH-Ib-slK">
+                            <connections>
+                                <action selector="backButton:" destination="sx1-ro-Kjs" id="HXc-Pg-pdY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="sEb-za-94n">
+                            <connections>
+                                <action selector="favoriteButton:" destination="sx1-ro-Kjs" id="4je-Ur-ByB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bookImageView" destination="Gne-kw-rcT" id="1JQ-26-sbT"/>
+                        <outlet property="longDescriptionTextView" destination="YOk-19-FSV" id="BbX-Gk-urh"/>
+                        <outlet property="subtitleLabel" destination="4bJ-Zq-tgU" id="kKt-M3-VhK"/>
+                        <outlet property="titleLabel" destination="JEa-qo-Wv5" id="hvQ-KC-BNJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mB6-Ld-lPv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="-116"/>
+            <point key="canvasLocation" x="1864" y="-116"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NVq-qA-v7k">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zlB-Wi-3ju" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jRw-8w-hcg">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sx1-ro-Kjs" kind="relationship" relationship="rootViewController" id="TFC-55-y6U"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eDz-y3-Rdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1143.75" y="-116.25"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GXH-RZ-tz0"/>
+        <segue reference="gqN-Jn-Xia"/>
     </inferredMetricsTieBreakers>
 </document>

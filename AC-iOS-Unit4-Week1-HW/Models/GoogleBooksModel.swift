@@ -9,10 +9,9 @@
 import Foundation
 
 //Endpoint "https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239"
-//https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
+//https://www.googleapis.com/books/v1/volumes?q=+isbn:\(ISBNGOESHERE)+\(apikey)
 //key=API_KEY
-//var apikey = "AIzaSyAA1l0upCWnuzbWRdfeltaIpGXuSDKV1Q4"
-
+var apikey = "AIzaSyAA1l0upCWnuzbWRdfeltaIpGXuSDKV1Q4"
 
 struct GoogleBooksWrapper: Codable {
     var items: [GoogleBooks]
@@ -42,4 +41,30 @@ struct ImageWrapper: Codable {
     var thumbnail: String
 }
 
+//MAKE GOOGLE API HERE
+struct GoogleAPIClient {
+    private init() {}
+    static let manager = GoogleAPIClient()
+    func getBookInfo(matching putISBNHere: String,
+                        completionHandler: @escaping ([BookInfo]) -> Void,
+                        errorHandler: @escaping (Error) -> Void) {
+        let endpointLink = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(putISBNHere)+\(apikey)"
+        guard let url = URL(string: endpointLink) else {
+            errorHandler(AppError.badURL(str: putISBNHere))
+            return
+        }
+        let request = URLRequest(url: url)
+        let parseDataIntoBooks: (Data) -> Void = {(data) in
+            do {
+                let results = try JSONDecoder().decode(GoogleBooksWrapper.self, from: data)
+                let booksArray = results.items[0].volumeInfo
+                completionHandler(booksArray)
+            }
+            catch {
+                errorHandler(AppError.codingError(rawError: error))
+            }
+        }
+        NetworkHelper.manager.performDataTask(with: request, completionHandler: parseDataIntoBooks, errorHandler: errorHandler)
+    }
+}
 

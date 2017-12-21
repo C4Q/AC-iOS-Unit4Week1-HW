@@ -26,7 +26,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
             //for element in categoriesArray {
                 //Call API with element.theEndpointLink
                 //Save each category
-                //Only run this once in Friday OR if the app never ran before
+                //Only run this once on Friday OR if the app never ran before
                 //All other times load from saved data
             //}
             
@@ -168,8 +168,31 @@ extension BestSellerViewController: UICollectionViewDataSource, UICollectionView
         
         
         return cell
+    }
+
+    // MARK: - Navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? DetailedViewController {
+//            let selectedRow = self.seriesTableView.indexPathForSelectedRow!.row
+//            let selectedShow = self.allEpisodesInASeries[selectedRow]
+//            destination.anEpisode = selectedShow
+//        }
+//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "bestSellerSegue" {
+        let destination = segue.destination as! DetailedViewController
+            if let selectedCell = self.collectionView.indexPathsForSelectedItems?.first!.row {
+            let selectedBook = self.displayedBestSellers[selectedCell]
+            destination.aBook = selectedBook
+            }
         
     }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "bestSellerSegue", sender: indexPath)
+    }
+    
+    
     
     //FLOW LAYOUT DELEGATES
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
