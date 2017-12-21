@@ -144,7 +144,7 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
                 cell.gBook = gbook[0]
                 cell.bestSellerSummaryTextView.text = gbook[0].searchInfo.textSnippet.html2String
                 cell.bestSellerSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
-                let imageUrl = gbook[0].volumeInfo.imageLinks.thumbnail
+                let imageUrl = gbook[0].volumeInfo.imageLinks?.thumbnail ?? "badurl"
                 
                 ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: { cell.bestSellerImageView.image = $0; cell.setNeedsLayout() }, errorHandler: { print($0) })
             } else {
