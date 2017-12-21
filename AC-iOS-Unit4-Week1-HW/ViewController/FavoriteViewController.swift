@@ -32,14 +32,19 @@ class FavoriteViewController: UIViewController {
         super.viewWillAppear(true)
        favoriteCollectionView.reloadData()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? FavoriteDetailViewController {
-//            let selectedBook = favoriteCollectionView.indexPathsForSelectedItems
-            let cell = sender as! FavoriteCollectionViewCell
-            guard favoriteCollectionView.indexPath(for: cell) != nil else {return}
-            destination.book = cell.savedBooks
+               let cell = sender as! FavoriteCollectionViewCell
+         //    let selectedBook = favoriteCollectionView.indexPathsForSelectedItems
+            if let indexPath = favoriteCollectionView.indexPath(for: cell) {
+                destination.favoritebook = BookDataStore.manager.getFavorites()[indexPath.row]
+                destination.favoriteImage = cell.favoritePhoto.image
+            }
+          
         }
     }
+    
     
 }
 extension FavoriteViewController: UICollectionViewDataSource {

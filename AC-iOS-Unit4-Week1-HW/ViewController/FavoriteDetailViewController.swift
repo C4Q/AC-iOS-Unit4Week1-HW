@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class FavoriteDetailViewController: UIViewController {
     
@@ -14,24 +15,18 @@ class FavoriteDetailViewController: UIViewController {
     @IBOutlet weak var favoriteDetailDescription: UITextView!
     @IBOutlet weak var favoriteDetailImage: UIImageView!
     
-    var book: BooksInfo!
+    var favoritebook: Favorite?
+    var favoriteImage: UIImage?
     
     override func viewDidLoad() {
+        favoriteDetailSubtitle.text = favoritebook?.subtitle
+        favoriteDetailDescription.text = favoritebook?.description
+        favoriteDetailImage.image = favoriteImage
         super.viewDidLoad()
-        favoriteDetailSubtitle.text = book.volumeInfo.subtitle
-        favoriteDetailDescription.text = book.volumeInfo.description
+
         
     }
-    func loadImage() {
-        guard let imageURLStr = book.volumeInfo.imageLinks?.thumbnail else {
-            return
-        }
-        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
-            self.favoriteDetailImage.image = onlineImage
-            self.favoriteDetailImage.setNeedsLayout()
-        }
-        ImageAPIClient.manager.getImage(from: imageURLStr, completionHandler: completion, errorHandler: {print($0)})
-    }
+    
 
 
 }

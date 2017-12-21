@@ -60,7 +60,7 @@ static let manager = BookDataStore()
     //1. stores image in documents folder
     //2. appends favorite item to array
     func addToFavorites(book: BooksInfo, andImage image: UIImage) -> Bool {
-        let indexExist = favorites.index{ $0.identifier == book.volumeInfo.industryIdentifiers.first?.identifier}
+        let indexExist = favorites.index{ $0.identifier == book.volumeInfo.industryIdentifiers?.first?.identifier}
         
         if indexExist != nil {print("FAVORITE EXIST"); return false}
        
@@ -69,8 +69,8 @@ static let manager = BookDataStore()
           let success = storeImageToDisk(image: image, andBook: book)
         if !success { return false }
         // 2) save favorite object
-         guard let identifier = book.volumeInfo.industryIdentifiers.first else { return false }
-       let newFavorite = Favorite.init(subtitle: book.volumeInfo.subtitle, description: book.volumeInfo.description, identifier: identifier.identifier)
+        guard let identifier = book.volumeInfo.industryIdentifiers?.first else { return false }
+        let newFavorite = Favorite.init(subtitle: book.volumeInfo.subtitle, description: book.volumeInfo.description!, identifier: identifier.identifier)
           favorites.append(newFavorite)
         return true
     }
@@ -81,7 +81,7 @@ static let manager = BookDataStore()
          // writing and saving to documents folder
         // 1) save image from favorite photo
         
-        guard let identifier = book.volumeInfo.industryIdentifiers.first else { return false }
+        guard let identifier = book.volumeInfo.industryIdentifiers?.first else { return false }
         
        let imageURL = BookDataStore.manager.dataFilePath(withPathName: identifier.identifier)
         do {
@@ -94,7 +94,7 @@ static let manager = BookDataStore()
     
     func isBookInFavorites(book: BooksInfo) -> Bool {
         //checking for uniqueness
-        let indexExist = favorites.index{ $0.identifier == book.volumeInfo.industryIdentifiers[0].identifier }
+        let indexExist = favorites.index{ $0.identifier == book.volumeInfo.industryIdentifiers![0].identifier }
         if indexExist != nil {
             return true
         } else {

@@ -59,7 +59,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         return categories[row].categoryName
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(categories[row], forKey: selectedSettingKey)
+//        UserDefaults.standard.set(categories[row], forKey: selectedSettingKey)
     }
     
 }

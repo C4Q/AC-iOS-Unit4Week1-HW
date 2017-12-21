@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
     //only made this variable to transfer info from the googleBookAPI to detail view controller
-    var savedBooks: BooksInfo?
+   
     
     @IBOutlet weak var favoritePhoto: UIImageView!
 }

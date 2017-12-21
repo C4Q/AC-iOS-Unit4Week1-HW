@@ -18,10 +18,10 @@ struct BooksInfo: Codable {
 
 struct VolumeInfo: Codable {
     let subtitle: String?
-    let description: String
+    let description: String?
     let imageLinks: ImageLink?
     let title: String
-    let industryIdentifiers: [BookIdentifiers]
+    let industryIdentifiers: [BookIdentifiers]?
 }
 
 struct ImageLink: Codable {
