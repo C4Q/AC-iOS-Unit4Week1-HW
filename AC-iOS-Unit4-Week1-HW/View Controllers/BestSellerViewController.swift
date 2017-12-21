@@ -15,12 +15,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDelegate, UIPicker
     @IBOutlet weak var collectionView: UICollectionView!
     
    
-    var books = [BookInfo?](){
-        didSet{
-         
-        
-    }
-}
+    
     
     
     var bestSellers = [BestSeller](){
@@ -55,6 +50,22 @@ class BestSellerViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.pickerView.delegate = self
        
     }
+    
+    //HOW TO SEGUE FROM COLLECTION CELL!!!!!!!!!!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue"{
+            let nav = segue.destination as! UINavigationController
+            let detailPage = nav.childViewControllers.first as! BestSellerDetailViewController
+            let selectedCell = sender as! BestSellerCollectionViewCell
+            let selectedBook = selectedCell.book
+            detailPage.book = selectedBook
+        }
+    }
+    
+    
+    
+    
     
     
     func loadBestSeller(category: String){
@@ -158,7 +169,6 @@ class BestSellerViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedCategory = categories[row]
-        books.removeAll()
         loadBestSeller(category: selectedCategory.categoryKey)
     }
     
@@ -182,24 +192,25 @@ extension BestSellerViewController: UICollectionViewDataSource {
         }
         cell.bookDescription.text = bestSellerToSetUp.bookDetail[0].bestSellerDescription
         
-        loadBooks(bestSeller: bestSellerToSetUp, cellToSet: cell, row: indexPath.row)
+        loadBooks(bestSeller: bestSellerToSetUp, cellToSet: cell)
         
         return cell
     }
     
     
-    func loadBooks(bestSeller: BestSeller, cellToSet: BestSellerCollectionViewCell, row: Int){
-        print("testfunc")
+    func loadBooks(bestSeller: BestSeller, cellToSet: BestSellerCollectionViewCell){
         
-        let isbn = bestSeller.isbns[0].isbn13
-        
+        guard let isbn = bestSeller.isbns.first?.isbn13 else {print("no isbn")
+            return
+        }
         let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=AIzaSyDqD8JrNJyYU_ANhQfkiMoItjCAP8X6OdI"
         
         let completion: ([BookInfo]) -> Void = {(onlineGoogleBook: [BookInfo]) in
-            print("test")
+            cellToSet.book = onlineGoogleBook[0]
             if let imageUrl = onlineGoogleBook[0].volumeInfo.imageLinks?.thumbnail{
             
             let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
+                cellToSet.image = onlineImage
                 cellToSet.bookImage.image = onlineImage
             }
                 ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: completion, errorHandler: {cellToSet.bookImage.image = #imageLiteral(resourceName: "image_not_available")
@@ -209,49 +220,33 @@ extension BestSellerViewController: UICollectionViewDataSource {
                 cellToSet.bookImage.image = #imageLiteral(resourceName: "image_not_available")
             }
         
-            if self.books.isEmpty{
-            let newBook = onlineGoogleBook[0]
-                self.books.append(newBook) } else{
-                if row > self.books.count - 1{
-                    let newBook = onlineGoogleBook[0]
-                    self.books.append(newBook)
-                }
-            }
-            
         
         
         }
         let errorHanlder: (AppError) -> Void = {(error: AppError) in
-            if self.books.isEmpty{
-                let nilInfo = Book.init(title: "N/A", subtitle: nil, description: "N/A", imageLinks: nil)
-                let nilBook = BookInfo(volumeInfo: nilInfo)
-                self.books.append(nilBook)
-            } else if row > self.books.count - 1{
-            let nilInfo = Book.init(title: "N/A", subtitle: nil, description: "N/A", imageLinks: nil)
-            let nilBook = BookInfo(volumeInfo: nilInfo)
-                    self.books.append(nilBook)
-                    
-                }
+            let noInfo = Book.init(title: bestSeller.bookDetail[0].title, subtitle: nil, description: bestSeller.bookDetail[0].bestSellerDescription, imageLinks: nil)
+            let noBook = BookInfo.init(volumeInfo: noInfo)
+            cellToSet.book = noBook
             
             switch error{
             case .noInternetConnection:
-                print("best seller: No internet connection")
+                print("google book: No internet connection")
             case .couldNotParseJSON:
-                print("best seller: Could Not Parse")
+                print("google book: Could Not Parse")
                 cellToSet.bookImage.image = #imageLiteral(resourceName: "image_not_available")
 
             case .badStatusCode:
-                print("best seller: Bad Status Code333")
+                print("google book: Bad Status Code333")
             case .badURL:
-                print("best seller: Bad URL")
+                print("google book: Bad URL")
             case .invalidJSONResponse:
-                print("best seller: Invalid JSON Response")
+                print("google book: Invalid JSON Response")
             case .noDataReceived:
-                print("best seller: No Data Received")
+                print("google book: No Data Received")
             case .notAnImage:
-                print("best seller: No Image Found")
+                print("google book: No Image Found")
             default:
-                print("best seller: Other error")
+                print("google book: Other error")
             }
         }
         

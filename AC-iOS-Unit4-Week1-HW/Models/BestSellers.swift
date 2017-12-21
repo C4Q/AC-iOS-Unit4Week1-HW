@@ -25,10 +25,13 @@ struct BestSeller: Codable {
 }
 
     struct BookDetail: Codable{
+        let title: String
         let bestSellerDescription: String
     
         enum CodingKeys: String, CodingKey {
+            case title
             case bestSellerDescription = "description"
+        
         }
     }
     

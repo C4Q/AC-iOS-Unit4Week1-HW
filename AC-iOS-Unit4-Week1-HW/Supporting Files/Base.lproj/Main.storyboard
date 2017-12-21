@@ -93,7 +93,7 @@
                                             <outlet property="bookDescription" destination="7Q3-EF-I9H" id="Pam-ZN-VVS"/>
                                             <outlet property="bookImage" destination="cGo-3V-m7x" id="7Dw-lY-i3h"/>
                                             <outlet property="numberOfWeeks" destination="eIb-1h-FLQ" id="Ztc-Kc-C0Y"/>
-                                            <segue destination="boO-Ty-ONQ" kind="show" id="0ve-5Z-DL4"/>
+                                            <segue destination="StY-vB-YJt" kind="presentation" identifier="detailSegue" id="kV0-S8-ciQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -133,46 +133,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-HD-kKp">
-                                <rect key="frame" x="67" y="117" width="240" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isi-FX-xMI">
-                                <rect key="frame" x="88" y="323" width="205" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isi-FX-xMI">
+                                <rect key="frame" x="0.0" y="318" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-Z2-zgb">
-                                <rect key="frame" x="67" y="367" width="247" height="196"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-Z2-zgb">
+                                <rect key="frame" x="11" y="350" width="353" height="265"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifZ-On-QT3">
-                                <rect key="frame" x="128" y="595" width="125" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifZ-On-QT3">
+                                <rect key="frame" x="130.5" y="626" width="114" height="30"/>
                                 <state key="normal" title="Add To Favorites"/>
                                 <connections>
                                     <action selector="addToFavoritePressed:" destination="boO-Ty-ONQ" eventType="touchUpInside" id="g8u-nQ-GRg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24o-XB-uyA">
+                                <rect key="frame" x="0.0" y="275" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-HD-kKp">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="isi-FX-xMI" firstAttribute="leading" secondItem="Tq0-wU-J8j" secondAttribute="leading" id="3Yb-nJ-FYB"/>
+                            <constraint firstItem="TdE-Z2-zgb" firstAttribute="top" secondItem="isi-FX-xMI" secondAttribute="bottom" constant="11" id="8cy-o0-OHx"/>
+                            <constraint firstItem="ifZ-On-QT3" firstAttribute="top" secondItem="TdE-Z2-zgb" secondAttribute="bottom" constant="11" id="CAX-HO-9VO"/>
+                            <constraint firstItem="Tvp-HD-kKp" firstAttribute="height" secondItem="O1V-Cj-wFB" secondAttribute="height" multiplier="0.3" id="Q2H-Fj-CQs"/>
+                            <constraint firstItem="ifZ-On-QT3" firstAttribute="centerX" secondItem="Tq0-wU-J8j" secondAttribute="centerX" id="V7C-ve-GXm"/>
+                            <constraint firstItem="Tq0-wU-J8j" firstAttribute="trailing" secondItem="24o-XB-uyA" secondAttribute="trailing" id="c2F-rP-S1i"/>
+                            <constraint firstItem="Tq0-wU-J8j" firstAttribute="trailing" secondItem="TdE-Z2-zgb" secondAttribute="trailing" constant="11" id="gDw-aF-HlS"/>
+                            <constraint firstItem="Tq0-wU-J8j" firstAttribute="trailing" secondItem="isi-FX-xMI" secondAttribute="trailing" id="gYA-aT-xha"/>
+                            <constraint firstItem="Tvp-HD-kKp" firstAttribute="leading" secondItem="Tq0-wU-J8j" secondAttribute="leading" id="geO-PI-0Fk"/>
+                            <constraint firstItem="Tq0-wU-J8j" firstAttribute="bottom" secondItem="ifZ-On-QT3" secondAttribute="bottom" constant="11" id="mn2-R2-dgd"/>
+                            <constraint firstItem="isi-FX-xMI" firstAttribute="top" secondItem="24o-XB-uyA" secondAttribute="bottom" constant="22" id="nYY-Vd-G9M"/>
+                            <constraint firstItem="Tq0-wU-J8j" firstAttribute="trailing" secondItem="Tvp-HD-kKp" secondAttribute="trailing" id="oHi-4d-Whc"/>
+                            <constraint firstItem="24o-XB-uyA" firstAttribute="top" secondItem="Tvp-HD-kKp" secondAttribute="bottom" constant="11" id="oz3-0z-ZBX"/>
+                            <constraint firstItem="Tvp-HD-kKp" firstAttribute="top" secondItem="Tq0-wU-J8j" secondAttribute="top" id="pSw-nh-siL"/>
+                            <constraint firstItem="24o-XB-uyA" firstAttribute="leading" secondItem="Tq0-wU-J8j" secondAttribute="leading" id="paz-bN-MwY"/>
+                            <constraint firstItem="TdE-Z2-zgb" firstAttribute="leading" secondItem="Tq0-wU-J8j" secondAttribute="leading" constant="11" id="w3z-Jt-mbh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Tq0-wU-J8j"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Sip-UY-2vb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="041-1F-e4J">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="boO-Ty-ONQ" id="o66-LM-6WC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bookCoverImage" destination="Tvp-HD-kKp" id="Gre-p1-cVf"/>
                         <outlet property="bookDescription" destination="TdE-Z2-zgb" id="iYL-RY-5v3"/>
                         <outlet property="subtitleLabel" destination="isi-FX-xMI" id="Wj1-nC-WDu"/>
+                        <outlet property="titleLabel" destination="24o-XB-uyA" id="sql-uZ-LLK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wJk-0S-3mS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1452" y="-812.74362818590714"/>
+            <point key="canvasLocation" x="2328.8000000000002" y="-812.74362818590714"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="mar-4n-YQL">
@@ -265,6 +293,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oh1-xd-rfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="831" y="862"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sGr-M1-XHX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="StY-vB-YJt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s1A-aG-cRc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="boO-Ty-ONQ" kind="relationship" relationship="rootViewController" id="mln-YJ-wbS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ww7-ce-sBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1346" y="-1127"/>
         </scene>
     </scenes>
 </document>

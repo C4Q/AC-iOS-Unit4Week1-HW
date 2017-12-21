@@ -16,5 +16,6 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var bookDescription: UITextView!
     
-    
+    var image: UIImage?
+    var book: BookInfo?
 }
