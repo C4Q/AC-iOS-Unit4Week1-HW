@@ -31,17 +31,11 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         self.settingsPickerView.delegate = self
         self.settingsPickerView.dataSource = self
-        BookCategoryAPIClient.manager.getBookCategories(completionHandler: { self.bookCategories = $0 }, errorHandler: { print($0) })
+        loadBookCategories()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //guard bookCategories.count != 0 else { return }
-        if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
-            settingsPickerView.selectRow(index, inComponent: 0, animated: true)
-        } else {
-            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.categoryIndex.rawValue)
-        }
+    func loadBookCategories() {
+        BookCategoryAPIClient.manager.getBookCategories(completionHandler: { self.bookCategories = $0 }, errorHandler: { print($0) })
     }
 
 }

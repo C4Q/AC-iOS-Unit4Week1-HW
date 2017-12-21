@@ -16,10 +16,12 @@ class BestSellersViewController: UIViewController {
     var bookCategories = [BookCategory]() {
         didSet {
             categoriesPickerView.reloadAllComponents()
-            if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
-                categoriesPickerView.selectRow(index, inComponent: 0, animated: true)
+            if let savedIndex = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
+                categoriesPickerView.selectRow(savedIndex, inComponent: 0, animated: true)
+                BestSellersAPIClient.manager.getBestSellers(with: bookCategories[savedIndex].list_name_encoded, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
             } else {
                 UserDefaults.standard.set(0, forKey: UserDefaultsKeys.categoryIndex.rawValue)
+                BestSellersAPIClient.manager.getBestSellers(with: bookCategories[0].list_name_encoded, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
             }
         }
     }
@@ -27,6 +29,7 @@ class BestSellersViewController: UIViewController {
     var bestSellers = [BestSeller]() {
         didSet {
             booksCollectionView.reloadData()
+            booksCollectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
 
@@ -39,27 +42,8 @@ class BestSellersViewController: UIViewController {
         loadBookCategories()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard bookCategories.count != 0 else { return }
-        if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
-            categoriesPickerView.selectRow(index, inComponent: 0, animated: true)
-            BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[index].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
-        } else {
-            UserDefaults.standard.set(0, forKey: UserDefaultsKeys.categoryIndex.rawValue)
-            BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[0].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
-        }
-    }
-    
     func loadBookCategories() {
-        BookCategoryAPIClient.manager.getBookCategories(completionHandler: {
-            self.bookCategories = $0
-            if let index = UserDefaults.standard.value(forKey: UserDefaultsKeys.categoryIndex.rawValue) as? Int {
-                BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[index].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
-            } else {
-                BestSellersAPIClient.manager.getBestSellers(with: self.bookCategories[0].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
-            }
-        }, errorHandler: { print($0) })
+        BookCategoryAPIClient.manager.getBookCategories(completionHandler: { self.bookCategories = $0 }, errorHandler: { print($0) })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,6 +52,7 @@ class BestSellersViewController: UIViewController {
             let bestSellerCell = sender as! BestSellerCollectionViewCell
             if let indexPath = booksCollectionView.indexPath(for: bestSellerCell) {
                 bestSellerDetails.bestSeller = bestSellers[indexPath.row]
+                bestSellerDetails.coverImage = bestSellerCell.bookImageView.image
             }
         }
     }
@@ -89,8 +74,7 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        BestSellersAPIClient.manager.getBestSellers(with: bookCategories[row].list_name, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
-        UserDefaults.standard.set(row, forKey: UserDefaultsKeys.categoryIndex.rawValue)
+        BestSellersAPIClient.manager.getBestSellers(with: bookCategories[row].list_name_encoded, completionHandler: { self.bestSellers = $0 }, errorHandler: { print($0) })
     }
     
 }
@@ -105,23 +89,33 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
         let bookCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Book Cell", for: indexPath)
         let selectedBook = bestSellers[indexPath.row]
         if let bookCell = bookCell as? BestSellerCollectionViewCell {
+            bookCell.bookImageSpinner.startAnimating()
+            bookCell.bookImageSpinner.isHidden = false
             bookCell.weeksInListLabel.text = "\(selectedBook.weeks_on_list) weeks in Best Seller List"
             let bookDescription = selectedBook.book_details[0].description
-            if bookDescription == "" { bookCell.bookShortDescription.text = "No short description found." }
+            if bookDescription == "" || bookDescription == nil { bookCell.bookShortDescription.text = "No short description found." }
             else { bookCell.bookShortDescription.text = bookDescription }
-            //bookCell.bookShortDescription.text = selectedBook.book_details[0].description
             bookCell.bookImageView.image = nil
             GoogleBookAPIClient.manager.getGoogleBook(with: selectedBook.book_details[0].primary_isbn13, completionHandler: {
-                    ImageFetchHelper.manager.getImage(from: $0.volumeInfo.imageLinks.smallThumbnail, completionHandler: {
-                            bookCell.bookImageView.image = $0
-                            bookCell.bookImageView.setNeedsLayout()
-                        }, errorHandler: { print($0) })
+                guard let imageLinks = $0.volumeInfo.imageLinks else { return }
+                ImageFetchHelper.manager.getImage(from: imageLinks.thumbnail, completionHandler: {
+                        bookCell.bookImageView.image = $0
+                    self.stopAndHideSpinner(cell: bookCell)
+                        bookCell.bookImageView.setNeedsLayout()
+                    }, errorHandler: { print($0) })
                 }, errorHandler: {_ in
+                    self.stopAndHideSpinner(cell: bookCell)
                     bookCell.bookImageView.image = #imageLiteral(resourceName: "coverNotFound")
                     bookCell.bookImageView.setNeedsLayout()
                 })
+            bookCell.bookShortDescription.setContentOffset(CGPoint.zero, animated: false)
         }
         return bookCell
+    }
+    
+    func stopAndHideSpinner(cell: BestSellerCollectionViewCell) {
+        cell.bookImageSpinner.stopAnimating()
+        cell.bookImageSpinner.isHidden = true
     }
     
 }

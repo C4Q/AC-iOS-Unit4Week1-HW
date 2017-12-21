@@ -11,12 +11,15 @@
 		54F137E21FE302CD00EA22AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E01FE302CD00EA22AA /* Main.storyboard */; };
 		54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E31FE302CE00EA22AA /* Assets.xcassets */; };
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
-		E2A293C41FE86D9600E3B629 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A293C31FE86D9600E3B629 /* DataModel.swift */; };
+		E24AE99B1FE97FFF00E00D58 /* FavoriteBookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24AE99A1FE97FFF00E00D58 /* FavoriteBookDetailViewController.swift */; };
+		E24AE99D1FE980D700E00D58 /* FavoriteBookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24AE99C1FE980D700E00D58 /* FavoriteBookCollectionViewCell.swift */; };
+		E2A293C41FE86D9600E3B629 /* DataPersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A293C31FE86D9600E3B629 /* DataPersistenceModel.swift */; };
 		E2A293C61FE8710400E3B629 /* BestSellerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A293C51FE8710400E3B629 /* BestSellerDetailViewController.swift */; };
 		E2D0591A1FE46279001267AF /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D059191FE46279001267AF /* NetworkHelper.swift */; };
 		E2D0591E1FE462BF001267AF /* ImageFetchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0591D1FE462BF001267AF /* ImageFetchHelper.swift */; };
 		E2D059221FE46788001267AF /* BestSellersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D059211FE46788001267AF /* BestSellersViewController.swift */; };
 		E2D059241FE46943001267AF /* BookCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D059231FE46943001267AF /* BookCategory.swift */; };
+		E2E7F3BD1FEB7F9000FD4D5B /* FavoriteBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E7F3BC1FEB7F9000FD4D5B /* FavoriteBook.swift */; };
 		E2F202D01FE7705A0068BB9F /* FavoriteBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F202CF1FE7705A0068BB9F /* FavoriteBooksViewController.swift */; };
 		E2F202D21FE7706C0068BB9F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F202D11FE7706C0068BB9F /* SettingsViewController.swift */; };
 		E2F202D41FE773840068BB9F /* BestSeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F202D31FE773840068BB9F /* BestSeller.swift */; };
@@ -31,12 +34,15 @@
 		54F137E31FE302CE00EA22AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F137E61FE302CE00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2A293C31FE86D9600E3B629 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E24AE99A1FE97FFF00E00D58 /* FavoriteBookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookDetailViewController.swift; sourceTree = "<group>"; };
+		E24AE99C1FE980D700E00D58 /* FavoriteBookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2A293C31FE86D9600E3B629 /* DataPersistenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceModel.swift; sourceTree = "<group>"; };
 		E2A293C51FE8710400E3B629 /* BestSellerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerDetailViewController.swift; sourceTree = "<group>"; };
 		E2D059191FE46279001267AF /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		E2D0591D1FE462BF001267AF /* ImageFetchHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchHelper.swift; sourceTree = "<group>"; };
 		E2D059211FE46788001267AF /* BestSellersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellersViewController.swift; sourceTree = "<group>"; };
 		E2D059231FE46943001267AF /* BookCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCategory.swift; sourceTree = "<group>"; };
+		E2E7F3BC1FEB7F9000FD4D5B /* FavoriteBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBook.swift; sourceTree = "<group>"; };
 		E2F202CF1FE7705A0068BB9F /* FavoriteBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBooksViewController.swift; sourceTree = "<group>"; };
 		E2F202D11FE7706C0068BB9F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E2F202D31FE773840068BB9F /* BestSeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSeller.swift; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				E2D059211FE46788001267AF /* BestSellersViewController.swift */,
+				E24AE99A1FE97FFF00E00D58 /* FavoriteBookDetailViewController.swift */,
 				E2F202CF1FE7705A0068BB9F /* FavoriteBooksViewController.swift */,
 				E2A293C51FE8710400E3B629 /* BestSellerDetailViewController.swift */,
 				E2F202D11FE7706C0068BB9F /* SettingsViewController.swift */,
@@ -109,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				E2F202D51FE781ED0068BB9F /* BestSellerCollectionViewCell.swift */,
+				E24AE99C1FE980D700E00D58 /* FavoriteBookCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -119,7 +127,8 @@
 				E2D059191FE46279001267AF /* NetworkHelper.swift */,
 				E2F202D31FE773840068BB9F /* BestSeller.swift */,
 				E2D059231FE46943001267AF /* BookCategory.swift */,
-				E2A293C31FE86D9600E3B629 /* DataModel.swift */,
+				E2A293C31FE86D9600E3B629 /* DataPersistenceModel.swift */,
+				E2E7F3BC1FEB7F9000FD4D5B /* FavoriteBook.swift */,
 				E2D0591D1FE462BF001267AF /* ImageFetchHelper.swift */,
 				E2F202D71FE7878D0068BB9F /* GoogleBook.swift */,
 			);
@@ -200,14 +209,17 @@
 			files = (
 				E2F202D61FE781ED0068BB9F /* BestSellerCollectionViewCell.swift in Sources */,
 				E2D059241FE46943001267AF /* BookCategory.swift in Sources */,
-				E2A293C41FE86D9600E3B629 /* DataModel.swift in Sources */,
+				E2A293C41FE86D9600E3B629 /* DataPersistenceModel.swift in Sources */,
 				E2F202D01FE7705A0068BB9F /* FavoriteBooksViewController.swift in Sources */,
 				E2F202D21FE7706C0068BB9F /* SettingsViewController.swift in Sources */,
+				E24AE99B1FE97FFF00E00D58 /* FavoriteBookDetailViewController.swift in Sources */,
 				E2D0591A1FE46279001267AF /* NetworkHelper.swift in Sources */,
 				E2F202D41FE773840068BB9F /* BestSeller.swift in Sources */,
 				54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */,
+				E24AE99D1FE980D700E00D58 /* FavoriteBookCollectionViewCell.swift in Sources */,
 				E2F202D81FE7878D0068BB9F /* GoogleBook.swift in Sources */,
 				E2D059221FE46788001267AF /* BestSellersViewController.swift in Sources */,
+				E2E7F3BD1FEB7F9000FD4D5B /* FavoriteBook.swift in Sources */,
 				E2A293C61FE8710400E3B629 /* BestSellerDetailViewController.swift in Sources */,
 				E2D0591E1FE462BF001267AF /* ImageFetchHelper.swift in Sources */,
 			);

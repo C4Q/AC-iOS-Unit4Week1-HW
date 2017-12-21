@@ -27,7 +27,7 @@ struct BestSeller: Codable {
 
 struct Book: Codable {
     let title: String
-    let description: String
+    let description: String?
     let contributor: String
     let author: String
     let price: Double
@@ -41,13 +41,10 @@ struct BestSellersAPIClient {
     static let manager = BestSellersAPIClient()
     
     let apiKey = "625d90145c754087a4e16200c1bbdfb6"
-    let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?"
+    let endpointUrlStr = "https://api.nytimes.com/svc/books/v3/lists.json?"
+    
     func getBestSellers(with category: String, completionHandler: @escaping ([BestSeller]) -> Void, errorHandler: @escaping (Error) -> Void) {
-        // TODO: rename variables better
-        let formattedCategory = category.replacingOccurrences(of: " ", with: "-")
-        let options = "api-key=\(apiKey)&list=\(formattedCategory)"
-        let fullUrl = urlStr + options
-        print(fullUrl)
+        let fullUrl = "\(endpointUrlStr)api-key=\(apiKey)&list=\(category)"
         guard let url = URL(string: fullUrl) else {
             errorHandler(AppError.badURL(str: fullUrl))
             return

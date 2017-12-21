@@ -27,9 +27,10 @@ struct BookCategoryAPIClient {
     static let manager = BookCategoryAPIClient()
     
     let apiKey = "625d90145c754087a4e16200c1bbdfb6"
-    let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key="
+    let endpointUrlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
+    
     func getBookCategories(completionHandler: @escaping ([BookCategory]) -> Void, errorHandler: @escaping (Error) -> Void) {
-        let fullUrl = urlStr + apiKey
+        let fullUrl = "\(endpointUrlStr)api-key=\(apiKey)"
         guard let url = URL(string: fullUrl) else {
             errorHandler(AppError.badURL(str: fullUrl))
             return

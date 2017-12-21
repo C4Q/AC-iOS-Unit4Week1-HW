@@ -13,5 +13,6 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var weeksInListLabel: UILabel!
     @IBOutlet weak var bookShortDescription: UITextView!
+    @IBOutlet weak var bookImageSpinner: UIActivityIndicatorView!
     
 }

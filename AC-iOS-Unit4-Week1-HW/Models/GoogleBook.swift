@@ -14,7 +14,6 @@ struct GoogleBookResponse: Codable {
 
 struct GoogleBook: Codable {
     let volumeInfo: VolumeInfoWrapper
-    let saleInfo: SaleInfoWrapper
 }
 
 struct VolumeInfoWrapper: Codable {
@@ -22,8 +21,7 @@ struct VolumeInfoWrapper: Codable {
     let subtitle: String?
     let authors: [String]
     let description: String
-    let imageLinks: ImagesWrapper
-    let industryIdentifiers: [ISBNWrapper]
+    let imageLinks: ImagesWrapper?
 }
 
 struct ImagesWrapper: Codable {
@@ -31,29 +29,15 @@ struct ImagesWrapper: Codable {
     let thumbnail: String
 }
 
-struct SaleInfoWrapper: Codable {
-    let retailPrice: PriceWrapper?
-}
-
-struct PriceWrapper: Codable {
-    let amount: Double
-}
-
-struct ISBNWrapper: Codable {
-    var type: String
-    var identifier: String
-}
-
 struct GoogleBookAPIClient {
     private init() {}
     static let manager = GoogleBookAPIClient()
     
     let apiKey = "AIzaSyAnbRfnkNiDr6ZusJ5eT2VAnseUm0dano8"
-    let urlStr = "https://www.googleapis.com/books/v1/volumes?"
+    let endpointUrlStr = "https://www.googleapis.com/books/v1/volumes?"
+    
     func getGoogleBook(with isbn: String, completionHandler: @escaping (GoogleBook) -> Void, errorHandler: @escaping (Error) -> Void) {
-        // TODO: fix with better names
-        let formattedURL = "key=\(apiKey)&q=+isbn:\(isbn)"
-        let fullUrl = urlStr + formattedURL
+        let fullUrl = "\(endpointUrlStr)key=\(apiKey)&q=+isbn:\(isbn)"
         guard let url = URL(string: fullUrl) else {
             errorHandler(AppError.badURL(str: fullUrl))
             return

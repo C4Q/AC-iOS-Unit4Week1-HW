@@ -11,6 +11,7 @@ import Foundation
 enum AppError: Error {
     case noData
     case noInternet
+    case notAnImage
     case couldNotParseJSON(rawError: Error)
     case badURL(str: String)
     case urlError(rawError: URLError)
