@@ -13,7 +13,7 @@ struct NYTimesAPIClient {
     static let manager = NYTimesAPIClient()
     
     private let apiKey = "191d3b557bb948828b1e94cd9516d629"
-    func getBestSellerCategories(completion: @escaping ([BookCategory]) -> Void,
+    func getBestSellerCategories(completion: @escaping ([CategoryResults]) -> Void,
                                  errorHandler: @escaping (Error) -> Void) {
         let bestSellerURL = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(apiKey)"
         // make url
@@ -26,7 +26,7 @@ struct NYTimesAPIClient {
             do {
                 // decode
                 // then access .results
-                let json = try JSONDecoder().decode(BestSellerCategories.self, from: data)
+                let json = try JSONDecoder().decode(BookCategory.self, from: data)
                 
                 completion(json.results)
                 
@@ -46,7 +46,7 @@ struct NYTimesAPIClient {
         let request = URLRequest(url: url)
         let completion: (Data) -> Void = { ( data: Data) in
             do {
-                let json = try JSONDecoder().decode(BestSellerBook.self, from: data)
+                let json = try JSONDecoder().decode(BestSeller.self, from: data)
                 completion(json.results)
             } catch {
                 errorHandler(AppError.codingError(rawError: error))

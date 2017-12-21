@@ -13,6 +13,7 @@ class BestSellerCell: UICollectionViewCell {
     @IBOutlet weak var bookTextView: UITextView!
     @IBOutlet weak var bookWeeksLabel: UILabel!
     @IBOutlet weak var bookImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     

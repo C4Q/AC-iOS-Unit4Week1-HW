@@ -8,38 +8,26 @@
 
 import Foundation
 
-//steps for API client
-//private init
-//static let manager
-//private constant with key
-//function with completion handler, errorhandler
-
-// build URLRequest:
-//set a string to url
-//guard let url
-//make URL Request
-//create completion hander with Data,
-// do
-//set constant to JSONDecoder().decode
-//catch
-//errors
-//call network helper
-//resum
-
-
 struct GoogleAPIClient {
     private init() {}
     static let manager = GoogleAPIClient()
-    private let apiKey = "AIzaSyBrowYMrW7YUKcp6y-oOHObUzLrTWzm5sI"
-    func getBookDetails(for isbn: String, completion: @escaping (VolumeInfo) -> Void,
+    
+    private let apiKey = "AIzaSyC80XyOEq1teuskfejuRmfZmuw3ehKSeI4"
+    func getBookDetails(for isbn: String, completion: @escaping ([Volume]?) -> Void,
                         errorHandler: @escaping (Error) -> Void) {
+        print(isbn)
         let bookDetailsURL = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)&key=\(apiKey)"
+        
+        //let bookDetailsURL = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)"
+        
+        print(bookDetailsURL)
         guard let url = URL(string: bookDetailsURL) else { errorHandler(AppError.badURL(str: bookDetailsURL)); return }
         let request = URLRequest(url: url)
         let completion: (Data) -> Void = { ( data: Data) in
             do {
-                let json = try JSONDecoder().decode(Volume.self, from: data)
-                completion(json.volumeInfo)
+                let json = try JSONDecoder().decode(BookPreview.self, from: data)
+                guard let myJson = json.items else { print("nil"); completion(nil); return }
+                completion(myJson)
             } catch {
                 errorHandler(AppError.codingError(rawError: error))
             }

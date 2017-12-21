@@ -1,5 +1,5 @@
 //
-//  BestSellerCategory.swift
+//  BookCategory.swift
 //  AC-iOS-Unit4-Week1-HW
 //
 //  Created by Clint Mejia on 12/14/17.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct BestSellerCategories: Codable {
-    let results: [BookCategory]
+struct BookCategory: Codable {
+    let results: [CategoryResults]
 }
 
-struct BookCategory: Codable {
+struct CategoryResults: Codable {
     var listNameEncoded: String
     var displayName: String
     
@@ -21,4 +21,6 @@ struct BookCategory: Codable {
         case displayName = "display_name"
     }
 }
+
+
 
