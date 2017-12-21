@@ -17,9 +17,6 @@ struct GoogleAPIClient {
                         errorHandler: @escaping (Error) -> Void) {
         print(isbn)
         let bookDetailsURL = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)&key=\(apiKey)"
-        
-        //let bookDetailsURL = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)"
-        
         print(bookDetailsURL)
         guard let url = URL(string: bookDetailsURL) else { errorHandler(AppError.badURL(str: bookDetailsURL)); return }
         let request = URLRequest(url: url)

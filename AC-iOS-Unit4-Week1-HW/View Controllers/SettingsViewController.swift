@@ -30,6 +30,8 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         categoryPicker.dataSource = self
         categoryPicker.delegate = self
+        
+        //avoided using API call by loading stored categories
         categories = PickerCategories.loadCategories()
     }
     

@@ -16,28 +16,19 @@ struct NYTimesAPIClient {
     func getBestSellerCategories(completion: @escaping ([CategoryResults]) -> Void,
                                  errorHandler: @escaping (Error) -> Void) {
         let bestSellerURL = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(apiKey)"
-        // make url
         guard let url = URL(string: bestSellerURL) else { errorHandler(AppError.badURL(str: bestSellerURL)); return }
-        //make url request
         let request = URLRequest(url: url)
-        // make complete. needs data
         let completion: (Data) -> Void = { ( data: Data) in
-            // decode
             do {
-                // decode
-                // then access .results
                 let json = try JSONDecoder().decode(BookCategory.self, from: data)
-                
                 completion(json.results)
-                
-            } catch { // for failures. Essentially "let error = error"
+            } catch {
                 errorHandler(AppError.codingError(rawError: error))
             }
         }
-        //then call networkHelper
         NetworkHelper.manager.performDataTask(with: request, completionHandler: completion, errorHandler: errorHandler)
     }
-    
+
     func getBestSellerBooks(for category: String,
                             completion: @escaping ([Book]) -> Void,
                             errorHandler: @escaping (Error) -> Void) {

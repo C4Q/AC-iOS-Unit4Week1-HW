@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Created to avoid making an api call again
 class PickerCategories {
     private init() {}
     static let manager = PickerCategories()
@@ -15,6 +16,8 @@ class PickerCategories {
     static func setCategories(from array: [CategoryResults]) {
         self.categories = array
     }
+    
+    // used in settingsViewController
     static func loadCategories() -> [CategoryResults] {
         return categories
     }

@@ -8,10 +8,6 @@
 
 import Foundation
 
-//The cover
-//The subtitle (if applicable)
-//A long description
-
 struct BookPreview: Codable {
     let items: [Volume]?
 }
@@ -25,6 +21,7 @@ struct BookDetails: Codable {
     let subtitle: String?
     let description: String?
     let imageLinks: ImageLinks?
+    let industryIdentifiers: [ISBNS]
 }
 
 struct ImageLinks: Codable {
@@ -32,14 +29,7 @@ struct ImageLinks: Codable {
     let thumbnail: String?
 }
 
-class ExpandedBookDetails {
-    private init() {}
-    static let manager = ExpandedBookDetails()
-    static private var bookDetails: [Volume]? = []
-    static func setExpandedBookDetails(from array: [Volume]?) {
-        self.bookDetails = array
-    }
-    static func getsetExpandedBookDetails() -> [Volume]? {
-        return bookDetails
-    }
+struct ISBNS: Codable {
+    let type: String
+    let identifier: String
 }

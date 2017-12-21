@@ -1,24 +1,18 @@
 //
-//  BestSellerCollectionViewCell.swift
+//  FavoriteBookCellCollectionViewCell.swift
 //  AC-iOS-Unit4-Week1-HW
 //
-//  Created by Clint Mejia on 12/14/17.
+//  Created by Clint Mejia on 12/21/17.
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
 import UIKit
 
-class BestSellerCell: UICollectionViewCell {
+class FavoriteBookCell: UICollectionViewCell {
     
-    //MARK - Outlets
-    @IBOutlet weak var bookTextView: UITextView!
-    @IBOutlet weak var bookWeeksLabel: UILabel!
-    @IBOutlet weak var bookImageView: UIImageView!
+    //MARK - outlets
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    //MARK - Variables
-    var bookExpandedDetails: Volume?
-    var bookImage: UIImage?
     
     //MARK - Function
     func hideActivityIndicator(_ bool: Bool) {
@@ -31,5 +25,4 @@ class BestSellerCell: UICollectionViewCell {
             activityIndicator.stopAnimating()
         }
     }
-    
 }

@@ -6,10 +6,7 @@
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
-import Foundation
 import UIKit
-
-
 
 class ImageAPIClient {
     private init() {}
