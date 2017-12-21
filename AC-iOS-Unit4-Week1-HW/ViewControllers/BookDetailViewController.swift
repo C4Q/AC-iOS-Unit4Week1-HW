@@ -33,7 +33,7 @@ class BookDetailViewController: UIViewController {
         descriptionLabel.text = googleBook?.volumeInfo.description ?? nil
         subtitleLabel.text = googleBook?.volumeInfo.subtitle ?? nil
         authorLabel.text = googleBook?.volumeInfo.authors?.joined(separator: ", ") ?? nil
-        imageView.image = bookImage
+        imageView.image = bookImage ?? #imageLiteral(resourceName: "not-available")
     }
     
     func saveFavoriteBook() {

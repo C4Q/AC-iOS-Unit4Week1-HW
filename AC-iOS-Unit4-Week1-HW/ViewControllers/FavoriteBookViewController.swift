@@ -46,7 +46,7 @@ extension FavoriteBookViewController: UICollectionViewDataSource {
         
         let favoritesBookDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let imagePath = favoritesBookDirectory!.appendingPathComponent(favorite.isbn).path
-        cell.favoriteImageView.image = UIImage(contentsOfFile: imagePath) ?? #imageLiteral(resourceName: "StashNoImage")
+        cell.favoriteImageView.image = UIImage(contentsOfFile: imagePath) ?? #imageLiteral(resourceName: "not-available")
         cell.setNeedsLayout()
         
         return cell

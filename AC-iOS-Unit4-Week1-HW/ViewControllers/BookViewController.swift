@@ -86,7 +86,7 @@ extension BookViewController: UICollectionViewDataSource {
             if let book = $0 {
                 cell.googleBooks = book[0]
             }
-            guard let image = imageURL else {return}
+            guard let image = imageURL else { cell.collectionImageView.image = #imageLiteral(resourceName: "not-available"); return}
             ImageAPIClient.manager.loadImage(from: image, completionHandler: {cell.collectionImageView.image = $0; cell.collectionImageView.setNeedsLayout()}, errorHandler: {print($0)})
         }, errorHandler: {print($0)})
     }
