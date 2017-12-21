@@ -9,9 +9,10 @@
 import Foundation
 
 class CategoryData {
+    private let plistName = "Categories.plist"
+    
     private init() {}
     static let manager = CategoryData()
-    private let userDefaults = UserDefaults.standard
     
     private var categories: [String] = [] {
         didSet {
@@ -19,18 +20,18 @@ class CategoryData {
         }
     }
     
-    private let categoryKey = "categoryKey"
-    
     //save
     func saveCategories() {
-        userDefaults.set(self.categories, forKey: categoryKey)
+        PersistentData.manager.saveItem(self.categories, atFileName: plistName)
     }
     
     //load
     func loadCategories() {
-        if let categories = userDefaults.value(forKey: categoryKey) as? [String] {
-            self.categories = categories
+        guard let categories =  PersistentData.manager.loadItems(fromFileName: plistName) as? [String] else {
+            return
         }
+        
+        self.categories = categories
     }
     
     //add

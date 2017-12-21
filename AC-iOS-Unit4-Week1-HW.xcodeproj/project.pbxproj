@@ -20,6 +20,7 @@
 		81693A181FE8C4F40004BFB6 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81693A171FE8C4F40004BFB6 /* FavoritesCollectionViewCell.swift */; };
 		81847F0C1FEAB6AF00D4ECAF /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81847F0B1FEAB6AF00D4ECAF /* CategoryData.swift */; };
 		819FAA6C1FEB1D45006BECB5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6B1FEB1D45006BECB5 /* Alert.swift */; };
+		819FAA6E1FEB2934006BECB5 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6D1FEB2934006BECB5 /* PersistentData.swift */; };
 		81AFFAFE1FEA1052009D54A4 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFAFD1FEA1052009D54A4 /* Categories.swift */; };
 		81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		81693A171FE8C4F40004BFB6 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		81847F0B1FEAB6AF00D4ECAF /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		819FAA6B1FEB1D45006BECB5 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		819FAA6D1FEB2934006BECB5 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		81AFFAFD1FEA1052009D54A4 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 			children = (
 				81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */,
 				819FAA6B1FEB1D45006BECB5 /* Alert.swift */,
+				819FAA6D1FEB2934006BECB5 /* PersistentData.swift */,
 				81246F081FEB17BB00C1304C /* Categories */,
 			);
 			path = Models;
@@ -213,6 +216,7 @@
 				81246F0E1FEB1A4700C1304C /* BookDetailViewController.swift in Sources */,
 				81AFFAFE1FEA1052009D54A4 /* Categories.swift in Sources */,
 				819FAA6C1FEB1D45006BECB5 /* Alert.swift in Sources */,
+				819FAA6E1FEB2934006BECB5 /* PersistentData.swift in Sources */,
 				81693A181FE8C4F40004BFB6 /* FavoritesCollectionViewCell.swift in Sources */,
 				81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */,
 				81847F0C1FEAB6AF00D4ECAF /* CategoryData.swift in Sources */,

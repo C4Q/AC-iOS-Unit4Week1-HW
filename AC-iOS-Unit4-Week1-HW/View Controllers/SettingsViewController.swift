@@ -21,6 +21,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
+//        categoriesPickerView.dataSource = self
+//        categoriesPickerView.delegate = self
     }
     
     func loadCategories() {
