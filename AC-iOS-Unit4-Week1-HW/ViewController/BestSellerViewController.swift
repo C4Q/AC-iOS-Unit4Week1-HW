@@ -27,8 +27,7 @@ class BestSellerViewController: UIViewController {
         self.bestSellersPickerView.delegate = self
         self.bestSellersPickerView.dataSource = self
         loadCategories()
-        
-//
+        BookDataStore.manager.load()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BestSellerDetailViewController {

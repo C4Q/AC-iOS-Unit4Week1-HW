@@ -21,6 +21,7 @@ class BestSellerDetailViewController: UIViewController {
         longDescription.text = book?.volumeInfo.description
         subtitle.text = book?.volumeInfo.subtitle
         loadImage()
+        
     }
 
    
@@ -33,7 +34,7 @@ class BestSellerDetailViewController: UIViewController {
     
     func loadImage() {
         guard let imageURLStr = book.volumeInfo.imageLinks?.thumbnail else {
-            return
+            return 
         }
         let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
             self.detailViewImage.image = onlineImage

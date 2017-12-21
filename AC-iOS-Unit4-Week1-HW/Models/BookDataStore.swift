@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class BookDataStore {
-static let kPathname = "FavoriteBooks"
+static let kPathname = "FavoriteBooks.plist"
 
 //singleton
 private init(){}
@@ -40,6 +40,8 @@ static let manager = BookDataStore()
             let data = try encoder.encode(favorites)
             //does the writing to disk
             try data.write(to: dataFilePath(withPathName: BookDataStore.kPathname), options: .atomic)
+            
+            print("save Favorites.plist:\(documentsDirectory())")
         } catch {
             print("error encoding items: \(error.localizedDescription)")
         }
