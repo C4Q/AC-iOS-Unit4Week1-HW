@@ -13,10 +13,9 @@ class BestSellersViewController: UIViewController {
     @IBOutlet weak var bestSellersCollectionView: UICollectionView!
     @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView!
     
-
     var categories = [Category]() {
         didSet {
-            print("catgories SET")
+            print("=============== categories SET ===============")
             DispatchQueue.main.async {
                 self.bestSellersCategoryPickerView.reloadAllComponents()
             }
@@ -25,24 +24,23 @@ class BestSellersViewController: UIViewController {
     
     var nytBooksWithISBN = [BestSellerBook]() {
         didSet {
-            print("nytBooksWithISBN SET")
+            /// do I call NYT API Client here?
+            print("=============== nytBooksWithISBN SET ===============")
             DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
-                
             }
         }
     }
     
     var googleBooksWithImages = [BookWrapper]() {
         didSet {
-            print("googleBooksWithImages SET")
+            /// do I call Google Books API Client here?
+            print("=============== googleBooksWithImages SET ===============")
             DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
             }
         }
     }
-    
-    
     
     
     override func viewDidLoad() {
@@ -54,49 +52,57 @@ class BestSellersViewController: UIViewController {
         loadCategories()
     }
     
-    func loadCategories() {
-        CategoryAPIClient.shared.getCategories(completionHandler: {self.categories = $0}, errorHandler: {print($0)})
-        
-    }
-
-    /// load images from google
-    /*
-     
-    // call function to populate Google array in the nytBooksWithISBN didSet
-    
-    // populate Google Array:
-    // 1) Check each ISBN number from nytBooksWithISBN
-    func findImageFromGoogle() {
-        for book in nytBooksWithISBN {
-            for codes in book.isbns {
-                guard let image = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(codes.isbn10?.description)" else {
-                    let image = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(codes.isbn13?.description)"
-                }
-            }
+    func loadCategories() { /// calls NYTAPIClient-Categories, uses NetworkHelper to access data
+        // set completion
+        let completion: ([Category]) -> Void = {(onlineCategory: [Category]) in
+            self.categories = onlineCategory
+            print("~~~Categories loaded~~~")
         }
-    }
-    BookDetailGoogleAPIClient.shared.getGoogleBooks(isbn: isbnNum, completionHandler: { self.googleBooksWithImages = $0 }, errorHandler: {print($0)})
-    
-    /// https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
-}
-// 2) Find image in googleBooksWithImages using the ISBN number
-// 3) Load the image attribute to the nytBooksWithISBN to load the collection view cell
-
-*/
-
- /// segue from collection view cell to detail view
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? BookDetailViewController {
-            destination.nytBook = nytBooksWithISBN[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
-            destination.googleBook = googleBooksWithImages[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
-            
-            ///do i even have google stuff?
-            
+        // set errorHandler
+        let errorHandler: (Error) -> Void = {(error: Error) in
+            /// TODO: AppError handling
         }
+        // API Call
+        CategoryAPIClient.shared.getCategories(completionHandler: completion, errorHandler: errorHandler) /// I have the data, this is what I want to do with it
     }
     
     
+    
+//    func loadCategories(){
+//        //set url with endpoint
+//        let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(APIKeys.NYTAPIKey)"
+//        //print(url)
+//        //set completion
+//        let completion: ([BookCategories]) -> Void = {(onlineCategory: [BookCategories]) in
+//            self.categoryArray = onlineCategory //Data becomes an array of categories
+//            print("You have categories!")
+//        }
+//        //set errorHandler
+//        let errorHandler: (Error) -> Void = {(error: Error) in
+//            //AppError handling
+//        }
+//        //API call
+//        NYTCatogriesAPICleint.manager.getCategories(from: url,
+//                                                    completionHandler: completion,
+//                                                    errorHandler: errorHandler)
+//    }
+    
+    
+    
+    
+    
+    /// segue from collection view cell to detail view
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if let destination = segue.destination as? BookDetailViewController {
+    //            destination.nytBook = nytBooksWithISBN[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
+    //            destination.googleBook =
+    ///                googleBooksWithImages[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
+    //
+    //        }
+    //    }
 }
+
+
 /// Best Sellers Collection View
 extension BestSellersViewController: UICollectionViewDataSource {
     
@@ -109,15 +115,10 @@ extension BestSellersViewController: UICollectionViewDataSource {
         let bookWithISBN = nytBooksWithISBN[indexPath.row]
         //        let bookWithImage = googleBooksWithImages[indexPath.row]
         
-        /// initialize a nil image
+        // initialize a nil image
         bookCell.bestSellerImageView.image = nil
-        //        let imageUrlStr: String = bookWithImage.volumeInfo.imageLinks.thumbnail
-        //        let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
-        //            bookCell.bestSellerImageView.image = onlineImage
-        //        }
-        //        ImageAPIClient.manager.loadImage(from: imageUrlStr, completionHandler: completion, errorHandler: {print($0)})
         
-        /// customize WEEKS ON BEST SELLER LIST label
+        // customize WEEKS ON BEST SELLER LIST label
         switch bookWithISBN.weeksOnList {
         case 1:
             bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Week On Best Sellers List"
@@ -125,15 +126,36 @@ extension BestSellersViewController: UICollectionViewDataSource {
             bookCell.weeksOnListLabel.text = "\(bookWithISBN.weeksOnList) Weeks On Best Sellers List"
         }
         
-        /// load book short description
+        // load book short description
         bookCell.shortDescriptionTextView.text = bookWithISBN.bookDetails[0].shortDescription
         
+        // calls load Image function
+        loadBookDetails(with: bookWithISBN.isbns[0].isbn10!, cell: bookCell)
         
         return bookCell
     }
     
     
+    /// load images from google
+    
+    // call function to populate Google array in the nytBooksWithISBN didSet
+    
+    // populate Google Array:
+    // 1) Check each ISBN number from nytBooksWithISBN
+    
+    func loadBookDetails(with isbn: String, cell: BestSellerCollectionViewCell) {
+        //        BookDetailGoogleAPIClient.shared.getBookDetails(isbn: isbn,
+        //               completionHandler: { let imageURL = $0[0].volumeInfo.imageLinks.thumbnail
+        //                                            ImageAPIClient.manager.loadImage(from: imageURL, completionHandler: {cell.bestSellerImageView.image = $0; cell.bestSellerImageView.setNeedsLayout() }, errorHandler: {print($0)}) }, errorHandler: {print($0)})
+        //    }
+        // 2) Find image in googleBooksWithImages using the ISBN number
+        // 3) Load the image attribute to the nytBooksWithISBN to load the collection view cell
+        
+    }
 }
+
+
+
 
 
 
@@ -156,6 +178,7 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     
     /// loadCollectionView
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         let category = categories[row]
         
         let completion: ([BestSellerBook]) -> Void = {(onlineBestSellers: [BestSellerBook]) in

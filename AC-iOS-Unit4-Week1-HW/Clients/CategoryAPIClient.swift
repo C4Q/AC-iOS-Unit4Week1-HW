@@ -19,7 +19,7 @@ struct CategoryAPIClient {
             errorHandler(AppError.badURL(str: urlStr)); return
         }
         let request = URLRequest(url: url)
-        let completion: (Data) -> Void = {(data: Data) in
+        let nytCategories: (Data) -> Void = {(data: Data) in /// this completion handler parses the NYT JSON, gives us the NYT data in the Category model
             do {
                 let response = try JSONDecoder().decode(CategoryWrapper.self, from: data)
                 completionHandler(response.results)
@@ -29,7 +29,7 @@ struct CategoryAPIClient {
             }
         }
         NetworkHelper.manager.performDataTask(with: request,
-                                              completionHandler: completion,
+                                              completionHandler: nytCategories,
                                               errorHandler: errorHandler)
     }
 }

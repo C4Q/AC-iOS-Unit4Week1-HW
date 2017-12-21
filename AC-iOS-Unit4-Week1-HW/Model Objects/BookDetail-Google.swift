@@ -8,7 +8,9 @@
 
 import Foundation
 
-/// https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyB95KwMKwLmYQTorODVmOunlU-CsYnhsA4
+/// API ENDPOINT #3 - GOOGLE BOOKS WITH ISBN INPUT AND GOOGLE API KEY
+/// Generic URL: https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk
+/// Sample URL: https://www.googleapis.com/books/v1/volumes?q=isbn:0385514239&key=AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk
 
 struct ResultsWrapper: Codable {
     let items: [BookWrapper]
@@ -22,13 +24,13 @@ struct BookDetail: Codable {
     let title: String
     let subtitle: String?
     let authors: [String]
-    let publisher: String
+    let publisher: String?
     let publishedDate: String
     let description: String /// LONG DESCRIPTION
     let industryIdentifiers: [Identifier]
     let pageCount: Int
     let categories: [String]
-    let averageRating: Int
+    let averageRating: Int?
     let imageLinks: Image
 }
 

@@ -11,25 +11,27 @@ import Foundation
 struct BookDetailGoogleAPIClient {
     private init(){}
     static let shared = BookDetailGoogleAPIClient()
-    func getGoogleBooks(isbn: String,
-                       completionHandler: @escaping ([BookWrapper]) -> Void,
-                       errorHandler: @escaping (Error) -> Void) {
-        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=+isbn:\(isbn)"
+    func getBookDetails(isbn: String,
+                        completionHandler: @escaping ([BookWrapper]) -> Void,
+                        errorHandler: @escaping (Error) -> Void) {
+        let myGoogleAPIKey = "AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk"
+        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=\(myGoogleAPIKey)"
         guard let url = URL(string: urlStr) else {
-            errorHandler(AppError.badURL(str: urlStr)); return
+            errorHandler(AppError.badURL(str: urlStr))
+            return
         }
         let request = URLRequest(url: url)
-        let completion: (Data) -> Void = {(data: Data) in
+        let googleBookDetails: (Data) -> Void = {(data: Data) in
             do {
-                let response = try JSONDecoder().decode(ResultsWrapper.self, from: data)
-                completionHandler(response.items)
+                let results = try JSONDecoder().decode(ResultsWrapper.self, from: data)
+                completionHandler(results.items)
             }
             catch {
                 errorHandler(AppError.codingError(rawError: error))
             }
         }
         NetworkHelper.manager.performDataTask(with: request,
-                                              completionHandler: completion,
+                                              completionHandler: googleBookDetails,
                                               errorHandler: errorHandler)
     }
 }

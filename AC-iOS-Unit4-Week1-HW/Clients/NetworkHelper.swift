@@ -18,10 +18,10 @@ enum AppError: Error {
     case invalidImage
 }
 
-struct NetworkHelper {
+struct NetworkHelper { /// connects to the internet
     private init() {}
     static let manager = NetworkHelper()
-    let session = URLSession(configuration: .default)
+    let session = URLSession(configuration: .default) /// INTERNET ACCESS
     func performDataTask(with request: URLRequest, completionHandler: @escaping (Data) -> Void, errorHandler: @escaping (Error) -> Void) {
         let myDataTask = session.dataTask(with: request) {(data, response, error) in
             DispatchQueue.main.async {

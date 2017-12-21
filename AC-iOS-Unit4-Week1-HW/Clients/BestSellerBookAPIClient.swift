@@ -17,10 +17,11 @@ struct BestSellerBookAPIClient {
         let myNYTAPIKey = "99f973e47a244b3a8ee6b95a632550ae"
         let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(myNYTAPIKey)&list=\(category)"
         guard let url = URL(string: urlStr) else {
-            errorHandler(AppError.badURL(str: urlStr)); return
+            errorHandler(AppError.badURL(str: urlStr))
+            return
         }
         let request = URLRequest(url: url)
-        let completion: (Data) -> Void = {(data: Data) in
+        let nytBookDetails: (Data) -> Void = {(data: Data) in
             do {
                 let response = try JSONDecoder().decode(BestSellerBookWrapper.self, from: data)
                 completionHandler(response.results)
@@ -30,7 +31,7 @@ struct BestSellerBookAPIClient {
             }
         }
         NetworkHelper.manager.performDataTask(with: request,
-                                              completionHandler: completion,
+                                              completionHandler: nytBookDetails,
                                               errorHandler: errorHandler)
     }
 }

@@ -8,15 +8,16 @@
 
 import Foundation
 
-/// https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=99f973e47a244b3a8ee6b95a632550ae
+/// API ENDPOINT #1 - NYT CATEGORIES WITH NYT API KEY
+/// Generic URL: https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=99f973e47a244b3a8ee6b95a632550ae
 
 struct CategoryWrapper: Codable {
-    let results: [Category]    
+    let results: [Category]
 }
 
 struct Category: Codable {
     let listName: String
-    let displayName: String?
+    let displayName: String // use this one for display
     let listNameEncoded: String
     
     enum CodingKeys: String, CodingKey {

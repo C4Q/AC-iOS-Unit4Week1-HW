@@ -22,15 +22,16 @@ class BookDetailViewController: UIViewController {
     var nytBook: BestSellerBook!
     var googleBook: BookWrapper!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let bookTitle = nytBook.bookDetails[0].title else { return }
-        self.bookTitleLabel.text = bookTitle
-        guard let bookSubtitle = googleBook.volumeInfo.subtitle else { return }
-        self.bookSubtitleLabel.text = bookSubtitle
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        guard let bookTitle = nytBook.bookDetails[0].title else { return }
+//        guard let bookTitle = nytBook.bookDetails[0].title else {return}
+//        self.bookTitleLabel.text = bookTitle
+//        guard let bookSubtitle = googleBook.volumeInfo.subtitle else { return }
+//        self.bookSubtitleLabel.text = bookSubtitle
     }
     /// LOAD THE IMAGE OF THE BOOK
-    //        self.bookImageView.image =
-}
+//            self.bookImageView.image =
+//}
 
 

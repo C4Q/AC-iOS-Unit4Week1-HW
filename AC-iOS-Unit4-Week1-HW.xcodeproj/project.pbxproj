@@ -81,11 +81,11 @@
 			isa = PBXGroup;
 			children = (
 				81A546991FE5F338003C9E6A /* Supporting Files */,
+				81A5469D1FE5F359003C9E6A /* Model Objects */,
+				81A546AA1FE60073003C9E6A /* Clients */,
 				54F137E01FE302CD00EA22AA /* Main.storyboard */,
 				81A5469A1FE5F342003C9E6A /* View Controllers */,
-				81A546AA1FE60073003C9E6A /* Clients */,
 				81A546B31FE614B2003C9E6A /* Custom Cells */,
-				81A5469D1FE5F359003C9E6A /* Model Objects */,
 				54F137E81FE302CE00EA22AA /* Info.plist */,
 			);
 			path = "AC-iOS-Unit4-Week1-HW";
