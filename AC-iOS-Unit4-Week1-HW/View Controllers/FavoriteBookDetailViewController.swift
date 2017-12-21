@@ -11,30 +11,27 @@ import UIKit
 class FavoriteBookDetailViewController: UIViewController {
 
     @IBOutlet weak var dateSavedLabel: UILabel!
-    
     @IBOutlet weak var bookImageView: UIImageView!
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var bookTextView: UITextView!
     
-    
-    var book = DataPersistenceHelper.FavoritedBook.init(bookImagePath: " ", title: " ", isbn: " ", timeSaved: Date()) {
-        didSet {
-            print(book)
+    // Placeholder var for favorite book
+    var book = DataPersistenceHelper.FavoritedBook.init(bookImagePath: "", title: "", isbn: "", timeSaved: Date(), summary: "")
 
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.dateSavedLabel.text = book.timeSaved.description
-        self.titleLabel.text = book.title
         
+        // Set the ui elements
+        self.dateSavedLabel.text = "Saved on: " + book.timeSaved.description.components(separatedBy: " ")[0...1].joined(separator: " at ")
+        self.titleLabel.text = book.title
+        self.detailLabel.text = "ISBN: " + book.isbn
+        self.bookTextView.text = book.summary.html2String
+        
+        // Get image from doc dir and set it
         let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        let cleanedPath = book.title.replacingOccurrences(of: " ", with: "%20") + book.isbn.description
+        let cleanedPath = book.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)! + book.isbn.description
         let imagePath = docDir!.appendingPathComponent(cleanedPath).path
         self.bookImageView.image = UIImage(contentsOfFile: imagePath) ?? #imageLiteral(resourceName: "no-image")
         
@@ -45,15 +42,4 @@ class FavoriteBookDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

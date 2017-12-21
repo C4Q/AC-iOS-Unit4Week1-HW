@@ -31,6 +31,8 @@ class BestSellersViewController: UIViewController {
     var books = [BestSellerBook]() {
         didSet {
             collectionView.reloadData()
+            
+            // When moving categories, move the collection view back to the beginning
             self.collectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }

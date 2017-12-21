@@ -13,6 +13,7 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bookImageView: UIImageView!
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+        // TODO: - Implement longpress to delete favorite
     }
     
 }

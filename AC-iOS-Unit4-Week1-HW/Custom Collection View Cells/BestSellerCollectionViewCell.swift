@@ -11,13 +11,11 @@ import UIKit
 class BestSellerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var bestSellerImageView: UIImageView!
-    
     @IBOutlet weak var bestSellerTitleLabel: UILabel!
-    
     @IBOutlet weak var bestSellerSummaryTextView: UITextView!
-    
     @IBOutlet weak var bestSellerTimeLabel: UILabel!
     
+    // Variable to hold googlebook per cell
     var gBook: GoogleBook?
     
 }

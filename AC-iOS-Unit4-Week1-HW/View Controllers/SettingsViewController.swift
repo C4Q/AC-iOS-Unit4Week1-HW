@@ -25,9 +25,12 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.dataSource = self; pickerView.delegate = self
+        
+        // Call load categories on load
         loadCategories()
     }
 
@@ -35,6 +38,7 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController {
     
+    // Calls nytimes api to get best seller categories
     func loadCategories() {
         NYTimesAPIClient.manager.getBestSellerCategories(completionHandler: { self.categories = $0 }, errorHandler: { print($0) })
     }
@@ -57,6 +61,8 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let settings = UserDefaultsHelper.MyDefaults(pickerPosition: row, title: categories[row].displayName)
+        
+        // On row select set the user default
         UserDefaultsHelper.manager.createDefaultSetting(value: settings)
     }
     

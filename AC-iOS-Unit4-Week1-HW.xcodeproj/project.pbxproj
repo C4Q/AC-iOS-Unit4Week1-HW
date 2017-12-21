@@ -98,6 +98,36 @@
 			path = "AC-iOS-Unit4-Week1-HW";
 			sourceTree = "<group>";
 		};
+		818AE88E1FE9F53000EA1C74 /* JSON Models */ = {
+			isa = PBXGroup;
+			children = (
+				81B1C4F81FE349B800E77D23 /* BestSellerCategory.swift */,
+				81B1C57A1FE4570800E77D23 /* GoogleBook.swift */,
+				81B1C4FA1FE35A3E00E77D23 /* BestSellerBook.swift */,
+			);
+			path = "JSON Models";
+			sourceTree = "<group>";
+		};
+		818AE88F1FE9F54200EA1C74 /* Network Models */ = {
+			isa = PBXGroup;
+			children = (
+				81B1C4EF1FE3464400E77D23 /* NetworkHelper.swift */,
+				81B1C4F11FE346A900E77D23 /* ImageAPIClient.swift */,
+				81B1C4F41FE3495F00E77D23 /* NYTimesAPIClient.swift */,
+				81B1C4F61FE3497000E77D23 /* GoogleBooksAPIClient.swift */,
+			);
+			path = "Network Models";
+			sourceTree = "<group>";
+		};
+		818AE8901FE9F55F00EA1C74 /* Data Persistence Models */ = {
+			isa = PBXGroup;
+			children = (
+				81B1C57C1FE5E50000E77D23 /* UserDefaultsHelper.swift */,
+				81B1C57E1FE660E700E77D23 /* DataPersistenceHelper.swift */,
+			);
+			path = "Data Persistence Models";
+			sourceTree = "<group>";
+		};
 		819B256A1FE341080099E7C0 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,16 +152,10 @@
 		81B1C4F31FE346B500E77D23 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				81B1C4F81FE349B800E77D23 /* BestSellerCategory.swift */,
-				81B1C57A1FE4570800E77D23 /* GoogleBook.swift */,
-				81B1C4FA1FE35A3E00E77D23 /* BestSellerBook.swift */,
-				81B1C4EF1FE3464400E77D23 /* NetworkHelper.swift */,
-				81B1C4F11FE346A900E77D23 /* ImageAPIClient.swift */,
-				81B1C4F41FE3495F00E77D23 /* NYTimesAPIClient.swift */,
-				81B1C57C1FE5E50000E77D23 /* UserDefaultsHelper.swift */,
+				818AE88E1FE9F53000EA1C74 /* JSON Models */,
+				818AE88F1FE9F54200EA1C74 /* Network Models */,
+				818AE8901FE9F55F00EA1C74 /* Data Persistence Models */,
 				81B1C5801FE7155100E77D23 /* HTMLToPlainText.swift */,
-				81B1C57E1FE660E700E77D23 /* DataPersistenceHelper.swift */,
-				81B1C4F61FE3497000E77D23 /* GoogleBooksAPIClient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

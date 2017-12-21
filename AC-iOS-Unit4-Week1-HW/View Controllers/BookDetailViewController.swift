@@ -8,12 +8,15 @@
 
 import UIKit
 
+
 class BookDetailViewController: UIViewController {
 
     @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var bookSubtitleLabel: UILabel!
     @IBOutlet weak var bookSummaryTextView: UITextView!
+    @IBOutlet weak var heartButton: UIBarButtonItem!
+    
     
     var bookImage: UIImage?
     var nyTimesBook: BestSellerBook?
@@ -23,46 +26,58 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // Check for variables
         guard let bookImage = bookImage, let nyTimesBook = nyTimesBook, let googleBook = googleBook else { return }
         
+        // Set ui elements
         bookImageView.image = bookImage
-        
         bookTitleLabel.text = nyTimesBook.bookDetails[0].title
-        
         bookSubtitleLabel.text = googleBook.searchInfo.textSnippet
-        
         bookSummaryTextView.text = googleBook.volumeInfo.description
         
-        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+    // Check to see if book is already favorited on viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if DataPersistenceHelper.manager.alreadyFavorited(isbn: nyTimesBook!.bookDetails[0].isbn13) {
+            heartButton.tintColor = .red
+        }
+
+    }
+
+    // Calls saveFavoriteBook function when heart button tapped
+    @IBAction func heartButtonTapped(_ sender: UIBarButtonItem) {
         saveFavoriteBook()
     }
-    
-    
-    
     
 }
 
 extension BookDetailViewController {
     
     func saveFavoriteBook() {
+        // See if the variables are loaded correctly
         guard let bookImage = bookImage, let nyTimesBook = nyTimesBook, let googleBook = googleBook else { return }
-        DataPersistenceHelper.manager.addFavorite(isbn: nyTimesBook.bookDetails[0].isbn13, bookTitle: nyTimesBook.bookDetails[0].title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!, image: bookImage)
         
+        // Check if the book is already favorited and alert / return
+        if DataPersistenceHelper.manager.alreadyFavorited(isbn: nyTimesBook.bookDetails[0].isbn13) {
+            alertController(title: "Error", message: "Already favorited."); return
+        }
+        
+        // Add favorite and alert with success and turn heart red
+        DataPersistenceHelper.manager.addFavorite(nytBook: nyTimesBook, googleBook: googleBook, image: bookImage)
+        heartButton.tintColor = .red
+        alertController(title: "Success", message: "Saved to favorites.")
+        
+    }
+    
+    // Alter control function
+    func alertController(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
         
     }
     

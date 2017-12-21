@@ -33,7 +33,6 @@ struct BookDetails: Codable {
     let description: String
     let contributor: String
     let author: String
-    //let price: Int
     let publisher: String
     let isbn13: String
     let isbn10: String
@@ -43,7 +42,6 @@ struct BookDetails: Codable {
         case description
         case contributor
         case author
-        //case price
         case publisher
         case isbn13 = "primary_isbn13"
         case isbn10 = "primary_isbn10"
