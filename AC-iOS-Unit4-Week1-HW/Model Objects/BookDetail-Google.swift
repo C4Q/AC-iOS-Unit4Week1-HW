@@ -13,7 +13,7 @@ import Foundation
 /// Sample URL: https://www.googleapis.com/books/v1/volumes?q=isbn:0385514239&key=AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk
 
 struct ResultsWrapper: Codable {
-    let items: [BookWrapper]
+    let items: [BookWrapper]?
 }
 
 struct BookWrapper: Codable {
@@ -24,22 +24,11 @@ struct BookDetail: Codable {
     let title: String
     let subtitle: String?
     let authors: [String]
-    let publisher: String?
-    let publishedDate: String
-    let description: String /// LONG DESCRIPTION
-    let industryIdentifiers: [Identifier]
-    let pageCount: Int
-    let categories: [String]
-    let averageRating: Int?
-    let imageLinks: Image
-}
-
-struct Identifier: Codable {
-    let type: String? // type of ISBN
-    let identifier: String // actual ISBN code
+    let description: String? /// LONG DESCRIPTION
+    let imageLinks: Image?
 }
 
 struct Image: Codable {
-    let smallThumbnail: String
-    let thumbnail: String
+    let smallThumbnail: String?
+    let thumbnail: String?
 }

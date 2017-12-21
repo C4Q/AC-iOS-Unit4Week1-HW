@@ -12,10 +12,11 @@ struct BookDetailGoogleAPIClient {
     private init(){}
     static let shared = BookDetailGoogleAPIClient()
     func getBookDetails(isbn: String,
-                        completionHandler: @escaping ([BookWrapper]) -> Void,
+                        completionHandler: @escaping ([BookWrapper]?) -> Void,
                         errorHandler: @escaping (Error) -> Void) {
-        let myGoogleAPIKey = "AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk"
-        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=\(myGoogleAPIKey)"
+//        let myGoogleAPIKey = "AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk"
+//        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=\(myGoogleAPIKey)"
+        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)"
         guard let url = URL(string: urlStr) else {
             errorHandler(AppError.badURL(str: urlStr))
             return
@@ -24,7 +25,8 @@ struct BookDetailGoogleAPIClient {
         let googleBookDetails: (Data) -> Void = {(data: Data) in
             do {
                 let results = try JSONDecoder().decode(ResultsWrapper.self, from: data)
-                completionHandler(results.items)
+                guard let json = results.items else {return}
+                completionHandler(json)
             }
             catch {
                 errorHandler(AppError.codingError(rawError: error))

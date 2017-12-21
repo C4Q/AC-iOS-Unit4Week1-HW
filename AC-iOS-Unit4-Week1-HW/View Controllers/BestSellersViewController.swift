@@ -15,6 +15,7 @@ class BestSellersViewController: UIViewController {
     
     var categories = [Category]() {
         didSet {
+            /// load initialized by func loadCategories
             print("=============== categories SET ===============")
             DispatchQueue.main.async {
                 self.bestSellersCategoryPickerView.reloadAllComponents()
@@ -24,18 +25,8 @@ class BestSellersViewController: UIViewController {
     
     var nytBooksWithISBN = [BestSellerBook]() {
         didSet {
-            /// do I call NYT API Client here?
+            /// load initialized in the Category pickerView delegate didSelectRow
             print("=============== nytBooksWithISBN SET ===============")
-            DispatchQueue.main.async {
-                self.bestSellersCollectionView.reloadData()
-            }
-        }
-    }
-    
-    var googleBooksWithImages = [BookWrapper]() {
-        didSet {
-            /// do I call Google Books API Client here?
-            print("=============== googleBooksWithImages SET ===============")
             DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
             }
@@ -56,54 +47,24 @@ class BestSellersViewController: UIViewController {
         // set completion
         let completion: ([Category]) -> Void = {(onlineCategory: [Category]) in
             self.categories = onlineCategory
-            print("~~~Categories loaded~~~")
         }
         // set errorHandler
         let errorHandler: (Error) -> Void = {(error: Error) in
             /// TODO: AppError handling
         }
         // API Call
-        CategoryAPIClient.shared.getCategories(completionHandler: completion, errorHandler: errorHandler) /// I have the data, this is what I want to do with it
+        CategoryAPIClient.shared.getCategories(completionHandler: completion, errorHandler: errorHandler)
     }
     
     
     
-//    func loadCategories(){
-//        //set url with endpoint
-//        let url = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(APIKeys.NYTAPIKey)"
-//        //print(url)
-//        //set completion
-//        let completion: ([BookCategories]) -> Void = {(onlineCategory: [BookCategories]) in
-//            self.categoryArray = onlineCategory //Data becomes an array of categories
-//            print("You have categories!")
-//        }
-//        //set errorHandler
-//        let errorHandler: (Error) -> Void = {(error: Error) in
-//            //AppError handling
-//        }
-//        //API call
-//        NYTCatogriesAPICleint.manager.getCategories(from: url,
-//                                                    completionHandler: completion,
-//                                                    errorHandler: errorHandler)
-//    }
+    /// TODO: segue from collection view cell to detail view
     
-    
-    
-    
-    
-    /// segue from collection view cell to detail view
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if let destination = segue.destination as? BookDetailViewController {
-    //            destination.nytBook = nytBooksWithISBN[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
-    //            destination.googleBook =
-    ///                googleBooksWithImages[bestSellersCollectionView.indexPathsForSelectedItems!.first!.row]
-    //
-    //        }
-    //    }
 }
 
 
-/// Best Sellers Collection View
+/// BEST SELLERS COLLECTION VIEW DATASOURCE
+
 extension BestSellersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,10 +74,6 @@ extension BestSellersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let bookCell = bestSellersCollectionView.dequeueReusableCell(withReuseIdentifier: "Book Cover Cell", for: indexPath) as! BestSellerCollectionViewCell
         let bookWithISBN = nytBooksWithISBN[indexPath.row]
-        //        let bookWithImage = googleBooksWithImages[indexPath.row]
-        
-        // initialize a nil image
-        bookCell.bestSellerImageView.image = nil
         
         // customize WEEKS ON BEST SELLER LIST label
         switch bookWithISBN.weeksOnList {
@@ -129,29 +86,39 @@ extension BestSellersViewController: UICollectionViewDataSource {
         // load book short description
         bookCell.shortDescriptionTextView.text = bookWithISBN.bookDetails[0].shortDescription
         
-        // calls load Image function
-        loadBookDetails(with: bookWithISBN.isbns[0].isbn10!, cell: bookCell)
-        
+        // initialize a nil image
+        bookCell.bestSellerImageView.image = nil
+
+        /// calls load Image function
+        loadBookDetails(from: bookWithISBN, cell: bookCell)
+
         return bookCell
     }
     
     
+    
+    
     /// load images from google
     
-    // call function to populate Google array in the nytBooksWithISBN didSet
-    
-    // populate Google Array:
-    // 1) Check each ISBN number from nytBooksWithISBN
-    
-    func loadBookDetails(with isbn: String, cell: BestSellerCollectionViewCell) {
-        //        BookDetailGoogleAPIClient.shared.getBookDetails(isbn: isbn,
-        //               completionHandler: { let imageURL = $0[0].volumeInfo.imageLinks.thumbnail
-        //                                            ImageAPIClient.manager.loadImage(from: imageURL, completionHandler: {cell.bestSellerImageView.image = $0; cell.bestSellerImageView.setNeedsLayout() }, errorHandler: {print($0)}) }, errorHandler: {print($0)})
-        //    }
-        // 2) Find image in googleBooksWithImages using the ISBN number
-        // 3) Load the image attribute to the nytBooksWithISBN to load the collection view cell
+    func loadBookDetails(from book: BestSellerBook, cell: BestSellerCollectionViewCell) {
+        
+        // import isbn from the book
+        guard let isbn = book.isbns[0].isbn13 else {return}
+        
+        BookDetailGoogleAPIClient.shared.getBookDetails(isbn: isbn, completionHandler: {
+            guard let details = $0 else {return} // populates the individual book details
+            guard let imageURL = details[0].volumeInfo.imageLinks?.thumbnail else {return}
+            
+            ImageAPIClient.manager.loadImage(from: imageURL, completionHandler: {
+                cell.bestSellerImageView.image = $0
+                cell.setNeedsLayout()
+                
+            }, errorHandler: {print("loading images from google error: \($0)")})
+            
+        }, errorHandler: {print("loading images from google error: \($0)")})
         
     }
+    
 }
 
 
@@ -160,7 +127,9 @@ extension BestSellersViewController: UICollectionViewDataSource {
 
 
 
-/// Picker
+
+/// PICKER VIEW DELEGATES
+
 extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -176,26 +145,26 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     
-    /// loadCollectionView
+    /// load CollectionView
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         let category = categories[row]
-        
         let completion: ([BestSellerBook]) -> Void = {(onlineBestSellers: [BestSellerBook]) in
             self.nytBooksWithISBN = onlineBestSellers
         }
-        
-        /// populating the Best Seller Book info
-        BestSellerBookAPIClient.shared.getNYTBooks(category: category.listNameEncoded , completionHandler: completion, errorHandler: {print($0)})
+        /// CALLS NYT BEST SELLERS API CLIENT, loads the NYT Book data
+        BestSellerBookAPIClient.shared.getNYTBooks(category: category.listNameEncoded,
+                                                   completionHandler: completion,
+                                                   errorHandler: {print($0)})
     }
 }
 
 
 
 
-let spacingBetweenCells = UIScreen.main.bounds.size.width * 0.05
 
-/// format the Best Seller collection view
+/// FORMAT BEST SELLERS COLLECTION VIEW CELLS
+
+let spacingBetweenCells = UIScreen.main.bounds.size.width * 0.05
 
 extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
     
