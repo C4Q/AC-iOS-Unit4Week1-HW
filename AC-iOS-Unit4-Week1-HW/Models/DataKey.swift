@@ -43,7 +43,7 @@ class DataModel {
     
     func addFavorite(book: BookList, googleBook: GoogleBooks, image: UIImage) {
         let imgPng = UIImagePNGRepresentation(image)!
-        let imgPath = DataModel.shared.dataFilePath(withPathName: "\(book.details[0].title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)\(book.isbns[0].isbn10)")
+        let imgPath = DataModel.shared.dataFilePath(withPathName: "\(book.isbns[0].isbn10)")
         
         do {
             try imgPng.write(to: imgPath, options: .atomic)

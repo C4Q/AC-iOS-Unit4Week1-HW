@@ -84,9 +84,7 @@ extension BookViewController: UICollectionViewDataSource {
     func getDataFromGoogle(with isbn: String, cell: BookCollectionViewCell) {
         GoogleAPIClient.manager.getImages(from: isbn, completionHandler: {let imageURL = $0?[0].volumeInfo.imageLinks?.thumbnail
             if let book = $0 {
-                print("here")
                 cell.googleBooks = book[0]
-                print(cell.googleBooks.volumeInfo.title)
             }
             guard let image = imageURL else {return}
             ImageAPIClient.manager.loadImage(from: image, completionHandler: {cell.collectionImageView.image = $0; cell.collectionImageView.setNeedsLayout()}, errorHandler: {print($0)})

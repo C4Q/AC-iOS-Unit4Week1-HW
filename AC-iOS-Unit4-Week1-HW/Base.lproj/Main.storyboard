@@ -237,6 +237,7 @@
                                             <constraint firstItem="iRP-Uf-pXs" firstAttribute="leading" secondItem="EkM-AI-Rgb" secondAttribute="leading" id="igX-ro-YSc"/>
                                             <constraint firstItem="iRP-Uf-pXs" firstAttribute="top" secondItem="EkM-AI-Rgb" secondAttribute="top" id="vGU-ET-4Um"/>
                                         </constraints>
+                                        <size key="customSize" width="205" height="253"/>
                                         <connections>
                                             <outlet property="favoriteImageView" destination="iRP-Uf-pXs" id="G49-zN-INo"/>
                                         </connections>

@@ -21,9 +21,15 @@ class FavoriteBookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        collectionView.dataSource = self
+        loadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadData()
+    }
+    
+    func loadData() {
         DataModel.shared.load()
         self.favorites = DataModel.shared.getLists()
     }
@@ -35,14 +41,14 @@ extension FavoriteBookViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCell", for: indexPath) as? FavoriteCollectionViewCell else {return UICollectionViewCell()}
-            let favorite = favorites[indexPath.row]
-            cell.favoriteImageView.image = nil
-            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            let favoritePath = favorite.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)! + favorite.isbn.description
-            let imagePath = directory!.appendingPathComponent(favoritePath).path
-            cell.favoriteImageView.image = UIImage(contentsOfFile: imagePath)
-            cell.setNeedsLayout()
+        let favorite = favorites[indexPath.row]
+        cell.favoriteImageView.image = nil
         
-    return cell
+        let favoritesBookDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let imagePath = favoritesBookDirectory!.appendingPathComponent(favorite.isbn).path
+        cell.favoriteImageView.image = UIImage(contentsOfFile: imagePath) ?? #imageLiteral(resourceName: "StashNoImage")
+        cell.setNeedsLayout()
+        
+        return cell
     }
 }

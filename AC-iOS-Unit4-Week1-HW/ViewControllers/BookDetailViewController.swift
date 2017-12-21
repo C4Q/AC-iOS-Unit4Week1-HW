@@ -44,7 +44,7 @@ class BookDetailViewController: UIViewController {
         }
         
         DataModel.shared.addFavorite(book: selectedBook, googleBook: googleBook, image: bookImage)
-        alertController(title: "Success", message: "Saved to favorites.")
+        alertController(title: "Added", message: "Saved to favorites.")
         
     }
     func alertController(title: String, message: String) {
