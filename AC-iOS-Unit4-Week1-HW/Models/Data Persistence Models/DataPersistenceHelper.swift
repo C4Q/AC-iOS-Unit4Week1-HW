@@ -100,7 +100,7 @@ class DataPersistenceHelper {
             return
         }
         
-        let favoriteBook = FavoritedBook(bookImagePath: imgPath.description, title: nytBook.bookDetails[0].title, isbn: nytBook.bookDetails[0].isbn13, timeSaved: currentTime, summary: googleBook.volumeInfo.description)
+        let favoriteBook = FavoritedBook(bookImagePath: imgPath.description, title: nytBook.bookDetails[0].title, isbn: nytBook.bookDetails[0].isbn13, timeSaved: currentTime, summary: (googleBook.volumeInfo.description ?? "No description"))
         
         myBooks.append(favoriteBook)
         

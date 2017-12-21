@@ -14,7 +14,11 @@ class FavoriteBookDetailViewController: UIViewController {
     @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var bookTextView: UITextView!
+    @IBOutlet weak var bookTextView: UITextView! {
+        didSet {
+            self.bookTextView.setContentOffset(CGPoint.zero, animated: false)
+        }
+    }
     
     // Placeholder var for favorite book
     var book = DataPersistenceHelper.FavoritedBook.init(bookImagePath: "", title: "", isbn: "", timeSaved: Date(), summary: "")
@@ -28,7 +32,7 @@ class FavoriteBookDetailViewController: UIViewController {
         self.titleLabel.text = book.title
         self.detailLabel.text = "ISBN: " + book.isbn
         self.bookTextView.text = book.summary.html2String
-        self.bookTextView.setContentOffset(CGPoint.zero, animated: true)
+        self.bookTextView.setContentOffset(CGPoint.zero, animated: false)
         
         // Get image from doc dir and set it
         let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first

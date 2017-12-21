@@ -19,8 +19,8 @@ struct GoogleBook: Codable {
 
 struct VolumeInfo: Codable {
     let title: String
-    let authors: [String]
-    let description: String
+    let authors: [String]?
+    let description: String?
     let imageLinks: ImageLinks
 }
 

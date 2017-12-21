@@ -28,7 +28,7 @@ class BookDetailViewController: UIViewController {
         
         bookImageView.image = bookImage ?? #imageLiteral(resourceName: "no-image")
         bookTitleLabel.text = nyTimesBook?.bookDetails[0].title ?? "Title Unknown"
-        bookSubtitleLabel.text = googleBook?.volumeInfo.authors.joined(separator: ", ") ?? "Info Unknown"
+        bookSubtitleLabel.text = googleBook?.volumeInfo.authors?.joined(separator: ", ") ?? "Info Unknown"
         bookSummaryTextView.text = googleBook?.volumeInfo.description ?? "Summary Unknown"
         bookSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
         
