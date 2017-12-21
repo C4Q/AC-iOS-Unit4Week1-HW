@@ -9,17 +9,13 @@
 import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
+    
     let defaults = UserDefaults.standard
     @IBOutlet weak var pickerView: UIPickerView!
     
     var categoriesArray = [Category]() {
         didSet {
             CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
-//            for elements in categoriesArray {
-//                //To print the Categories and see how they are formatted
-//                print("\(elements.displayName) + \(elements.listName ?? "BLANK") + \(elements.listNameEncoded)")
-//            }
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
             CategoriesKeyedArchiverClient.manager.saveCategories()
             print("Saved Categories to KeyedArchive")
@@ -60,9 +56,9 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let newTomorrowDate = Date().addingTimeInterval(plusOneDay)
         var storedDate = Date()
         if let check = UserDefaultsHelper.manager.getTomorrowDate(){
-             storedDate = check
+            storedDate = check
         } else {
-             storedDate = newTomorrowDate
+            storedDate = newTomorrowDate
         }
         if CurrentDate == storedDate { print("Equal")
         }

@@ -46,8 +46,7 @@ class NetworkHelper {
                 }
                 if let response = response as? HTTPURLResponse {
                     errorHandler(AppError.goodStatusCode(num: response.statusCode))
-                    //print(response.statusCode)
-                    //return
+                    
                 }
                 if let error = error as? URLError {
                     switch error {
@@ -68,10 +67,7 @@ class NetworkHelper {
                         errorHandler(AppError.other(rawError: error))
                     }
                 }
-                //Optional (for printing data)
-//                if let dataStr = String(data: data, encoding: .utf8){
-//                    print(dataStr)
-//                }
+                
                 completionHandler(data)
             }
             }.resume()

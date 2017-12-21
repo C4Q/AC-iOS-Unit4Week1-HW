@@ -17,19 +17,9 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
     //constant for our cell spacing which will be consistent around  our cells
     let cellSpacing: CGFloat = 20.0
     
-    
-    
     var categoriesArray = [Category]() {
         didSet {
             CategoriesKeyedArchiverClient.manager.addAllCategories(allCategories: categoriesArray)
-            
-            //for element in categoriesArray {
-                //Call API with element.theEndpointLink
-                //Save each category
-                //Only run this once on Friday OR if the app never ran before
-                //All other times load from saved data
-            //}
-            
             pickerView.reloadAllComponents() //THIS reloads the selector once the data returns from the internet
             CategoriesKeyedArchiverClient.manager.saveCategories()
             print("Saved Categories to KeyedArchive")
@@ -39,9 +29,6 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         didSet {
             BestSellersKeyedArchiverClient.manager.addBestSellersArray(BestSellers: displayedBestSellers)
             collectionView.reloadData()
-            for elements in displayedBestSellers {
-                print(elements.bookDetails[0].title)
-            }
         }
     }
     
@@ -110,7 +97,6 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     
     
-    
     //MARK: PickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -124,20 +110,24 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         return "\(categoriesArray[row].displayName)"
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("This is Row: \(row) Component\(component)")
-        
-        let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
-        UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
-        print("New Saved Picker Index is \(newPickerIndex)")
-        
+        //For Date Check
+        let CurrentDate = Date()
+        let plusOneDay: Double = 60*60*24 //One Day in Seconds
+        let newTomorrowDate = Date().addingTimeInterval(plusOneDay)
+        var storedDate = Date()
         let selectedCategory = categoriesArray[pickerView.selectedRow(inComponent: 0)]
         let endpoint = selectedCategory.theEndpointLink
+        if let check = UserDefaultsHelper.manager.getTomorrowDate(){
+            storedDate = check
+        } else {
+            storedDate = newTomorrowDate
+        }
         
-        //THIS IS WHERE THE BEST SELLER API IS CALLED
         BestSellersKeyedArchiverClient.manager.loadData(encoded: selectedCategory.listNameEncoded)
-        //If a value for the endpoint returns nil from the archiver, call the API ELSE load from archive
-        if BestSellersKeyedArchiverClient.manager.getBestSellers().isEmpty {
-            //API CALL GOES HERE
+        if CurrentDate == storedDate {
+            print("Equal")
+        } else if CurrentDate > storedDate {
+            print("A Day has passed. CALL API")
             let completion: ([BestSellers]) -> Void = {(onlineBestSellers: [BestSellers]) in
                 self.displayedBestSellers = onlineBestSellers //This should trigger the didSet and add to the Best Seller Array
                 print("Finished API CAll for Best Sellers in \(selectedCategory.displayName)")
@@ -145,9 +135,28 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
                 print("Best Seller for \(selectedCategory.displayName) saved to phone")
             }
             BestSellersAPIClient.manager.getBestSellers(matching: endpoint, completionHandler: completion, errorHandler: {print($0)})
-        } else {
-            self.displayedBestSellers = BestSellersKeyedArchiverClient.manager.getBestSellers()
+            UserDefaultsHelper.manager.setTomorrowDate(to: newTomorrowDate)
+        } else if CurrentDate < storedDate {
+            print("A Day has not passed. Get from stored data")
+            //If a value for the endpoint returns nil from the archiver, call the API ELSE load from archive
+            if BestSellersKeyedArchiverClient.manager.getBestSellers().isEmpty {
+                //API CALL GOES HERE
+                let completion: ([BestSellers]) -> Void = {(onlineBestSellers: [BestSellers]) in
+                    self.displayedBestSellers = onlineBestSellers //This should trigger the didSet and add to the Best Seller Array
+                    print("Finished API CAll for Best Sellers in \(selectedCategory.displayName)")
+                    BestSellersKeyedArchiverClient.manager.saveBestSellers(encoded: selectedCategory.listNameEncoded)
+                    print("Best Seller for \(selectedCategory.displayName) saved to phone")
+                }
+                BestSellersAPIClient.manager.getBestSellers(matching: endpoint, completionHandler: completion, errorHandler: {print($0)})
+            } else {
+                self.displayedBestSellers = BestSellersKeyedArchiverClient.manager.getBestSellers()
+            }
+            
         }
+        
+        let newPickerIndex = String(pickerView.selectedRow(inComponent: 0))
+        UserDefaultsHelper.manager.setPickerIndex(to: newPickerIndex)
+        
     }
 }
 //MARK: Collection View Delegate and DataSource
@@ -160,27 +169,58 @@ extension BestSellerViewController: UICollectionViewDataSource, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "booksCell", for: indexPath) as? BestSellerCollectionViewCell else {return UICollectionViewCell() }
         
         let aBook = displayedBestSellers[indexPath.row]
+        let callThisISBN = aBook.bookDetails[0].primaryISBN
+        //Set Labels
         cell.shortDescriptionLabel.text = aBook.bookDetails[0].description
         cell.weeksOnBestSellerLabel.text = "Weeks On: \(aBook.weeksOnList)"
         
-        //IMAGE API HERE
-        //ADD SAVE IMAGE TO DETAILEDVIEWCONTROLLER. NOT HERE.
         
+        //Check for saved Book info.
+        //If it's there load from phone
+        BooksKeyedArchiverClient.manager.loadData(ISBN: callThisISBN)
+        if !BooksKeyedArchiverClient.manager.getSpecificBook().isEmpty {
+            //This is where an image can be set to the collection cell from the phone
+        } else {
+            //Else Get Book Info from Google API, then save it to the phone
+            var downloadedBookDetails = [BookWrapper]()
+            let completion: ([BookWrapper]) -> Void = {(onlineBookInfo: [BookWrapper]) in
+                downloadedBookDetails = onlineBookInfo
+                
+                //Pass To Archiver
+                BooksKeyedArchiverClient.manager.addSpecificBookArray(Book: downloadedBookDetails)
+                //Save to phone
+                BooksKeyedArchiverClient.manager.saveBook(ISBN: callThisISBN)
+                
+                cell.spinner.isHidden = false
+                cell.spinner.startAnimating()
+                let setImageToOnlineImage: (UIImage) -> Void = {(onlineImage: UIImage) in
+                    cell.bookImageView.image = onlineImage
+                    cell.spinner.stopAnimating()
+                    cell.spinner.isHidden = true
+                    cell.bookImageView.setNeedsLayout()
+                }
+                
+                ImageAPIClient.manager.getImage(from: downloadedBookDetails[0].imageLinks.thumbnail, completionHandler: setImageToOnlineImage, errorHandler: {print($0)})
+                
+//                cell.spinner.stopAnimating()
+//                cell.spinner.isHidden = true
+            }
+            
+            GoogleAPIClient.manager.getBookInfo(matching: callThisISBN, completionHandler: completion, errorHandler: {print($0)})
+        }
         
         return cell
     }
-
+    
     // MARK: - Navigation
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "bestSellerSegue" {
             if let destinationViewController = segue.destination as? DetailedViewController {
-                print("here")
+                
                 if let cell = sender as? BestSellerCollectionViewCell {
                     if let indexPath = collectionView.indexPath(for: cell) {
-                        print("here")
+                        
                         let selectedCell = indexPath.row
                         let selectedBook = self.displayedBestSellers[selectedCell]
                         destinationViewController.aBook = selectedBook

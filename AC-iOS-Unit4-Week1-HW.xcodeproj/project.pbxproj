@@ -13,8 +13,11 @@
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
 		DB11BA7F1FE7ED0200C3F857 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11BA7E1FE7ED0200C3F857 /* UserDefaultsHelper.swift */; };
 		DB11BA811FE80D7E00C3F857 /* NetflixTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11BA801FE80D7E00C3F857 /* NetflixTableViewCell.swift */; };
-		DB11BA831FE80D9E00C3F857 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11BA821FE80D9E00C3F857 /* FavoritesCollectionViewCell.swift */; };
 		DB11BA851FE80DB100C3F857 /* BestSellerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11BA841FE80DB100C3F857 /* BestSellerCollectionViewCell.swift */; };
+		DB3245581FEB5D7A007B67EE /* BooksKeyedArchiverClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3245571FEB5D7A007B67EE /* BooksKeyedArchiverClient.swift */; };
+		DB32455A1FEB5D8D007B67EE /* PicturesNSCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3245591FEB5D8D007B67EE /* PicturesNSCache.swift */; };
+		DB32455C1FEBA594007B67EE /* FavoritesArchiverClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32455B1FEBA594007B67EE /* FavoritesArchiverClient.swift */; };
+		DB32455E1FEBB166007B67EE /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32455D1FEBB166007B67EE /* FavoriteCollectionViewCell.swift */; };
 		DB7FC00A1FE9BC52000B2B79 /* NetFlixCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FC0091FE9BC52000B2B79 /* NetFlixCollectionViewCell.swift */; };
 		DB85AEC01FE46B130045725B /* BestSellersKeyedArchiverClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85AEBD1FE46B130045725B /* BestSellersKeyedArchiverClient.swift */; };
 		DB85AEC11FE46B130045725B /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85AEBE1FE46B130045725B /* NetworkHelper.swift */; };
@@ -38,8 +41,11 @@
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB11BA7E1FE7ED0200C3F857 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		DB11BA801FE80D7E00C3F857 /* NetflixTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetflixTableViewCell.swift; sourceTree = "<group>"; };
-		DB11BA821FE80D9E00C3F857 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB11BA841FE80DB100C3F857 /* BestSellerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB3245571FEB5D7A007B67EE /* BooksKeyedArchiverClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksKeyedArchiverClient.swift; sourceTree = "<group>"; };
+		DB3245591FEB5D8D007B67EE /* PicturesNSCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesNSCache.swift; sourceTree = "<group>"; };
+		DB32455B1FEBA594007B67EE /* FavoritesArchiverClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesArchiverClient.swift; sourceTree = "<group>"; };
+		DB32455D1FEBB166007B67EE /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB7FC0091FE9BC52000B2B79 /* NetFlixCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetFlixCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB85AEBD1FE46B130045725B /* BestSellersKeyedArchiverClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestSellersKeyedArchiverClient.swift; sourceTree = "<group>"; };
 		DB85AEBE1FE46B130045725B /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
@@ -102,8 +108,8 @@
 			children = (
 				DB11BA801FE80D7E00C3F857 /* NetflixTableViewCell.swift */,
 				DB7FC0091FE9BC52000B2B79 /* NetFlixCollectionViewCell.swift */,
-				DB11BA821FE80D9E00C3F857 /* FavoritesCollectionViewCell.swift */,
 				DB11BA841FE80DB100C3F857 /* BestSellerCollectionViewCell.swift */,
+				DB32455D1FEBB166007B67EE /* FavoriteCollectionViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -114,7 +120,10 @@
 				DB85AEBE1FE46B130045725B /* NetworkHelper.swift */,
 				DB85AEBD1FE46B130045725B /* BestSellersKeyedArchiverClient.swift */,
 				DB85AEC71FE48B810045725B /* CategoryKeyedArchiverClient.swift */,
+				DB3245571FEB5D7A007B67EE /* BooksKeyedArchiverClient.swift */,
+				DB3245591FEB5D8D007B67EE /* PicturesNSCache.swift */,
 				DB11BA7E1FE7ED0200C3F857 /* UserDefaultsHelper.swift */,
+				DB32455B1FEBA594007B67EE /* FavoritesArchiverClient.swift */,
 				DB85AEBF1FE46B130045725B /* ImageAPIClient.swift */,
 			);
 			path = Services;
@@ -217,16 +226,19 @@
 				DB11BA7F1FE7ED0200C3F857 /* UserDefaultsHelper.swift in Sources */,
 				DB85AEC11FE46B130045725B /* NetworkHelper.swift in Sources */,
 				DB92D6A21FE5BFDF0075679C /* SettingsViewController.swift in Sources */,
+				DB32455E1FEBB166007B67EE /* FavoriteCollectionViewCell.swift in Sources */,
 				DB11BA811FE80D7E00C3F857 /* NetflixTableViewCell.swift in Sources */,
 				DB85AEC01FE46B130045725B /* BestSellersKeyedArchiverClient.swift in Sources */,
+				DB32455C1FEBA594007B67EE /* FavoritesArchiverClient.swift in Sources */,
+				DB32455A1FEB5D8D007B67EE /* PicturesNSCache.swift in Sources */,
 				DB85AEC61FE46C7F0045725B /* GoogleBooksModel.swift in Sources */,
 				DB85AEC21FE46B130045725B /* ImageAPIClient.swift in Sources */,
-				DB11BA831FE80D9E00C3F857 /* FavoritesCollectionViewCell.swift in Sources */,
 				DB92D69E1FE5BF080075679C /* DetailedViewController.swift in Sources */,
 				DB7FC00A1FE9BC52000B2B79 /* NetFlixCollectionViewCell.swift in Sources */,
 				DB85AEC81FE48B810045725B /* CategoryKeyedArchiverClient.swift in Sources */,
 				DB85AEC51FE46C7F0045725B /* NYTimesModel.swift in Sources */,
 				DB92D69C1FE5BEF10075679C /* NetflixViewController.swift in Sources */,
+				DB3245581FEB5D7A007B67EE /* BooksKeyedArchiverClient.swift in Sources */,
 				DB11BA851FE80DB100C3F857 /* BestSellerCollectionViewCell.swift in Sources */,
 				DB92D6A41FE5C0010075679C /* FavoritesViewController.swift in Sources */,
 				DB92D6A01FE5BFB70075679C /* BestSellerViewController.swift in Sources */,

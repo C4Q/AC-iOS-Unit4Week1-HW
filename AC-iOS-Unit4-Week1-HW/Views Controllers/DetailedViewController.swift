@@ -12,6 +12,12 @@ class DetailedViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBAction func saveButton(_ sender: UIBarButtonItem) {
+        FavoritesArchiverClient.manager.add(favorite: aBooksInfo)
+        
+        
+    }
+    
     @IBOutlet weak var subtitleLabel: UILabel!
     
     @IBOutlet weak var longDescriptionTextView: UITextView!

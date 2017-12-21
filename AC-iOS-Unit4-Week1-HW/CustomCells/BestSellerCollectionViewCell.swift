@@ -10,6 +10,8 @@ import UIKit
 
 class BestSellerCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var bookImageView: UIImageView!
     
     @IBOutlet weak var weeksOnBestSellerLabel: UILabel!

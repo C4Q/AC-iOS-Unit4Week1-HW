@@ -238,7 +238,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favoritesCells" id="hQM-vg-XCY" customClass="FavoritesCollectionViewCell" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favoritesCells" id="hQM-vg-XCY" customClass="FavoriteCollectionViewCell" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -248,17 +248,45 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2V-4k-jVj">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="bi5-oh-8W1">
+                                                    <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nch-Qn-trv">
+                                                    <rect key="frame" x="2" y="72" width="96" height="12"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.19970034246575341" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fts-kj-W4R">
+                                                    <rect key="frame" x="2" y="86" width="96" height="12"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.19970034246575341" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.32369780539999998" green="0.1063579395" blue="0.574860394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="D2V-4k-jVj" firstAttribute="leading" secondItem="hQM-vg-XCY" secondAttribute="leading" id="12D-cH-czA"/>
+                                            <constraint firstItem="bi5-oh-8W1" firstAttribute="centerY" secondItem="D2V-4k-jVj" secondAttribute="centerY" id="Fij-Xn-yFn"/>
+                                            <constraint firstItem="bi5-oh-8W1" firstAttribute="centerX" secondItem="D2V-4k-jVj" secondAttribute="centerX" id="H9i-aA-Uay"/>
                                             <constraint firstAttribute="trailing" secondItem="D2V-4k-jVj" secondAttribute="trailing" id="KFo-eS-Qqg"/>
+                                            <constraint firstAttribute="trailing" secondItem="nch-Qn-trv" secondAttribute="trailing" constant="2" id="KtO-rZ-iuS"/>
+                                            <constraint firstItem="fts-kj-W4R" firstAttribute="leading" secondItem="hQM-vg-XCY" secondAttribute="leading" constant="2" id="NjT-rt-fgU"/>
+                                            <constraint firstAttribute="bottom" secondItem="fts-kj-W4R" secondAttribute="bottom" constant="2" id="UzB-eg-bXr"/>
                                             <constraint firstAttribute="bottom" secondItem="D2V-4k-jVj" secondAttribute="bottom" id="gVj-ue-cOs"/>
+                                            <constraint firstItem="nch-Qn-trv" firstAttribute="leading" secondItem="hQM-vg-XCY" secondAttribute="leading" constant="2" id="jak-En-np2"/>
+                                            <constraint firstAttribute="trailing" secondItem="fts-kj-W4R" secondAttribute="trailing" constant="2" id="k0J-83-CbG"/>
+                                            <constraint firstItem="fts-kj-W4R" firstAttribute="top" secondItem="nch-Qn-trv" secondAttribute="bottom" constant="2" id="tWv-u1-vI5"/>
                                             <constraint firstItem="D2V-4k-jVj" firstAttribute="top" secondItem="hQM-vg-XCY" secondAttribute="top" id="wtz-Xa-s9z"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="sx1-ro-Kjs" kind="show" identifier="favoriteSegue" id="MhX-Rt-r7m"/>
+                                            <outlet property="bookImageView" destination="D2V-4k-jVj" id="cba-bV-1hy"/>
+                                            <outlet property="spinner" destination="bi5-oh-8W1" id="TPd-Z7-Mma"/>
+                                            <outlet property="subtitleLabel" destination="fts-kj-W4R" id="7Hb-TR-icJ"/>
+                                            <outlet property="titleLabel" destination="nch-Qn-trv" id="jEu-fq-UZe"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -329,16 +357,21 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeeksOnBestSeller" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGK-Wk-C9m">
                                                     <rect key="frame" x="2" y="124" width="146" height="12"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.19694456335616439" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShortDescription" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxT-wX-piv">
                                                     <rect key="frame" x="2" y="136" width="146" height="12"/>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.1955265410958904" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="54P-g3-Bd5">
+                                                    <rect key="frame" x="65" y="65" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -346,8 +379,10 @@
                                             <constraint firstItem="eGK-Wk-C9m" firstAttribute="leading" secondItem="v61-lj-TIp" secondAttribute="leading" constant="2" id="2X7-J7-jnG"/>
                                             <constraint firstAttribute="bottom" secondItem="vlt-AT-1xq" secondAttribute="bottom" id="7g1-xz-1ev"/>
                                             <constraint firstAttribute="trailing" secondItem="eGK-Wk-C9m" secondAttribute="trailing" constant="2" id="B9t-Gy-3hQ"/>
+                                            <constraint firstItem="54P-g3-Bd5" firstAttribute="centerY" secondItem="vlt-AT-1xq" secondAttribute="centerY" id="Bo8-Z1-Z03"/>
                                             <constraint firstAttribute="trailing" secondItem="zxT-wX-piv" secondAttribute="trailing" constant="2" id="HNp-lx-x9u"/>
                                             <constraint firstAttribute="bottom" secondItem="zxT-wX-piv" secondAttribute="bottom" constant="2" id="UnS-kW-Mib"/>
+                                            <constraint firstItem="54P-g3-Bd5" firstAttribute="centerX" secondItem="vlt-AT-1xq" secondAttribute="centerX" id="Y7a-Mr-Qs7"/>
                                             <constraint firstItem="vlt-AT-1xq" firstAttribute="leading" secondItem="v61-lj-TIp" secondAttribute="leading" id="aAE-aI-JJs"/>
                                             <constraint firstAttribute="trailing" secondItem="vlt-AT-1xq" secondAttribute="trailing" id="h64-Y8-6TK"/>
                                             <constraint firstItem="zxT-wX-piv" firstAttribute="top" secondItem="eGK-Wk-C9m" secondAttribute="bottom" id="nuH-Uk-N9A"/>
@@ -357,6 +392,7 @@
                                         <connections>
                                             <outlet property="bookImageView" destination="vlt-AT-1xq" id="79K-sd-YV5"/>
                                             <outlet property="shortDescriptionLabel" destination="zxT-wX-piv" id="UWR-kI-9dX"/>
+                                            <outlet property="spinner" destination="54P-g3-Bd5" id="lXf-jw-u2R"/>
                                             <outlet property="weeksOnBestSellerLabel" destination="eGK-Wk-C9m" id="avT-zQ-tUf"/>
                                             <segue destination="sx1-ro-Kjs" kind="show" identifier="bestSellerSegue" id="C69-1x-GUT"/>
                                         </connections>
@@ -440,7 +476,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NGL-TY-iae"/>
                     </view>
-                    <navigationItem key="navigationItem" id="f91-wX-aP0"/>
+                    <navigationItem key="navigationItem" id="f91-wX-aP0">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="C7e-P0-GWf">
+                            <connections>
+                                <action selector="saveButton:" destination="sx1-ro-Kjs" id="9J1-C5-zFy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bookImageView" destination="Gne-kw-rcT" id="1JQ-26-sbT"/>
                         <outlet property="longDescriptionTextView" destination="YOk-19-FSV" id="BbX-Gk-urh"/>
