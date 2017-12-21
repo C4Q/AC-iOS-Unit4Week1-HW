@@ -10,26 +10,39 @@ import UIKit
 
 class FavoriteBookViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var favorites = [DataModel.Favorite]() {
+        didSet {
+            collectionView.reloadData()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.dataSource = self
     }
-    */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DataModel.shared.load()
+        self.favorites = DataModel.shared.getLists()
+    }
 
+}
+extension FavoriteBookViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return favorites.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCell", for: indexPath) as? FavoriteCollectionViewCell else {return UICollectionViewCell()}
+            let favorite = favorites[indexPath.row]
+            cell.favoriteImageView.image = nil
+            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let favoritePath = favorite.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)! + favorite.isbn.description
+            let imagePath = directory!.appendingPathComponent(favoritePath).path
+            cell.favoriteImageView.image = UIImage(contentsOfFile: imagePath)
+            cell.setNeedsLayout()
+        
+    return cell
+    }
 }

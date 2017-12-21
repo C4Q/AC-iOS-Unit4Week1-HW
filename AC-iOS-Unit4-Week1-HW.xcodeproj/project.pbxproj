@@ -22,6 +22,7 @@
 		816283F21FE8A4E500887B97 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816283F11FE8A4E500887B97 /* SettingsViewController.swift */; };
 		816283F41FE8A4F600887B97 /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816283F31FE8A4F600887B97 /* UserDefaultHelper.swift */; };
 		816284411FEB13BD00887B97 /* DataKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816284401FEB13BD00887B97 /* DataKey.swift */; };
+		816284431FEB60FD00887B97 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816284421FEB60FD00887B97 /* FavoriteCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		816283F11FE8A4E500887B97 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		816283F31FE8A4F600887B97 /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
 		816284401FEB13BD00887B97 /* DataKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataKey.swift; sourceTree = "<group>"; };
+		816284421FEB60FD00887B97 /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				815BDE081FE33B1B000B8F15 /* Supporting Files */,
 				8162843F1FEB122500887B97 /* ViewControllers */,
 				815BDE141FE443A4000B8F15 /* BookCollectionViewCell.swift */,
+				816284421FEB60FD00887B97 /* FavoriteCollectionViewCell.swift */,
 				815BDE0F1FE347C8000B8F15 /* Models */,
 				54F137E01FE302CD00EA22AA /* Main.storyboard */,
 				54F137E81FE302CE00EA22AA /* Info.plist */,
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				816284431FEB60FD00887B97 /* FavoriteCollectionViewCell.swift in Sources */,
 				815BDE0C1FE3479E000B8F15 /* NetworkHelper.swift in Sources */,
 				816283EC1FE853D000887B97 /* GoogleAPIClient.swift in Sources */,
 				54F137DF1FE302CD00EA22AA /* BookViewController.swift in Sources */,

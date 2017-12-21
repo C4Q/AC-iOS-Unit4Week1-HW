@@ -44,16 +44,16 @@ class BookViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BookDetailViewController {
-//            let selectedBook = collectionView.indexPathsForSelectedItems
             if let cell = sender as? BookCollectionViewCell {
-                if let book = collectionView.indexPath(for: cell) {
+                let book = books[(collectionView.indexPath(for: cell)?.row)!]
                 destination.googleBook = cell.googleBooks
-                destination.image = cell.collectionImageView.image
-                }
+                destination.selectedBook = book
+                destination.bookImage = cell.collectionImageView.image
+            }
             }
         }
     }
-}
+
 extension BookViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -88,7 +88,8 @@ extension BookViewController: UICollectionViewDataSource {
                 cell.googleBooks = book[0]
                 print(cell.googleBooks.volumeInfo.title)
             }
-            ImageAPIClient.manager.loadImage(from: imageURL!, completionHandler: {cell.collectionImageView.image = $0; cell.collectionImageView.setNeedsLayout()}, errorHandler: {print($0)})
+            guard let image = imageURL else {return}
+            ImageAPIClient.manager.loadImage(from: image, completionHandler: {cell.collectionImageView.image = $0; cell.collectionImageView.setNeedsLayout()}, errorHandler: {print($0)})
         }, errorHandler: {print($0)})
     }
 }

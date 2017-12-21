@@ -9,10 +9,6 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
-    
-    
-    
     
     var bookTypes = [BookType]() {
         didSet {

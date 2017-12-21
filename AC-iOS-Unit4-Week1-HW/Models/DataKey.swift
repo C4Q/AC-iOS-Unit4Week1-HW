@@ -7,25 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
-struct Favorite: Codable {
-    let author: String
-    let title: String
-    let subtitle: String
-    let description: String
-    let isbn: String
-}
 class DataModel {
-    
-    static let kPathname = "BestSellerBooks.plist"
     
     // using a singleton to manage the model
     private init(){}
     static let shared = DataModel()
     
-    private var favorite = [Favorite]() {
+    static let kPathname = "BestSellerBooks.plist"
+    
+    struct Favorite: Codable {
+        let title: String
+        let description: String
+        let isbn: String
+    }
+    
+    private var favorites = [Favorite]() {
         didSet { // property observer does saving to persistence on changes
-            saveDSAList()
+            saveFavoriteList()
             print(documentsDirectory())
         }
     }
@@ -41,11 +41,27 @@ class DataModel {
         return DataModel.shared.documentsDirectory().appendingPathComponent(path)
     }
     
+    func addFavorite(book: BookList, googleBook: GoogleBooks, image: UIImage) {
+        let imgPng = UIImagePNGRepresentation(image)!
+        let imgPath = DataModel.shared.dataFilePath(withPathName: "\(book.details[0].title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)\(book.isbns[0].isbn10)")
+        
+        do {
+            try imgPng.write(to: imgPath, options: .atomic)
+        } catch {
+            print("Error saving image. \(error.localizedDescription)")
+            return
+        }
+        let savedBook = Favorite(title: googleBook.volumeInfo.title, description: googleBook.volumeInfo.description!, isbn: googleBook.volumeInfo.industryIdentifiers[0].identifier)
+        
+        favorites.append(savedBook)
+        
+    }
+    
     // save
-    private func saveDSAList() {
+    private func saveFavoriteList() {
         let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(favorite)
+            let data = try encoder.encode(favorites)
             try data.write(to: dataFilePath(withPathName: DataModel.kPathname), options: .atomic)
         } catch {
             print("error encoding items: \(error.localizedDescription)")
@@ -58,31 +74,27 @@ class DataModel {
         let decoder = PropertyListDecoder()
         do {
             let data = try Data.init(contentsOf: path)
-            favorite = try decoder.decode([Favorite].self, from: data)
+            favorites = try decoder.decode([Favorite].self, from: data)
         } catch {
             print("error decoding items: \(error.localizedDescription)")
         }
     }
     
-    // create
-    public func addDSAItemToList(dsaItem item: Favorite) {
-        favorite.append(item)
-    }
-    
     // read
     public func getLists() -> [Favorite] {
-        return favorite
+        return favorites
     }
     
-    // update
-//    public func updateDSAItem(withUpdatedItem item: String) {
-//        if let index = favorite.index(where: {$0.title == favorite }) {
-//            favorite[index] = item
-//        }
-//    }
+    // Check
+    public func favoriteCheck(with isbn: String) -> Bool {
+        let index = favorites.index(where: {$0.isbn == isbn })
+        if index != nil {return true}
+        return false
+        
+    }
     
     // delete
-    public func removeDSAItemFromIndex(fromIndex index: Int) {
-        favorite.remove(at: index)
+    public func removeFavoriteItemFromIndex(fromIndex index: Int) {
+        favorites.remove(at: index)
     }
 }
