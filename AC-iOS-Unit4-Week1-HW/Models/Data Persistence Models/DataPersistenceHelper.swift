@@ -126,7 +126,7 @@ class DataPersistenceHelper {
     func alreadyFavorited(isbn: String) -> Bool {
         
         let indexExist = myBooks.index{ $0.isbn == isbn }
-        if indexExist != nil { print("Favorite exists."); return true }
+        if indexExist != nil { return true }
         
         return false
         

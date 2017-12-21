@@ -26,14 +26,11 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Check for variables
-        guard let bookImage = bookImage, let nyTimesBook = nyTimesBook, let googleBook = googleBook else { return }
-        
-        // Set ui elements
-        bookImageView.image = bookImage
-        bookTitleLabel.text = nyTimesBook.bookDetails[0].title
-        bookSubtitleLabel.text = googleBook.searchInfo.textSnippet
-        bookSummaryTextView.text = googleBook.volumeInfo.description
+        bookImageView.image = bookImage ?? #imageLiteral(resourceName: "no-image")
+        bookTitleLabel.text = nyTimesBook?.bookDetails[0].title ?? "Title Unknown"
+        bookSubtitleLabel.text = googleBook?.volumeInfo.authors.joined(separator: ", ") ?? "Info Unknown"
+        bookSummaryTextView.text = googleBook?.volumeInfo.description ?? "Summary Unknown"
+        bookSummaryTextView.setContentOffset(CGPoint.zero, animated: true)
         
     }
     
@@ -58,7 +55,7 @@ extension BookDetailViewController {
     
     func saveFavoriteBook() {
         // See if the variables are loaded correctly
-        guard let bookImage = bookImage, let nyTimesBook = nyTimesBook, let googleBook = googleBook else { return }
+        guard let bookImage = bookImage, let nyTimesBook = nyTimesBook, let googleBook = googleBook else { alertController(title: "Error", message: "Bad book data."); return }
         
         // Check if the book is already favorited and alert / return
         if DataPersistenceHelper.manager.alreadyFavorited(isbn: nyTimesBook.bookDetails[0].isbn13) {

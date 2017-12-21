@@ -14,6 +14,7 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bestSellerTitleLabel: UILabel!
     @IBOutlet weak var bestSellerSummaryTextView: UITextView!
     @IBOutlet weak var bestSellerTimeLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // Variable to hold googlebook per cell
     var gBook: GoogleBook?

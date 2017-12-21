@@ -118,6 +118,12 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
         
         // Make cell the custom cell
         if let cell = cell as? BestSellerCollectionViewCell {
+            
+            // Activity indicator start
+            cell.spinner.color = .black
+            cell.spinner.isHidden = false
+            cell.spinner.startAnimating()
+            
             cell.bestSellerImageView.image = nil
             cell.bestSellerTimeLabel.text = "Weeks on List: " + book.weeksOnList.description
             cell.bestSellerTitleLabel.text = book.bookDetails[0].title
@@ -145,7 +151,13 @@ extension BestSellersViewController: UICollectionViewDataSource, UICollectionVie
                 cell.bestSellerSummaryTextView.text = "No information available."
                 cell.bestSellerImageView.image = #imageLiteral(resourceName: "no-image")
             }
-        }, errorHandler: { print($0) })
+            
+            cell.spinner.isHidden = true
+            cell.spinner.stopAnimating()
+            
+        }, errorHandler: { cell.spinner.isHidden = true; cell.spinner.stopAnimating(); print($0) })
+        
+
     }
     
     // Makes the item size of the collection view equal to the collection view's bounds

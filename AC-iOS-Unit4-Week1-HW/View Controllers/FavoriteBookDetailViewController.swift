@@ -28,6 +28,7 @@ class FavoriteBookDetailViewController: UIViewController {
         self.titleLabel.text = book.title
         self.detailLabel.text = "ISBN: " + book.isbn
         self.bookTextView.text = book.summary.html2String
+        self.bookTextView.setContentOffset(CGPoint.zero, animated: true)
         
         // Get image from doc dir and set it
         let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
