@@ -21,6 +21,7 @@
 		81847F0C1FEAB6AF00D4ECAF /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81847F0B1FEAB6AF00D4ECAF /* CategoryData.swift */; };
 		819FAA6C1FEB1D45006BECB5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6B1FEB1D45006BECB5 /* Alert.swift */; };
 		819FAA6E1FEB2934006BECB5 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6D1FEB2934006BECB5 /* PersistentData.swift */; };
+		819FAA701FEB370C006BECB5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6F1FEB370C006BECB5 /* Settings.swift */; };
 		81AFFAFE1FEA1052009D54A4 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFAFD1FEA1052009D54A4 /* Categories.swift */; };
 		81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		81847F0B1FEAB6AF00D4ECAF /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		819FAA6B1FEB1D45006BECB5 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		819FAA6D1FEB2934006BECB5 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
+		819FAA6F1FEB370C006BECB5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		81AFFAFD1FEA1052009D54A4 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */,
 				819FAA6B1FEB1D45006BECB5 /* Alert.swift */,
 				819FAA6D1FEB2934006BECB5 /* PersistentData.swift */,
+				819FAA6F1FEB370C006BECB5 /* Settings.swift */,
 				81246F081FEB17BB00C1304C /* Categories */,
 			);
 			path = Models;
@@ -221,6 +224,7 @@
 				81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */,
 				81847F0C1FEAB6AF00D4ECAF /* CategoryData.swift in Sources */,
 				54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */,
+				819FAA701FEB370C006BECB5 /* Settings.swift in Sources */,
 				81246F0A1FEB19F900C1304C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

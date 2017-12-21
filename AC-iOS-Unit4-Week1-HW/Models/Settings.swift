@@ -12,6 +12,8 @@ class Settings {
     private static let manager = UserDefaults.standard
     private static let categoryIndexKey = "categoryIndexKey"
     
+    static var categoryChanged = true
+    
     static func saveCategory(atIndex index: Int) {
         manager.set(index, forKey: categoryIndexKey)
     }
