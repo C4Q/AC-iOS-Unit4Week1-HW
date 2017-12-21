@@ -15,8 +15,11 @@ class DetailedViewController: UIViewController {
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         if !aBooksInfo.isEmpty {
         FavoritesArchiverClient.manager.add(favorite: aBooksInfo)
+            let alertVC = UIAlertController(title: "Added", message: "Added to favorites", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alertVC, animated: true, completion: nil)
         }
-        
+        print("Didn't add due to empty array")
         
     }
     
