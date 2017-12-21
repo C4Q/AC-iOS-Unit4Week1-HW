@@ -8,20 +8,17 @@
 
 import Foundation
 
-//to get the Best Sellers isbn
-//https://www.googleapis.com/books/v1/volumes?q=+\(bestSellarsISBN)
-
 class NYTBestSellersAPIClient{
     private init(){}
     static let manager = NYTBestSellersAPIClient()
-    //private let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=0c769eb094e94bffa0b35d55b222d489&list=\()"
     
     func getBestSellerISBN(from urlStr: String,
                            completionHandler: @escaping ([BestSellers]) -> Void,
                            errorHandler: @escaping (Error) -> Void){
-        
+        //Endpoint to get the book categories
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=0c769eb094e94bffa0b35d55b222d489"
         guard let url = URL(string: urlStr) else {errorHandler(AppError.badURL(url: urlStr)); return}
-        
+
         let request = URLRequest(url: url)
         
         let parseDataIntoISBN: (Data) -> Void = {(data) in

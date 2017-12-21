@@ -9,18 +9,17 @@
 import Foundation
 
 // calling your APIendpoint and returning an array of whatever you are looking for...THATS IT!
-class NYTCatogriesAPICleint {
+class NYTCategoriesAPIClient {
     private init(){}
-    static let manager = NYTCatogriesAPICleint()
-    //Endpoint to get the book categories
-    private let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=0c769eb094e94bffa0b35d55b222d489"
+    static let manager = NYTCategoriesAPIClient()
     
-    func getCategories(from urlStr: String,
-                       completionHandler: @escaping ([BookCategories]) -> Void,
+    func getCategories(completionHandler: @escaping ([BookCategories]) -> Void,
                        errorHandler: @escaping (Error) -> Void){
+        //Endpoint to get the book categories
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=0c769eb094e94bffa0b35d55b222d489"
         
         //make sure you have a url
-//        let fullUrlStr = urlStr + formattedSearchTerm
+        //        let fullUrlStr = urlStr + formattedSearchTerm
         guard let url = URL(string: urlStr) else {
             errorHandler(AppError.badURL(url: urlStr)); return}
         

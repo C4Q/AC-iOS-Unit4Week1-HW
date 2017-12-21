@@ -1,24 +1,18 @@
 //
-//  BookReviewViewController.swift
+//  NYTBestSellersSearchViewController.swift
 //  AC-iOS-Unit4-Week1-HW
 //
-//  Created by C4Q on 12/15/17.
+//  Created by C4Q on 12/17/17.
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
 import UIKit
-// dismissing the modal view controller that was presented using the Navigation Controller
-//navigationController?.dismiss(animated: true, completion: nil)
 
-class BookReviewViewController: UIViewController {
+class NYTBestSellersSearchViewController: UIViewController {
+
+    @IBOutlet weak var bestSellers: UITableView!
     
-    
-    @IBOutlet weak var cancelBtn: UIBarButtonItem!
-    @IBOutlet weak var detailedBookImage: UIImageView!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var favoriteIcon: UIButton!
-    
-    @IBOutlet weak var bookSummary: UITextView!
+     @IBOutlet weak var searchBarIcon: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 

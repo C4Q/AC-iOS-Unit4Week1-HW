@@ -11,11 +11,6 @@ import Foundation
 //Endpoint 3
 //https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
 
-//Example
-//https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
-
-//let apiKey = "AIzaSyD1fwxd2uoPzrrhizy4-wANHEvViVmaOSE"
-
 struct GoogleBooksWrapper: Codable {
     var items: [GoogleBooks]
 }
@@ -30,13 +25,6 @@ struct BookInfo: Codable {
     var authors: [String]
     var summary: String //This is the summary
     var imageLinks: ImageWrapper
-    var allAuthors: String {
-        var authorString = ""
-        for authors in authors {
-            authorString.append(authors)
-        }
-        return authorString
-    }
 }
 
 struct ImageWrapper: Codable {

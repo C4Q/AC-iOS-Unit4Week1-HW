@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// it's going to the enpoint and returning the url in the type it was set (usually as a string). It grabs that url and brings it back to try and convert it into an UIImage thru UIKit. If the url is good, try and convery that url into an UIIMage
+// It's going to the enpoint and returning the url in the type it was set (usually as a string). It grabs that url and brings it back to try and convert it into an UIImage thru UIKit. If the url is good, try and convery that url into an UIIMage
 class ImageAPIClient {
     private init() {}
     static let manager = ImageAPIClient()

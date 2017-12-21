@@ -23,5 +23,6 @@ enum AppError: Error {
     case badStatusCode(num: Int)
     case urlError(rawError: Error)
     case otherError(rawError: Error)
+    //case fuckOff(rawError: IDGAF)
 }
 

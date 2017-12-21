@@ -12,13 +12,15 @@ import Foundation
 class GoogleBooksInfoAPIClient{
     private init (){}
     static let manager = GoogleBooksInfoAPIClient()
-    //private let urlStr = "https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239"
     
-    func getBookImages(from urlStr: String,
+    func getBookImages(from primaryISBN13: String,
                        completionHandler: @escaping ([GoogleBooks]) -> Void,
                        errorHandler: @escaping (Error) -> Void){
         
-        guard let url = URL(string: urlStr) else {errorHandler(AppError.badURL(url: urlStr)); return}
+        //Endpoint to get the books by isbn
+        let ISBNEndPointToCall = "https://www.googleapis.com/books/v1/volumes?q=+\(primaryISBN13)"
+        
+        guard let url = URL(string: ISBNEndPointToCall) else {errorHandler(AppError.badURL(url: primaryISBN13)); return}
         
         let request = URLRequest(url: url)
         

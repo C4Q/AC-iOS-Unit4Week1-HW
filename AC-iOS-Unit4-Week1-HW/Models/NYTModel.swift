@@ -13,7 +13,6 @@ import Foundation
 
 //Endpoint 2: Best Sellers for a category
 //https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(hyphen-separated-list-name)
-//(e.g Hardcover-Fiction)
 //For Example - "https://api.nytimes.com/svc/books/v3/lists.json?api-key=ac1cde81fb2147a59b8fc20e10ff70b2&list=Hardcover-Fiction"
 
 
@@ -21,38 +20,48 @@ import Foundation
 //MARK: - Endpoint 1: Books by Category
 struct CategoryResultsWrapper: Codable {
     let category: [BookCategories]
+    
+    enum CodingKeys: String, CodingKey {
+        case category = "results"
+    }
 }
 
 struct BookCategories: Codable {
     let categoryName: String
-    let listNameForInterpolationInAPICall: String
+    let listNameEndpointForAPICall: String
     
+    //this is the endpoint to get the bestsellers by category
     var categoryEndpointURL: String {
-        let key = "0c769eb094e94bffa0b35d55b222d489"
+        //let key = "0c769eb094e94bffa0b35d55b222d489"
         var urlStr = ""
-        urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(self.listNameForInterpolationInAPICall)"
+        urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(APIKeys.NYTAPIKey)&list=\(self.listNameEndpointForAPICall)"
         return urlStr
     }
     
     enum CodingKeys: String, CodingKey {
         case categoryName = "list_name"
-        case listNameForInterpolationInAPICall = "list_name_encoded"
+        case listNameEndpointForAPICall = "list_name_encoded"
     }
 }
 
+
+
+
+
+
 //MARK: - EndPoint 2: Best Sellers by category
-struct BestSellersWrpper: Codable {
+struct BestSellersWrapper: Codable {
     let results: [BestSellers]
 }
 
-//already returns sorted
+//already returns sorted!
 struct BestSellers: Codable { //BestSellersWrapper
     let displayName: String //Category to filter for NYKeyedArchiver
     let rank: Double
     let rankLastWeek: Double
     let weeksOnList: Double
     let amazonProductUrl: String
-    let bookDetails: BookDetailsWrapper //[BookDetails]
+    let bookDetails: [BookDetails] //array of details of ONE Book
     
     enum CodingKeys: String, CodingKey{
         case rank
@@ -64,18 +73,18 @@ struct BestSellers: Codable { //BestSellersWrapper
     }
 }
 
-struct BookDetailsWrapper: Codable {
+struct BookDetails: Codable {
     let title: String
     let shortDescription: String
     let author: String
     let primaryISBN13: String
     let primaryISBN10: String
     
-    var isbnNumbers: String {
-        var urlStr = ""
-        urlStr = "https://www.googleapis.com/books/v1/volumes?q=+\(primaryISBN13)"
-        return urlStr
-    }
+        var isbnNumbers: String {
+            var urlStrForGoogleCall = ""
+            urlStrForGoogleCall = "https://www.googleapis.com/books/v1/volumes?q=+\(primaryISBN13)"
+            return urlStrForGoogleCall
+        }
     
     enum CodingKeys: String, CodingKey{
         case title
@@ -85,19 +94,3 @@ struct BookDetailsWrapper: Codable {
         case primaryISBN10 = "primary_isbn10"
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
