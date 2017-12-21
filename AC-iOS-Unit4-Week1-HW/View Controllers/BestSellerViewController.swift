@@ -29,10 +29,10 @@ class BestSellerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
-//        bestSellerCollectionView.delegate = self
-//        bestSellerCollectionView.dataSource = self
         categoriesPickerView.delegate = self
         categoriesPickerView.dataSource = self
+        bestSellerCollectionView.delegate = self
+        bestSellerCollectionView.dataSource = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class BestSellerViewController: UIViewController {
         
         let currentCategory = categories[categoriesPickerView.selectedRow(inComponent: 0)]
         
-        loadBooks(withCategory: currentCategory)
+        loadBestSellers(withCategory: currentCategory)
     }
     
     func loadCategories() {
@@ -67,8 +67,17 @@ class BestSellerViewController: UIViewController {
         }
     }
     
-    func loadBooks(withCategory category: String) {
+    func loadBestSellers(withCategory category: String) {
+        
+        if let bestSellers = BestSellerData.manager.getBestSellers(inCategory: category) {
+            
+            self.bestSellers = bestSellers
+            return
+        }
+        
         BestSellerAPIClient.manager.getBestSellers(forCategory: category, completionHandler: { (onlineBestSellers) in
+            BestSellerData.manager.saveBestSellers(onlineBestSellers, inCategory: category)
+            
             self.bestSellers = onlineBestSellers
             
         }, errorHandler: { (appError) in
@@ -82,8 +91,11 @@ class BestSellerViewController: UIViewController {
 
 extension BestSellerViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //to do
         Settings.categoryChanged = false
+        
+        let currentCategory = categories[row]
+        
+        loadBestSellers(withCategory: currentCategory)
     }
 }
 
@@ -100,4 +112,12 @@ extension BestSellerViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row]
     }
+}
+
+extension BestSellerViewController: UICollectionViewDelegateFlowLayout {
+    //to do
+}
+
+extension BestSellerViewController: UICollectionViewDataSource {
+    //to do
 }

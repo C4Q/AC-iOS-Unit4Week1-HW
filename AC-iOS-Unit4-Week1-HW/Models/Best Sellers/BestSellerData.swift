@@ -15,13 +15,13 @@ class BestSellerData {
     //save
     func saveBestSellers(_ bestSellers: [BestSeller], inCategory category: String) {
         
-        PersistentData.manager.saveItem(bestSellers, atFileName: pListName(ofCategory: category))
+        PersistentData.manager.saveItem(bestSellers, atFileName: pListName(ofCategory: category), isBestSeller: true)
     }
     
     //get
     func getBestSellers(inCategory category: String) -> [BestSeller]? {
         
-        guard let bestSellers = PersistentData.manager.loadItems(fromFileName: pListName(ofCategory: category)) as? [BestSeller] else {
+        guard let bestSellers = PersistentData.manager.loadItems(fromFileName: pListName(ofCategory: category), isBestSeller: true) as? [BestSeller] else {
             return nil
         }
         

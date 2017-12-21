@@ -28,7 +28,7 @@ class PersistentData {
     }
     
     //save
-    func saveItem(_ item: Any, atFileName fileName: String) {
+    func saveItem(_ item: Any, atFileName fileName: String, isBestSeller: Bool = false) {
         let filePath = dataFilePath(fileName: fileName)
         
         do {
@@ -37,6 +37,8 @@ class PersistentData {
             switch fileName {
             case "Categories.plist":
                 data = try encoder.encode(item as! [String])
+            case _ where isBestSeller:
+                data = try encoder.encode(item as! [BestSeller])
             default:
                 return
             }
@@ -48,7 +50,7 @@ class PersistentData {
     }
     
     //load
-    func loadItems(fromFileName fileName: String) -> Any? {
+    func loadItems(fromFileName fileName: String, isBestSeller: Bool = false) -> Any? {
         let filePath = dataFilePath(fileName: fileName)
         let data: Data
         
@@ -58,6 +60,10 @@ class PersistentData {
                 data = try Data(contentsOf: filePath)
                 let categories = try decoder.decode([String].self, from: data)
                 return categories
+            case _ where isBestSeller:
+                data = try Data(contentsOf: filePath)
+                let bestSellers = try decoder.decode([BestSeller].self, from: data)
+                return bestSellers
             default:
                 return nil
             }
