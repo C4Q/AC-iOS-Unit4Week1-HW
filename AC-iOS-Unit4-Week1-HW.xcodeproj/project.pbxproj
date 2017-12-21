@@ -8,20 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F137DC1FE302CD00EA22AA /* AppDelegate.swift */; };
-		54F137DF1FE302CD00EA22AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F137DE1FE302CD00EA22AA /* ViewController.swift */; };
 		54F137E21FE302CD00EA22AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E01FE302CD00EA22AA /* Main.storyboard */; };
 		54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E31FE302CE00EA22AA /* Assets.xcassets */; };
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
+		81CB92EF1FE8BD2E00407BD7 /* BestSellersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CB92EE1FE8BD2E00407BD7 /* BestSellersCollectionViewCell.swift */; };
+		81D95EB31FE6C8780062E9C9 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EB21FE6C8780062E9C9 /* AppError.swift */; };
+		81D95EB51FE6C8FA0062E9C9 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EB41FE6C8FA0062E9C9 /* NetworkHelper.swift */; };
+		81D95EBB1FE6CB3A0062E9C9 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EBA1FE6CB3A0062E9C9 /* Book.swift */; };
+		81D95EBD1FE6DDFD0062E9C9 /* KeyedArchiverClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EBC1FE6DDFD0062E9C9 /* KeyedArchiverClient.swift */; };
+		81D95EBF1FE753E00062E9C9 /* BooksAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EBE1FE753E00062E9C9 /* BooksAPIClient.swift */; };
+		81D95EC11FE75BD20062E9C9 /* BestSellersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EC01FE75BD20062E9C9 /* BestSellersViewController.swift */; };
+		81D95EC31FE75C0F0062E9C9 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EC21FE75C0F0062E9C9 /* FavoritesViewController.swift */; };
+		81D95EC51FE75C220062E9C9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EC41FE75C220062E9C9 /* SettingsViewController.swift */; };
+		81D95EC71FE75E390062E9C9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D95EC61FE75E390062E9C9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		54F137D91FE302CD00EA22AA /* AC-iOS-Unit4-Week1-HW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC-iOS-Unit4-Week1-HW.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F137DC1FE302CD00EA22AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		54F137DE1FE302CD00EA22AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		54F137E11FE302CD00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54F137E31FE302CE00EA22AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F137E61FE302CE00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81CB92EE1FE8BD2E00407BD7 /* BestSellersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellersCollectionViewCell.swift; sourceTree = "<group>"; };
+		81D95EB21FE6C8780062E9C9 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		81D95EB41FE6C8FA0062E9C9 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		81D95EBA1FE6CB3A0062E9C9 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		81D95EBC1FE6DDFD0062E9C9 /* KeyedArchiverClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyedArchiverClient.swift; sourceTree = "<group>"; };
+		81D95EBE1FE753E00062E9C9 /* BooksAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAPIClient.swift; sourceTree = "<group>"; };
+		81D95EC01FE75BD20062E9C9 /* BestSellersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellersViewController.swift; sourceTree = "<group>"; };
+		81D95EC21FE75C0F0062E9C9 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		81D95EC41FE75C220062E9C9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		81D95EC61FE75E390062E9C9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +72,47 @@
 		54F137DB1FE302CD00EA22AA /* AC-iOS-Unit4-Week1-HW */ = {
 			isa = PBXGroup;
 			children = (
-				54F137DC1FE302CD00EA22AA /* AppDelegate.swift */,
-				54F137DE1FE302CD00EA22AA /* ViewController.swift */,
 				54F137E01FE302CD00EA22AA /* Main.storyboard */,
-				54F137E31FE302CE00EA22AA /* Assets.xcassets */,
-				54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */,
+				81D95EB11FE6BE0A0062E9C9 /* Models */,
+				81D95EB01FE6BDFE0062E9C9 /* View Controllers */,
+				81D95EAF1FE6BDDB0062E9C9 /* Supporting Files */,
 				54F137E81FE302CE00EA22AA /* Info.plist */,
 			);
 			path = "AC-iOS-Unit4-Week1-HW";
+			sourceTree = "<group>";
+		};
+		81D95EAF1FE6BDDB0062E9C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				54F137DC1FE302CD00EA22AA /* AppDelegate.swift */,
+				54F137E31FE302CE00EA22AA /* Assets.xcassets */,
+				54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		81D95EB01FE6BDFE0062E9C9 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				81D95EC01FE75BD20062E9C9 /* BestSellersViewController.swift */,
+				81CB92EE1FE8BD2E00407BD7 /* BestSellersCollectionViewCell.swift */,
+				81D95EC61FE75E390062E9C9 /* DetailViewController.swift */,
+				81D95EC21FE75C0F0062E9C9 /* FavoritesViewController.swift */,
+				81D95EC41FE75C220062E9C9 /* SettingsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		81D95EB11FE6BE0A0062E9C9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81D95EB21FE6C8780062E9C9 /* AppError.swift */,
+				81D95EB41FE6C8FA0062E9C9 /* NetworkHelper.swift */,
+				81D95EBC1FE6DDFD0062E9C9 /* KeyedArchiverClient.swift */,
+				81D95EBA1FE6CB3A0062E9C9 /* Book.swift */,
+				81D95EBE1FE753E00062E9C9 /* BooksAPIClient.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +187,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F137DF1FE302CD00EA22AA /* ViewController.swift in Sources */,
+				81D95EBD1FE6DDFD0062E9C9 /* KeyedArchiverClient.swift in Sources */,
+				81D95EB31FE6C8780062E9C9 /* AppError.swift in Sources */,
+				81D95EC31FE75C0F0062E9C9 /* FavoritesViewController.swift in Sources */,
+				81D95EBB1FE6CB3A0062E9C9 /* Book.swift in Sources */,
+				81D95EB51FE6C8FA0062E9C9 /* NetworkHelper.swift in Sources */,
 				54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */,
+				81D95EC11FE75BD20062E9C9 /* BestSellersViewController.swift in Sources */,
+				81D95EC71FE75E390062E9C9 /* DetailViewController.swift in Sources */,
+				81D95EBF1FE753E00062E9C9 /* BooksAPIClient.swift in Sources */,
+				81CB92EF1FE8BD2E00407BD7 /* BestSellersCollectionViewCell.swift in Sources */,
+				81D95EC51FE75C220062E9C9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
