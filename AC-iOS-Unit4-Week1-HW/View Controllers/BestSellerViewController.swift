@@ -14,6 +14,8 @@ class BestSellerViewController: UIViewController {
     
     @IBOutlet weak var categoriesPickerView: UIPickerView!
     
+    let cellSpacing: CGFloat = UIScreen.main.bounds.width * 0.05
+    
     var categories: [String] = [] {
         didSet {
             categoriesPickerView.reloadComponent(0)
@@ -115,9 +117,36 @@ extension BestSellerViewController: UIPickerViewDataSource {
 }
 
 extension BestSellerViewController: UICollectionViewDelegateFlowLayout {
-    //to do
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let numberOfCells: CGFloat = 1
+        let numberOfSpaces: CGFloat = numberOfCells + 1
+        let width = (collectionView.bounds.width - (numberOfSpaces * cellSpacing)) / numberOfCells
+        let height = collectionView.bounds.height
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return cellSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: cellSpacing, bottom: 0, right: cellSpacing)
+    }
 }
 
 extension BestSellerViewController: UICollectionViewDataSource {
-    //to do
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return bestSellers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestSellerCell", for: indexPath) as! BestSellerCollectionViewCell
+        let currentBestSeller = bestSellers[indexPath.row]
+        
+        //to do image
+        cell.configureCell(withBestSeller: currentBestSeller)
+        
+        return cell
+    }
 }

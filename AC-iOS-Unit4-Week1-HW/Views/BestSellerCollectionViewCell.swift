@@ -14,4 +14,11 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bestSellerTimeLabel: UILabel!
     @IBOutlet weak var bookDescriptionLabel: UILabel!
     
+    func configureCell(withBestSeller bestSeller: BestSeller) {
+        //to do - image
+        
+        self.bestSellerTimeLabel.text = "\(bestSeller.weeksOnList) week(s) on the best seller list"
+        self.bookDescriptionLabel.text = bestSeller.bookDetails[0].description
+    }
+    
 }
