@@ -171,28 +171,24 @@ extension BestSellerViewController: UICollectionViewDataSource, UICollectionView
     }
 
     // MARK: - Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? DetailedViewController {
-//            let selectedRow = self.seriesTableView.indexPathForSelectedRow!.row
-//            let selectedShow = self.allEpisodesInASeries[selectedRow]
-//            destination.anEpisode = selectedShow
-//        }
-//    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "bestSellerSegue" {
-        let destination = segue.destination as! DetailedViewController
-            if let selectedCell = self.collectionView.indexPathsForSelectedItems?.first!.row {
-            let selectedBook = self.displayedBestSellers[selectedCell]
-            destination.aBook = selectedBook
-            }
         
+        if segue.identifier == "bestSellerSegue" {
+            if let destinationViewController = segue.destination as? DetailedViewController {
+                print("here")
+                if let cell = sender as? BestSellerCollectionViewCell {
+                    if let indexPath = collectionView.indexPath(for: cell) {
+                        print("here")
+                        let selectedCell = indexPath.row
+                        let selectedBook = self.displayedBestSellers[selectedCell]
+                        destinationViewController.aBook = selectedBook
+                    }
+                }
+            }
+        }
     }
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "bestSellerSegue", sender: indexPath)
-    }
-    
-    
     
     //FLOW LAYOUT DELEGATES
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
