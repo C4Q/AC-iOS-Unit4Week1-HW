@@ -15,14 +15,14 @@ class BookViewController: UIViewController {
             collectionView.reloadData()
         }
     }
-    var text = "" {
-        didSet {
-            loadBooks()
-        }
-    }
     var bookTypes = [BookType]() {
         didSet {
             pickerView.reloadAllComponents()
+         
+            if let myDefault = UserDefaultHelper.manager.getBook() {
+                pickerView.selectRow(myDefault, inComponent: 0, animated: true)
+                loadBooks(type: bookTypes[myDefault].name.replacingOccurrences(of: " ", with: "%20"))
+            }
         }
     }
         
@@ -31,18 +31,27 @@ class BookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        pickerView.delegate = self; pickerView.dataSource = self
         collectionView.dataSource = self
-        collectionView.delegate = self
         loadBookTypes()
     }
     func loadBookTypes() {
     BookAPIClient.manager.getBookType(completionHandler: {self.bookTypes = $0}, errorHandler: {print($0)})
     }
-    func loadBooks() {
-        let bookUrl = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=ef6e801396e44409a1b28aee9dbcd7d4&list=\(text)"
-        BookAPIClient.manager.getBookDetail(from: bookUrl, completionHandler: {self.books = $0}, errorHandler: {print($0)})
+    func loadBooks(type: String) {
+        BookAPIClient.manager.getBookDetail(from: type, completionHandler: {self.books = $0}, errorHandler: {print($0)})
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BookDetailViewController {
+//            let selectedBook = collectionView.indexPathsForSelectedItems
+            if let cell = sender as? BookCollectionViewCell {
+                if let book = collectionView.indexPath(for: cell) {
+                destination.googleBook = cell.googleBooks
+                destination.image = cell.collectionImageView.image
+                }
+            }
+        }
     }
 }
 extension BookViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -56,7 +65,7 @@ extension BookViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return bookTypes[row].name
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        text = bookTypes[row].name.replacingOccurrences(of: " ", with: "-")
+        loadBooks(type: bookTypes[row].name.replacingOccurrences(of: " ", with: "-"))
     }
 }
 extension BookViewController: UICollectionViewDataSource {
@@ -69,12 +78,19 @@ extension BookViewController: UICollectionViewDataSource {
         cell.collectionLabel.text = "\(book.duration) Weeks on the best seller List"
         cell.collectionTextView.text = book.details[0].description
         cell.collectionImageView.image = nil
+        getDataFromGoogle(with: book.isbns[0].isbn10, cell: cell)
         return cell
     }
-}
-extension BookViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 375, height: 350)
+    func getDataFromGoogle(with isbn: String, cell: BookCollectionViewCell) {
+        GoogleAPIClient.manager.getImages(from: isbn, completionHandler: {let imageURL = $0?[0].volumeInfo.imageLinks?.thumbnail
+            if let book = $0 {
+                print("here")
+                cell.googleBooks = book[0]
+                print(cell.googleBooks.volumeInfo.title)
+            }
+            ImageAPIClient.manager.loadImage(from: imageURL!, completionHandler: {cell.collectionImageView.image = $0; cell.collectionImageView.setNeedsLayout()}, errorHandler: {print($0)})
+        }, errorHandler: {print($0)})
     }
 }
+
 

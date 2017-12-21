@@ -12,4 +12,5 @@ class BookCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionTextView: UITextView!
     @IBOutlet weak var collectionLabel: UILabel!
     @IBOutlet weak var collectionImageView: UIImageView!
+    var googleBooks: GoogleBooks!
 }

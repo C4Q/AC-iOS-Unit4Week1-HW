@@ -18,18 +18,23 @@ struct BookType: Codable {
         case name = "list_name"
     }
 }
-
 ///2nd Endpoint
 struct BookWrapper: Codable {
     let results: [BookList]
 }
 struct BookList: Codable {
     let duration: Int
+    let isbns: [ISBNWrapper]
     let details: [BookDetail]
     enum CodingKeys: String, CodingKey {
         case duration = "weeks_on_list"
+        case isbns
         case details = "book_details"
     }
+}
+struct ISBNWrapper: Codable {
+    let isbn10: String
+    let isbn13: String
 }
 struct BookDetail: Codable {
     let title: String
@@ -40,9 +45,10 @@ struct BookAPIClient {
     private init() {}
     static let manager = BookAPIClient()
     private let bookTypeUrl = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=ef6e801396e44409a1b28aee9dbcd7d4"
-    func getBookDetail(from urlStr: String, completionHandler: @escaping ([BookList]) -> Void, errorHandler: @escaping (Error) -> Void) {
-        guard let url = URL(string: urlStr ) else {
-            errorHandler(AppError.badURL(str: urlStr))
+    func getBookDetail(from text: String, completionHandler: @escaping ([BookList]) -> Void, errorHandler: @escaping (Error) -> Void) {
+        let bookUrl = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=ef6e801396e44409a1b28aee9dbcd7d4&list=\(text)"
+        guard let url = URL(string: bookUrl ) else {
+            errorHandler(AppError.badURL(str: bookUrl))
             return
         }
         let request = URLRequest(url: url)
