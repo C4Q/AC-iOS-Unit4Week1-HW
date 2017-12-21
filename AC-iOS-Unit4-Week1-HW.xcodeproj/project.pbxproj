@@ -22,6 +22,9 @@
 		819FAA6C1FEB1D45006BECB5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6B1FEB1D45006BECB5 /* Alert.swift */; };
 		819FAA6E1FEB2934006BECB5 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6D1FEB2934006BECB5 /* PersistentData.swift */; };
 		819FAA701FEB370C006BECB5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA6F1FEB370C006BECB5 /* Settings.swift */; };
+		819FAA721FEB440C006BECB5 /* BestSeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA711FEB440C006BECB5 /* BestSeller.swift */; };
+		819FAA751FEB4AA9006BECB5 /* BestSellerAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA741FEB4AA9006BECB5 /* BestSellerAPIClient.swift */; };
+		819FAA771FEB501B006BECB5 /* BestSellerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FAA761FEB501B006BECB5 /* BestSellerData.swift */; };
 		81AFFAFE1FEA1052009D54A4 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFAFD1FEA1052009D54A4 /* Categories.swift */; };
 		81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +47,9 @@
 		819FAA6B1FEB1D45006BECB5 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		819FAA6D1FEB2934006BECB5 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		819FAA6F1FEB370C006BECB5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		819FAA711FEB440C006BECB5 /* BestSeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSeller.swift; sourceTree = "<group>"; };
+		819FAA741FEB4AA9006BECB5 /* BestSellerAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerAPIClient.swift; sourceTree = "<group>"; };
+		819FAA761FEB501B006BECB5 /* BestSellerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerData.swift; sourceTree = "<group>"; };
 		81AFFAFD1FEA1052009D54A4 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +134,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		819FAA731FEB4410006BECB5 /* Best Sellers */ = {
+			isa = PBXGroup;
+			children = (
+				819FAA711FEB440C006BECB5 /* BestSeller.swift */,
+				819FAA741FEB4AA9006BECB5 /* BestSellerAPIClient.swift */,
+				819FAA761FEB501B006BECB5 /* BestSellerData.swift */,
+			);
+			path = "Best Sellers";
+			sourceTree = "<group>";
+		};
 		81AFFAFF1FEA1063009D54A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +152,7 @@
 				819FAA6D1FEB2934006BECB5 /* PersistentData.swift */,
 				819FAA6F1FEB370C006BECB5 /* Settings.swift */,
 				81246F081FEB17BB00C1304C /* Categories */,
+				819FAA731FEB4410006BECB5 /* Best Sellers */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,10 +231,13 @@
 			files = (
 				81693A151FE8BEDA0004BFB6 /* BestSellerCollectionViewCell.swift in Sources */,
 				81246F0C1FEB1A0F00C1304C /* FavoriteBooksViewController.swift in Sources */,
+				819FAA771FEB501B006BECB5 /* BestSellerData.swift in Sources */,
+				819FAA751FEB4AA9006BECB5 /* BestSellerAPIClient.swift in Sources */,
 				81246F071FEB17B400C1304C /* CategoryAPIClient.swift in Sources */,
 				54F137DF1FE302CD00EA22AA /* BestSellerViewController.swift in Sources */,
 				81246F0E1FEB1A4700C1304C /* BookDetailViewController.swift in Sources */,
 				81AFFAFE1FEA1052009D54A4 /* Categories.swift in Sources */,
+				819FAA721FEB440C006BECB5 /* BestSeller.swift in Sources */,
 				819FAA6C1FEB1D45006BECB5 /* Alert.swift in Sources */,
 				819FAA6E1FEB2934006BECB5 /* PersistentData.swift in Sources */,
 				81693A181FE8C4F40004BFB6 /* FavoritesCollectionViewCell.swift in Sources */,

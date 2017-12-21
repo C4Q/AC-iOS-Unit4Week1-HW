@@ -20,6 +20,12 @@ class BestSellerViewController: UIViewController {
         }
     }
     
+    var bestSellers: [BestSeller] = [] {
+        didSet {
+            bestSellerCollectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
@@ -36,6 +42,10 @@ class BestSellerViewController: UIViewController {
             categoriesPickerView.selectRow(categoryIndex, inComponent: 0, animated: true)
             categoriesPickerView.reloadComponent(0)
         }
+        
+        let currentCategory = categories[categoriesPickerView.selectedRow(inComponent: 0)]
+        
+        loadBooks(withCategory: currentCategory)
     }
     
     func loadCategories() {
@@ -55,6 +65,17 @@ class BestSellerViewController: UIViewController {
                 self.present(errorAlert, animated: true, completion: nil)
             })
         }
+    }
+    
+    func loadBooks(withCategory category: String) {
+        BestSellerAPIClient.manager.getBestSellers(forCategory: category, completionHandler: { (onlineBestSellers) in
+            self.bestSellers = onlineBestSellers
+            
+        }, errorHandler: { (appError) in
+            let alertController = Alert.createAlert(forError: appError)
+            
+            self.present(alertController, animated: true, completion: nil)
+        })
     }
     
 }
