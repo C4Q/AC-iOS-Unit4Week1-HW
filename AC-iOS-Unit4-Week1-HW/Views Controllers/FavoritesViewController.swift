@@ -49,8 +49,8 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         
         let aFavorite = favoriteBooksArray[indexPath.row]
         cell.bookImageView.image = nil //To stop flickering
-        cell.titleLabel.text = aFavorite[0].title
-        cell.subtitleLabel.text = "Weeks On: \(aFavorite[0].subtitle ?? "")"
+        //cell.titleLabel.text = aFavorite[0].title
+        //cell.subtitleLabel.text = "Weeks On: \(aFavorite[0].subtitle ?? "")"
         
         //IMAGE API HERE UNTIL I ADD LOADING IMAGES FROM PHONE
         cell.spinner.isHidden = false
@@ -62,7 +62,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
             cell.bookImageView.setNeedsLayout()
         }
         
-        ImageAPIClient.manager.getImage(from: aFavorite[0].imageLinks.thumbnail, completionHandler: setImageToOnlineImage, errorHandler: {print($0)})
+        //ImageAPIClient.manager.getImage(from: aFavorite[0].imageLinks.thumbnail, completionHandler: setImageToOnlineImage, errorHandler: {print($0)})
         
         
         return cell

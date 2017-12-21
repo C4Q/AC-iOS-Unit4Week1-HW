@@ -13,7 +13,9 @@ class DetailedViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
+        if !aBooksInfo.isEmpty {
         FavoritesArchiverClient.manager.add(favorite: aBooksInfo)
+        }
         
         
     }
