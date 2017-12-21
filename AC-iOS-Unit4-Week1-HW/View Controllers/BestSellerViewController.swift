@@ -28,6 +28,12 @@ class BestSellerViewController: UIViewController {
         }
     }
     
+    var googleBooks: [GoogleBook] = [] {
+        didSet {
+            bestSellerCollectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
@@ -114,6 +120,19 @@ extension BestSellerViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row]
     }
+    
+}
+
+extension BestSellerViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //to do - only call and load google books when the cell is about to appear
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //to do? - maybe
+    }
+    
 }
 
 extension BestSellerViewController: UICollectionViewDelegateFlowLayout {
@@ -144,7 +163,7 @@ extension BestSellerViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestSellerCell", for: indexPath) as! BestSellerCollectionViewCell
         let currentBestSeller = bestSellers[indexPath.row]
         
-        //to do image
+        //to do google book api call - maybe?
         cell.configureCell(withBestSeller: currentBestSeller)
         
         return cell
