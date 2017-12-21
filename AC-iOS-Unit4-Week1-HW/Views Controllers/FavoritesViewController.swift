@@ -10,7 +10,6 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     //constant for our cell spacing which will be consistent around  our cells
@@ -33,7 +32,7 @@ class FavoritesViewController: UIViewController {
         //Load the array of favoriteBooks
         FavoritesArchiverClient.manager.loadFavorites()
         favoriteBooksArray = FavoritesArchiverClient.manager.getFavorites()
-        print(favoriteBooksArray)
+        //print(favoriteBooksArray)
         
     }
 }
@@ -50,7 +49,7 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
         let aFavorite = favoriteBooksArray[indexPath.row]
         cell.bookImageView.image = nil //To stop flickering
         cell.titleLabel.text = aFavorite[0].title
-        cell.subtitleLabel.text = "Weeks On: \(aFavorite[0].subtitle ?? "")"
+        cell.subtitleLabel.text = "\(aFavorite[0].subtitle ?? "")"
         
         //IMAGE API HERE UNTIL I ADD LOADING IMAGES FROM PHONE
         cell.spinner.isHidden = false

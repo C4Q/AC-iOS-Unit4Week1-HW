@@ -18,9 +18,9 @@ class DetailedViewController: UIViewController {
             let alertVC = UIAlertController(title: "Added", message: "Added to favorites", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alertVC, animated: true, completion: nil)
+        } else {
+            print("Didn't add due to empty array")
         }
-        print("Didn't add due to empty array")
-        
     }
     
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -35,14 +35,12 @@ class DetailedViewController: UIViewController {
             //The GoogleAPICall will update the subtitle label and bookImageView
             titleLabel.text = aBooksInfo[0].title
             subtitleLabel.text = aBooksInfo[0].subtitle ?? ""
-            //API IMAGE CALL GOES HERE
-            
         }
     }
     
     var aBook: BestSellers? {
         didSet {
-            //Call IMAGE API HERE
+    
         }
     }
     

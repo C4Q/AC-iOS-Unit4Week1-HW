@@ -124,9 +124,9 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         }
         
         BestSellersKeyedArchiverClient.manager.loadData(encoded: selectedCategory.listNameEncoded)
-        if CurrentDate == storedDate {
-            print("Equal")
-        } else if CurrentDate > storedDate {
+        displayedBestSellers = BestSellersKeyedArchiverClient.manager.getBestSellers()
+        
+        if CurrentDate > storedDate {
             print("A Day has passed. CALL API")
             let completion: ([BestSellers]) -> Void = {(onlineBestSellers: [BestSellers]) in
                 self.displayedBestSellers = onlineBestSellers //This should trigger the didSet and add to the Best Seller Array
@@ -139,6 +139,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDataSource, UIPick
         } else if CurrentDate < storedDate {
             print("A Day has not passed. Get from stored data")
             //If a value for the endpoint returns nil from the archiver, call the API ELSE load from archive
+            BestSellersKeyedArchiverClient.manager.loadData(encoded: selectedCategory.listNameEncoded)
             if BestSellersKeyedArchiverClient.manager.getBestSellers().isEmpty {
                 //API CALL GOES HERE
                 let completion: ([BestSellers]) -> Void = {(onlineBestSellers: [BestSellers]) in
