@@ -28,6 +28,8 @@ class BestSellerViewController: UIViewController {
         }
     }
     
+    var currentGoogleBook: GoogleBook?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
@@ -94,9 +96,13 @@ class BestSellerViewController: UIViewController {
     }
     
     //Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destinationVC =
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? BookDetailViewController, let cell = sender as? BestSellerCollectionViewCell {
+            
+            destinationVC.googleBook = self.currentGoogleBook
+            destinationVC.image = cell.bookImageView.image
+        }
+    }
     
 }
 
@@ -157,11 +163,14 @@ extension BestSellerViewController: UICollectionViewDataSource {
         
         cell.configureCell(withBestSeller: currentBestSeller)
         
+        cell.bookImageView.image = nil
         //I know we shouldn't make the cell do so much stuff (like doing network requests to get a whole model), but I couldn't get the right google book image to load for the corresponding best seller other wise (the google books and the best sellers were never in the same order in the array) - I don't know how to use dispatch group yet, so for now I can only do this
         //loading google book
         GoogleBookAPIClient.manager.getGoogleBooks(
             forISBN: currentBestSeller.bookDetails[0].isbn10,
             completionHandler: { (googleBook) in
+               
+               self.currentGoogleBook = googleBook
                 cell.configureImageForCell(withGoogleBook: googleBook) { (appError) in
                     self.presentErrorAlert(forError: appError)
                 }
