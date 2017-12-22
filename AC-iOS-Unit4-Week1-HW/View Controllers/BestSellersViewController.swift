@@ -208,7 +208,7 @@ extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
     
     /// spacing between rows ^v
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return spacingBetweenCells
+        return 0
     }
     
     /// spacing between columns <>
