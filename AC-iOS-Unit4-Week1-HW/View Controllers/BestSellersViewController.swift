@@ -8,17 +8,28 @@
 
 import UIKit
 
+
+let defaults = UserDefaults.standard
+
+
 class BestSellersViewController: UIViewController {
     
     @IBOutlet weak var bestSellersCollectionView: UICollectionView!
-    @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView!
+    @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView! {
+        didSet {
+            print("picker view set")
+        }
+    }
     
     var categories = [Category]() {
         didSet {
             /// load initialized by func loadCategories
             print("=============== categories SET ===============")
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.bestSellersCategoryPickerView.reloadAllComponents()
+                if let settingsCategory = defaults.value(forKey: "selectedCategoryIndexKey") as? Int { self.bestSellersCategoryPickerView.selectRow(settingsCategory, inComponent: 0, animated: false)
+                    
+//                }
             }
         }
     }
@@ -27,9 +38,9 @@ class BestSellersViewController: UIViewController {
         didSet {
             /// load initialized in the Category pickerView delegate didSelectRow
             print("=============== nytBooksWithISBN SET ===============")
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
-            }
+//            }
         }
     }
     
@@ -41,6 +52,18 @@ class BestSellersViewController: UIViewController {
         self.bestSellersCategoryPickerView.dataSource = self
         self.bestSellersCategoryPickerView.delegate = self
         loadCategories()
+    }
+    
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(true)
+    //        bestSellersCategoryPickerView.reloadAllComponents()
+    //    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        bestSellersCollectionView.reloadData()
+        bestSellersCategoryPickerView.reloadAllComponents()
     }
     
     func loadCategories() { /// calls NYTAPIClient-Categories, uses NetworkHelper to access data
@@ -106,10 +129,10 @@ extension BestSellersViewController: UICollectionViewDataSource {
         
         // initialize a nil image
         bookCell.bestSellerImageView.image = nil
-
+        
         /// calls load Image function
         loadBookDetails(from: bookWithISBN, cell: bookCell)
-
+        
         return bookCell
     }
     
@@ -163,13 +186,17 @@ extension BestSellersViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        
         return categories[row].displayName
     }
     
     
     /// load CollectionView
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         let category = categories[row]
+        
         let completion: ([BestSellerBook]) -> Void = {(onlineBestSellers: [BestSellerBook]) in
             self.nytBooksWithISBN = onlineBestSellers
         }
@@ -198,7 +225,7 @@ extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
         
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
-        return CGSize(width: (screenWidth - (spacingBetweenCells * numOfSpaces)) / numOfCells, height: screenHeight * 0.50) // this Double changes the height of the cells
+        return CGSize(width: (screenWidth - (spacingBetweenCells * numOfSpaces)) / numOfCells, height: screenHeight * 0.45) // this Double changes the height of the cells
     }
     
     /// insets for collection view - borders at the ENDS of the entire collection view
