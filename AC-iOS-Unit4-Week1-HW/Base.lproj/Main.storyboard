@@ -129,17 +129,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-Ai-5Ym">
-                                <rect key="frame" x="0.0" y="469.5" width="375" height="138.5"/>
+                                <rect key="frame" x="0.0" y="470" width="375" height="118"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXu-eP-D3S">
+                                <rect key="frame" x="130" y="588" width="114" height="30"/>
+                                <state key="normal" title="Add To Favorites"/>
+                                <connections>
+                                    <action selector="addToFavoritesButtonPressed:" destination="ixV-wN-agA" eventType="touchUpInside" id="czS-gh-2aM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gMp-Ai-5Ym" firstAttribute="top" secondItem="3gD-88-3Eo" secondAttribute="bottom" constant="10" id="0zX-PB-KRR"/>
-                            <constraint firstItem="VO5-99-HY3" firstAttribute="bottom" secondItem="gMp-Ai-5Ym" secondAttribute="bottom" constant="10" id="AbL-jL-NhA"/>
+                            <constraint firstItem="yXu-eP-D3S" firstAttribute="centerX" secondItem="czm-2f-Ahc" secondAttribute="centerX" id="AQA-Y3-e4s"/>
                             <constraint firstItem="3gD-88-3Eo" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" constant="10" id="CBa-Cd-pWk"/>
                             <constraint firstItem="gMp-Ai-5Ym" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" id="Hgp-Lz-PXT"/>
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" id="LoL-Hb-CBy"/>
@@ -151,12 +158,15 @@
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="top" secondItem="VO5-99-HY3" secondAttribute="top" id="Ybu-4M-dt2"/>
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="height" secondItem="czm-2f-Ahc" secondAttribute="height" multiplier="1:2" id="d5D-G0-wuf"/>
                             <constraint firstItem="wCT-oF-JVv" firstAttribute="top" secondItem="ivv-vB-Q9C" secondAttribute="bottom" constant="10" id="ezA-ug-0Oq"/>
+                            <constraint firstItem="yXu-eP-D3S" firstAttribute="bottom" secondItem="VO5-99-HY3" secondAttribute="bottom" id="fYL-e9-bfZ"/>
                             <constraint firstItem="VO5-99-HY3" firstAttribute="trailing" secondItem="wCT-oF-JVv" secondAttribute="trailing" constant="10" id="jZ2-bN-z0S"/>
+                            <constraint firstItem="yXu-eP-D3S" firstAttribute="top" secondItem="gMp-Ai-5Ym" secondAttribute="bottom" id="jon-VP-Mh3"/>
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="centerX" secondItem="VO5-99-HY3" secondAttribute="centerX" id="tDu-5q-KwI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VO5-99-HY3"/>
                     </view>
                     <connections>
+                        <outlet property="addToFavoritesButton" destination="yXu-eP-D3S" id="cyD-4Q-vQj"/>
                         <outlet property="bookImageView" destination="ivv-vB-Q9C" id="tLn-xK-7wY"/>
                         <outlet property="bookLongDescriptionTextView" destination="gMp-Ai-5Ym" id="9xh-dt-0js"/>
                         <outlet property="bookSubtitleLabel" destination="3gD-88-3Eo" id="FJx-kI-gIA"/>
@@ -198,7 +208,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s3w-DP-ztD">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" red="0.59521072235172934" green="0.75721038584314249" blue="0.96620899438858032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wrW-n0-jbP">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wrW-n0-jbP">
                                     <size key="itemSize" width="265" height="203"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -206,7 +216,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Favorite Cell" id="Cg2-yD-4Ep" customClass="FavoriteCollectionViewCell" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target">
-                                        <rect key="frame" x="55" y="0.0" width="265" height="203"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="265" height="203"/>

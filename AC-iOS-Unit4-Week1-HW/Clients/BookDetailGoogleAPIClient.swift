@@ -14,9 +14,9 @@ struct BookDetailGoogleAPIClient {
     func getBookDetails(isbn: String,
                         completionHandler: @escaping ([BookWrapper]?) -> Void,
                         errorHandler: @escaping (Error) -> Void) {
-//        let myGoogleAPIKey = "AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk"
-//        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=\(myGoogleAPIKey)"
-        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)"
+        let myGoogleAPIKey = "AIzaSyB0MSiQ37Z90T23RfL19PQi7YVYoZ4Tnvk"
+        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=\(myGoogleAPIKey)"
+//        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)"
         guard let url = URL(string: urlStr) else {
             errorHandler(AppError.badURL(str: urlStr))
             return

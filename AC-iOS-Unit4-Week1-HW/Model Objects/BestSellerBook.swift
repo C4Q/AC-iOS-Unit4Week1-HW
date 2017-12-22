@@ -6,7 +6,7 @@
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// API ENDPOINT #2 - NYT BEST SELLERS WITH NYT API KEY AND CATEGORY INPUT
 /// Generic URL: https://api.nytimes.com/svc/books/v3/lists.json?api-key=99f973e47a244b3a8ee6b95a632550ae&list=\(category)
@@ -35,6 +35,15 @@ struct BestSellerBook: Codable {
 struct ISBNNum: Codable {
     let isbn10: String?
     let isbn13: String?
+    
+    var image: UIImage? {
+        set{}
+        get {
+            let imageURL = FavoriteBookStore.manager.dataFilePath(withPathName: isbn13!)
+            let docImage = UIImage(contentsOfFile: imageURL.path)
+            return docImage
+        }
+    }
 }
 
 struct Detail: Codable {

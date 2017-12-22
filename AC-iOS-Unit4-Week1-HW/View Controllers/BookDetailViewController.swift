@@ -18,6 +18,10 @@ class BookDetailViewController: UIViewController {
     
     @IBOutlet weak var bookLongDescriptionTextView: UITextView!
     
+    @IBOutlet weak var addToFavoritesButton: UIButton!
+    
+    
+    
     /// segue from collection view cell to this detail view controller
     
     var detailedBook: BestSellerBook?
@@ -37,6 +41,16 @@ class BookDetailViewController: UIViewController {
             bookLongDescriptionTextView.text = myGoogleBook.volumeInfo.description ?? ""
         }
     }
+    
+    /// Add functionality for saving to favorites
+    @IBAction func addToFavoritesButtonPressed(_ sender: UIButton) {
+        guard let image = bookImage else {return}
+        let _ = FavoriteBookStore.manager.addToFavorites(book: detailedBook!)
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    
     
 }
 

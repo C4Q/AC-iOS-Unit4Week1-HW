@@ -12,4 +12,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var favoriteImageView: UIImageView!
     
+    var myFavoriteBook: BookWrapper?
+    
+    
 }
