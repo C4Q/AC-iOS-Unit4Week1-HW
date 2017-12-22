@@ -47,11 +47,17 @@ class BookDetailViewController: UIViewController {
         guard let image = bookImage else {return}
         let _ = FavoriteBookStore.manager.addToFavorites(book: detailedBook!)
         navigationController?.popViewController(animated: true)
-        
+//        showAlert(title: "Added to Favorites", message: "Ya")
     }
     
     
+    /// doesn't work yet
+//    func showAlert(title: String, message: String) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "Ok", style: .default) { alert in self.tabBarController?.selectedIndex = 0 }
+//        alertController.addAction(okAction)
+//        present(alertController, animated: true, completion: nil)
+//
+//    }
     
 }
-
-

@@ -30,6 +30,7 @@ class BestSellersViewController: UIViewController {
                 if let settingsCategory = defaults.value(forKey: "selectedCategoryIndexKey") as? Int { self.bestSellersCategoryPickerView.selectRow(settingsCategory, inComponent: 0, animated: false)
                     
 //                }
+                    
             }
         }
     }
