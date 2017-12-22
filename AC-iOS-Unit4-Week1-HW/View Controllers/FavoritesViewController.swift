@@ -25,6 +25,21 @@ class FavoritesViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "favoriteSegue"{
+            let nav = segue.destination as! UINavigationController
+            let detailPage = nav.childViewControllers.first as! FavoritesDetailViewController
+            let selectedCell = sender as! FavoritesCollectionViewCell
+            let index = collectionView.indexPath(for: selectedCell)
+            let favorites = PersistentStoreManager.manager.getFavorites()
+            let selectedFavorite = favorites[(index?.row)!]
+            detailPage.favorite = selectedFavorite
+            
+            
+        }
+    }
 }
 
 extension FavoritesViewController: UICollectionViewDataSource {

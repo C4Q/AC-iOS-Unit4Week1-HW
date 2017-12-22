@@ -1,15 +1,14 @@
 //
-//  BestSellerDetailViewController.swift
+//  FavoritesDetailViewController.swift
 //  AC-iOS-Unit4-Week1-HW
 //
-//  Created by C4Q on 12/16/17.
+//  Created by C4Q on 12/21/17.
 //  Copyright © 2017 C4Q . All rights reserved.
 //
 
 import UIKit
 
-class BestSellerDetailViewController: UIViewController {
-
+class FavoritesDetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var bookCoverImage: UIImageView!
@@ -18,42 +17,29 @@ class BestSellerDetailViewController: UIViewController {
     
     @IBOutlet weak var bookDescription: UITextView!
     
-    var book: BookInfo!
-    var imageCover: UIImage?
+    var favorite: Favorite!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        setImage(book: book)
+        setFavorites(favorite: favorite)
         
-
+        
     }
-
     
-    func setImage(book: BookInfo){
-        titleLabel.text = book.volumeInfo.title
-        bookDescription.text = book.volumeInfo.description
-        
-        if book.volumeInfo.subtitle != nil{
+    
+    func setFavorites(favorite: Favorite){
+        titleLabel.text = favorite.title
+        if favorite.subtitle != nil{
             subtitleLabel.isHidden = false
-            subtitleLabel.text = book.volumeInfo.subtitle
+            subtitleLabel.text = favorite.subtitle
         }
+        bookDescription.text = favorite.description
+            bookCoverImage.image = favorite.image
         
-        
-        
-        if book.volumeInfo.imageLinks == nil{
-            bookCoverImage.image = #imageLiteral(resourceName: "image_not_available")
-        }else{
-            bookCoverImage.image = imageCover
-        }
-        
-        
-        if PersistentStoreManager.manager.isBookInFavorites(book: book) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "favorite-filled-32"), style: .plain, target: self, action: #selector(removeFavorite))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "favorite-unfilled-32"), style: .plain, target: self, action: #selector(favoritesButtonPressed(_:)))
-        }
+     
     }
     
     
@@ -69,9 +55,8 @@ class BestSellerDetailViewController: UIViewController {
     
     
     @IBAction func favoritesButtonPressed(_ sender: UIBarButtonItem) {
-        guard let image = bookCoverImage.image else{return}
-        let _ = PersistentStoreManager.manager.addToFavorites(book: book, andImage: image)
-        dismiss(animated: true, completion: nil)
+        
+        print("error")
     }
     
     @objc func removeFavorite() {
@@ -83,7 +68,8 @@ class BestSellerDetailViewController: UIViewController {
             dismiss(animated: true, completion: nil)
         }
     }
-
     
+    
+
 
 }

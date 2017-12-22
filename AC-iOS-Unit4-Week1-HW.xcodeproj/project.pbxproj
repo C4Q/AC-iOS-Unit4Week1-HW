@@ -29,6 +29,7 @@
 		814BD2B91FE5F99B00C0DE5E /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814BD2B81FE5F99B00C0DE5E /* Favorite.swift */; };
 		814BD2BB1FE5FA4800C0DE5E /* PersistenceStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814BD2BA1FE5FA4800C0DE5E /* PersistenceStoreManager.swift */; };
 		814F13F81FE8A658004F6FCD /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F13F71FE8A658004F6FCD /* UserDefaultHelper.swift */; };
+		816896C71FEC949100F7087E /* FavoritesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816896C61FEC949100F7087E /* FavoritesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		814BD2B81FE5F99B00C0DE5E /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		814BD2BA1FE5FA4800C0DE5E /* PersistenceStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStoreManager.swift; sourceTree = "<group>"; };
 		814F13F71FE8A658004F6FCD /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
+		816896C61FEC949100F7087E /* FavoritesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		814BD2A11FE5CEAD00C0DE5E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				816896C61FEC949100F7087E /* FavoritesDetailViewController.swift */,
 				814BD2951FE5CE5800C0DE5E /* BestSellerViewController.swift */,
 				814BD2971FE5CE6900C0DE5E /* FavoritesViewController.swift */,
 				814BD2991FE5CE7500C0DE5E /* BestSellerDetailViewController.swift */,
@@ -230,6 +233,7 @@
 				814BD2A51FE5CF6E00C0DE5E /* NetworkHelper.swift in Sources */,
 				814BD2B61FE5D22400C0DE5E /* Categories.swift in Sources */,
 				814BD2AB1FE5D11D00C0DE5E /* CategoryAPIClient.swift in Sources */,
+				816896C71FEC949100F7087E /* FavoritesDetailViewController.swift in Sources */,
 				814BD2A01FE5CEA000C0DE5E /* FavoritesCollectionViewCell.swift in Sources */,
 				54F137DD1FE302CD00EA22AA /* AppDelegate.swift in Sources */,
 				814F13F81FE8A658004F6FCD /* UserDefaultHelper.swift in Sources */,

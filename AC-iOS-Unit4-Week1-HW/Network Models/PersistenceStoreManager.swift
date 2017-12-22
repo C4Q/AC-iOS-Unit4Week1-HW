@@ -112,6 +112,16 @@ class PersistentStoreManager {
         }
     }
     
+    func isFavoriteInFavorites(favorite: Favorite) -> Bool {
+        // checking for uniqueness
+        let indexExist = favorites.index{ $0.title == favorite.title }
+        if indexExist != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func getFavoriteWithTitle(title: String) -> Favorite? {
         let index = getFavorites().index{$0.title == title}
         guard let indexFound = index else { return nil }
@@ -119,6 +129,7 @@ class PersistentStoreManager {
     }
     
     func getFavorites() -> [Favorite] {
+        load()
         return favorites
     }
     

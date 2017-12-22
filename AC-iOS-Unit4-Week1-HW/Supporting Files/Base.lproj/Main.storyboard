@@ -115,7 +115,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4U6-fw-n4Q"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="LFB-0c-yMP"/>
+                    <tabBarItem key="tabBarItem" title="Best Sellers" id="LFB-0c-yMP"/>
                     <connections>
                         <outlet property="collectionView" destination="CVs-MD-NVh" id="65Q-Ep-mzY"/>
                         <outlet property="pickerView" destination="iOi-1e-2Yd" id="3XS-Id-yig"/>
@@ -133,7 +133,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isi-FX-xMI">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isi-FX-xMI">
                                 <rect key="frame" x="0.0" y="318" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -196,7 +196,80 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wJk-0S-3mS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2328.8000000000002" y="-812.74362818590714"/>
+            <point key="canvasLocation" x="2454" y="-871"/>
+        </scene>
+        <!--Favorites Detail View Controller-->
+        <scene sceneID="gdV-Av-CDA">
+            <objects>
+                <viewController id="Cqe-7E-BiB" customClass="FavoritesDetailViewController" customModule="AC_iOS_Unit4_Week1_HW" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wji-AH-AGw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unn-sJ-ULm">
+                                <rect key="frame" x="0.0" y="318" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Haq-ZJ-iGW">
+                                <rect key="frame" x="11" y="350" width="353" height="306"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdE-pZ-csz">
+                                <rect key="frame" x="0.0" y="275" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iy2-0N-lWw">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iy2-0N-lWw" firstAttribute="height" secondItem="Wji-AH-AGw" secondAttribute="height" multiplier="0.3" id="2t0-Sd-tnS"/>
+                            <constraint firstItem="Rfd-6a-sbF" firstAttribute="bottom" secondItem="Haq-ZJ-iGW" secondAttribute="bottom" constant="11" id="D3U-pw-cEb"/>
+                            <constraint firstItem="Unn-sJ-ULm" firstAttribute="leading" secondItem="Rfd-6a-sbF" secondAttribute="leading" id="HDp-FW-6Lm"/>
+                            <constraint firstItem="iy2-0N-lWw" firstAttribute="leading" secondItem="Rfd-6a-sbF" secondAttribute="leading" id="Lsz-aS-WjZ"/>
+                            <constraint firstItem="Rfd-6a-sbF" firstAttribute="trailing" secondItem="Unn-sJ-ULm" secondAttribute="trailing" id="SF2-d2-OeO"/>
+                            <constraint firstItem="Rfd-6a-sbF" firstAttribute="trailing" secondItem="Haq-ZJ-iGW" secondAttribute="trailing" constant="11" id="aXg-Yb-LDl"/>
+                            <constraint firstItem="xdE-pZ-csz" firstAttribute="top" secondItem="iy2-0N-lWw" secondAttribute="bottom" constant="11" id="avC-1s-1Uo"/>
+                            <constraint firstItem="Unn-sJ-ULm" firstAttribute="top" secondItem="xdE-pZ-csz" secondAttribute="bottom" constant="22" id="cqF-CM-HYd"/>
+                            <constraint firstItem="Rfd-6a-sbF" firstAttribute="trailing" secondItem="iy2-0N-lWw" secondAttribute="trailing" id="dCD-Dq-L6I"/>
+                            <constraint firstItem="Haq-ZJ-iGW" firstAttribute="leading" secondItem="Rfd-6a-sbF" secondAttribute="leading" constant="11" id="eI9-Kl-tK8"/>
+                            <constraint firstItem="Rfd-6a-sbF" firstAttribute="trailing" secondItem="xdE-pZ-csz" secondAttribute="trailing" id="guA-3C-3FM"/>
+                            <constraint firstItem="xdE-pZ-csz" firstAttribute="leading" secondItem="Rfd-6a-sbF" secondAttribute="leading" id="ph0-Dx-kGI"/>
+                            <constraint firstItem="Haq-ZJ-iGW" firstAttribute="top" secondItem="Unn-sJ-ULm" secondAttribute="bottom" constant="11" id="yRs-MR-ZHy"/>
+                            <constraint firstItem="iy2-0N-lWw" firstAttribute="top" secondItem="Rfd-6a-sbF" secondAttribute="top" id="z5y-NW-vct"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rfd-6a-sbF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hil-kR-fai">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-delete-32" id="MCp-Zz-l42">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="Cqe-7E-BiB" id="Gyi-0c-2Dx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="favorite-unfilled-32" id="xWB-4X-0zg">
+                            <connections>
+                                <action selector="favoritesButtonPressed:" destination="Cqe-7E-BiB" id="BEV-mK-CbN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bookCoverImage" destination="iy2-0N-lWw" id="WXY-vh-1WD"/>
+                        <outlet property="bookDescription" destination="Haq-ZJ-iGW" id="3Fd-Mp-1BF"/>
+                        <outlet property="subtitleLabel" destination="Unn-sJ-ULm" id="xYI-bX-f5C"/>
+                        <outlet property="titleLabel" destination="xdE-pZ-csz" id="PND-QT-shf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t2W-UW-KfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2525.5999999999999" y="38.23088455772114"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="mar-4n-YQL">
@@ -224,7 +297,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="186" height="202"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hag-xO-oS1">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hag-xO-oS1">
                                                     <rect key="frame" x="0.0" y="0.0" width="186" height="202"/>
                                                 </imageView>
                                             </subviews>
@@ -237,6 +310,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="favoriteBooksImage" destination="hag-xO-oS1" id="DnK-KZ-5Bh"/>
+                                            <segue destination="uEh-nd-7bN" kind="presentation" identifier="favoriteSegue" id="GS2-wg-1A1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -245,7 +319,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="gSL-pV-yoG"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="tC4-Mv-Xfd"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="tC4-Mv-Xfd"/>
                     <connections>
                         <outlet property="collectionView" destination="pvQ-mn-G5n" id="Mz6-tf-IMj"/>
                     </connections>
@@ -286,7 +360,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="oV9-yQ-uCf"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="xXH-fY-tTu"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="xXH-fY-tTu"/>
                     <connections>
                         <outlet property="pickerView" destination="Mk5-xi-7FB" id="wYT-Xu-Ghj"/>
                     </connections>
@@ -311,7 +385,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ww7-ce-sBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="-1127"/>
+            <point key="canvasLocation" x="1354" y="-765"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="08W-9s-1qh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uEh-nd-7bN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Zb-fh-68A">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Cqe-7E-BiB" kind="relationship" relationship="rootViewController" id="0dx-Ns-mYo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="je1-w8-pce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1537" y="38"/>
         </scene>
     </scenes>
     <resources>

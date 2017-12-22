@@ -42,6 +42,7 @@ class BestSellerViewController: UIViewController, UIPickerViewDelegate, UIPicker
    
     
     override func viewDidLoad() {
+        PersistentStoreManager.manager.load()
         self.loadCategories()
         super.viewDidLoad()
         self.collectionView.delegate = self
@@ -226,7 +227,7 @@ extension BestSellerViewController: UICollectionViewDataSource {
         
         }
         let errorHanlder: (AppError) -> Void = {(error: AppError) in
-            let noInfo = Book.init(title: bestSeller.bookDetail[0].title, subtitle: nil, description: bestSeller.bookDetail[0].bestSellerDescription, imageLinks: nil)
+            let noInfo = Book.init(title: bestSeller.bookDetail[0].title.lowercased().capitalized, subtitle: nil, description: bestSeller.bookDetail[0].bestSellerDescription, imageLinks: nil)
             let noBook = BookInfo.init(volumeInfo: noInfo)
             cellToSet.book = noBook
             
