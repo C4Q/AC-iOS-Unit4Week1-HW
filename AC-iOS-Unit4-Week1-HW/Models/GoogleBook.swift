@@ -8,10 +8,8 @@
 
 import Foundation
 
-//to do - set up codable models for google book api
-
 struct GoogleBookWrapper: Codable {
-    let items: [GoogleBook]
+    let items: [GoogleBook]?
 }
 
 struct GoogleBook: Codable {
@@ -22,7 +20,7 @@ struct VolumeInfo: Codable {
     let title: String
     let subtitle: String?
     let authors: [String]
-    let description: String
+    let description: String?
     let industryIdentifiers: [IndustryIdentifier]
     let imageLinks: ImageLink
 }

@@ -14,23 +14,20 @@ class BestSellerViewController: UIViewController {
     
     @IBOutlet weak var categoriesPickerView: UIPickerView!
     
-    let cellSpacing: CGFloat = UIScreen.main.bounds.width * 0.05
+    let cellSpacing: CGFloat = UIScreen.main.bounds.width * 0.20
     
     var categories: [String] = [] {
         didSet {
+            let currentCategory = categories[self.categoriesPickerView.selectedRow(inComponent: 0)]
+            
+            self.loadBestSellers(withCategory: currentCategory)
             categoriesPickerView.reloadComponent(0)
         }
     }
     
     var bestSellers: [BestSeller] = [] {
         didSet {
-            bestSellerCollectionView.reloadData()
-        }
-    }
-    
-    var googleBooks: [GoogleBook] = [] {
-        didSet {
-            bestSellerCollectionView.reloadData()
+           bestSellerCollectionView.reloadData()
         }
     }
     
@@ -51,9 +48,6 @@ class BestSellerViewController: UIViewController {
             categoriesPickerView.reloadComponent(0)
         }
         
-        let currentCategory = categories[categoriesPickerView.selectedRow(inComponent: 0)]
-        
-        loadBestSellers(withCategory: currentCategory)
     }
     
     func loadCategories() {
@@ -68,9 +62,7 @@ class BestSellerViewController: UIViewController {
                 self.categories = CategoryData.manager.getCategories()
                 
             }, errorHandler: { (appError) in
-                let errorAlert = Alert.createAlert(forError: appError)
-                
-                self.present(errorAlert, animated: true, completion: nil)
+                self.presentErrorAlert(forError: appError)
             })
         }
     }
@@ -89,10 +81,14 @@ class BestSellerViewController: UIViewController {
             self.bestSellers = onlineBestSellers
             
         }, errorHandler: { (appError) in
-            let alertController = Alert.createAlert(forError: appError)
-            
-            self.present(alertController, animated: true, completion: nil)
+            self.presentErrorAlert(forError: appError)
         })
+    }
+    
+    func presentErrorAlert(forError error: Error) {
+        let alertController = Alert.createAlert(forError: error)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -123,18 +119,6 @@ extension BestSellerViewController: UIPickerViewDataSource {
     
 }
 
-extension BestSellerViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //to do - only call and load google books when the cell is about to appear
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //to do? - maybe
-    }
-    
-}
-
 extension BestSellerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCells: CGFloat = 1
@@ -161,9 +145,23 @@ extension BestSellerViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestSellerCell", for: indexPath) as! BestSellerCollectionViewCell
+        
         let currentBestSeller = bestSellers[indexPath.row]
         
         cell.configureCell(withBestSeller: currentBestSeller)
+        
+        //I know we shouldn't make the cell do so much stuff (like doing network requests to get a whole model), but I couldn't get the right google book image to load for the corresponding best seller other wise (the google books and the best sellers were never in the same order in the array) - I don't know how to use dispatch group yet, so for now I can only do this
+        //loading google book
+        GoogleBookAPIClient.manager.getGoogleBooks(
+            forISBN: currentBestSeller.bookDetails[0].isbn10,
+            completionHandler: { (googleBook) in
+                cell.configureImageForCell(withGoogleBook: googleBook) { (appError) in
+                    self.presentErrorAlert(forError: appError)
+                }
+        },
+            errorHandler: { (appError) in
+                self.presentErrorAlert(forError: appError)
+        })
         
         return cell
     }

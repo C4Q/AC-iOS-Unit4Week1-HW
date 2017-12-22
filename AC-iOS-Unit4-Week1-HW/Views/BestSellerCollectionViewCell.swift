@@ -16,12 +16,16 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     
     func configureCell(withBestSeller bestSeller: BestSeller) {
         self.bestSellerTimeLabel.text = "\(bestSeller.weeksOnList) week(s) on the best seller list"
-        self.bookDescriptionLabel.text = bestSeller.bookDetails[0].description
+        self.bookDescriptionLabel.text = (bestSeller.bookDetails[0].description != "") ? bestSeller.bookDetails[0].description : "No description available."
     }
     
-    func configureImageForCell(withGoogleBook googleBook: GoogleBook, errorHandler: @escaping (Error) -> Void) {
+    func configureImageForCell(withGoogleBook googleBook: GoogleBook?, errorHandler: @escaping (Error) -> Void) {
         self.bookImageView.image = nil
-        self.bookImageView.image = #imageLiteral(resourceName: "placeholder-image")
+        
+        guard let googleBook = googleBook else {
+            self.bookImageView.image = #imageLiteral(resourceName: "placeholder-image")
+            return
+        }
         
         let imageLink = googleBook.volumeInfo.imageLinks.thumbnail
         

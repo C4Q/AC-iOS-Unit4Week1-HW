@@ -16,9 +16,24 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    var googleBook: GoogleBook?
+    var image: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUpViews()
     }
 
+    func setUpViews() {
+        titleLabel.text = googleBook?.volumeInfo.title ?? "No title available"
+        subtitleLabel.text = googleBook?.volumeInfo.subtitle ?? ""
+        authorLabel.text = googleBook?.volumeInfo.authors.joined(separator: ", ") ?? "No author available"
+        descriptionTextView.text = googleBook?.volumeInfo.description ?? "No description available."
+        setUpImage()
+    }
+    
+    func setUpImage() {
+        bookImageView.image = image
+    }
+    
 }
