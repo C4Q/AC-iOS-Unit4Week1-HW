@@ -12,8 +12,14 @@ struct GoogleBookWrapper: Codable {
     let items: [GoogleBook]?
 }
 
-struct GoogleBook: Codable {
+struct GoogleBook: Codable, Equatable {
+    
     let volumeInfo: VolumeInfo
+    
+    static func ==(lhs: GoogleBook, rhs: GoogleBook) -> Bool {
+        return lhs.volumeInfo.title == rhs.volumeInfo.title && lhs.volumeInfo.industryIdentifiers?.first?.identifier == rhs.volumeInfo.industryIdentifiers?.first?.identifier
+    }
+    
 }
 
 struct VolumeInfo: Codable {

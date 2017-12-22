@@ -37,6 +37,8 @@ class PersistentData {
             switch fileName {
             case "Categories.plist":
                 data = try encoder.encode(item as! [String])
+            case "GoogleBooks.plist":
+                data = try encoder.encode(item as! [GoogleBook])
             case _ where isBestSeller:
                 data = try encoder.encode(item as! [BestSeller])
             default:
@@ -60,6 +62,10 @@ class PersistentData {
                 data = try Data(contentsOf: filePath)
                 let categories = try decoder.decode([String].self, from: data)
                 return categories
+            case "GoogleBooks.plist":
+                data = try Data(contentsOf: filePath)
+                let googleBooks = try decoder.decode([GoogleBook].self, from: data)
+                return googleBooks
             case _ where isBestSeller:
                 data = try Data(contentsOf: filePath)
                 let bestSellers = try decoder.decode([BestSeller].self, from: data)
@@ -73,8 +79,5 @@ class PersistentData {
         
         return nil
     }
-    
-    //delete
-    //to do for favorite books
     
 }

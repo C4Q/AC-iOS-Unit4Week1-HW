@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AC-iOS-Unit4-Week1-HW/View Controllers/BookDetailViewController.swift"
-            timestampString = "535675990.095254"
+            filePath = "AC-iOS-Unit4-Week1-HW/Models/GoogleBookData.swift"
+            timestampString = "535679280.234649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "GoogleBookData"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

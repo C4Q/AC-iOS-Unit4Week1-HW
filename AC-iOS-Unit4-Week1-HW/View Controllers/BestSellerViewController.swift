@@ -64,6 +64,7 @@ class BestSellerViewController: UIViewController {
                 let currentCategory = categories[self.categoriesPickerView.selectedRow(inComponent: 0)]
                 
                 self.loadBestSellers(withCategory: currentCategory)
+                self.bestSellerCollectionView.reloadData()
                 
             }, errorHandler: { (appError) in
                 self.presentErrorAlert(forError: appError)

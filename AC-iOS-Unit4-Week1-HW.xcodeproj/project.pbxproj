@@ -31,6 +31,7 @@
 		81AFFB011FEA107A009D54A4 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */; };
 		81B08A791FEC088D00A5B6BF /* ImageClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B08A781FEC088D00A5B6BF /* ImageClientAPI.swift */; };
 		81B08A7C1FEC094400A5B6BF /* GoogleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B08A7B1FEC094400A5B6BF /* GoogleBook.swift */; };
+		81CCBC9D1FEDC5D6004AA660 /* GoogleBookData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCBC9C1FEDC5D6004AA660 /* GoogleBookData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		81AFFB001FEA107A009D54A4 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		81B08A781FEC088D00A5B6BF /* ImageClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageClientAPI.swift; sourceTree = "<group>"; };
 		81B08A7B1FEC094400A5B6BF /* GoogleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBook.swift; sourceTree = "<group>"; };
+		81CCBC9C1FEDC5D6004AA660 /* GoogleBookData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBookData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			children = (
 				81B08A7B1FEC094400A5B6BF /* GoogleBook.swift */,
 				812F0A211FEC67FE003AF18E /* GoogleBookAPIClient.swift */,
+				81CCBC9C1FEDC5D6004AA660 /* GoogleBookData.swift */,
 			);
 			name = "Google Books";
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				819FAA771FEB501B006BECB5 /* BestSellerData.swift in Sources */,
 				819FAA751FEB4AA9006BECB5 /* BestSellerAPIClient.swift in Sources */,
 				812F0A271FECB7B1003AF18E /* ImageCache.swift in Sources */,
+				81CCBC9D1FEDC5D6004AA660 /* GoogleBookData.swift in Sources */,
 				81246F071FEB17B400C1304C /* CategoryAPIClient.swift in Sources */,
 				812F0A221FEC67FE003AF18E /* GoogleBookAPIClient.swift in Sources */,
 				54F137DF1FE302CD00EA22AA /* BestSellerViewController.swift in Sources */,

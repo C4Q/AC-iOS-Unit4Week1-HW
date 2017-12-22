@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         CategoryData.manager.loadCategories()
 
+        GoogleBookData.manager.loadGoogleBooks()
+        
         return true
     }
 

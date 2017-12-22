@@ -127,7 +127,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="210" height="331"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0oI-Ge-xnX">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0oI-Ge-xnX">
                                                     <rect key="frame" x="0.0" y="0.0" width="210" height="331"/>
                                                 </imageView>
                                             </subviews>
@@ -222,10 +222,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mwx-YG-2Dp"/>
                     </view>
+                    <navigationItem key="navigationItem" id="yoN-UC-ADd">
+                        <barButtonItem key="rightBarButtonItem" image="unfilled" id="Shx-Ju-k7E">
+                            <color key="tintColor" red="0.67400000000000004" green="0.68575342699999997" blue="0.74088829519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="favoriteButtonPressed:" destination="pEZ-Vm-kHI" id="xU9-BY-UPd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="2Ye-mg-VFz" id="j9Y-YE-pfP"/>
                         <outlet property="bookImageView" destination="P4h-cP-4Jp" id="fSA-ea-7ZU"/>
                         <outlet property="descriptionTextView" destination="jZu-aC-JjM" id="DkS-WI-JEq"/>
+                        <outlet property="favoritesButton" destination="Shx-Ju-k7E" id="1ZQ-gm-dJ0"/>
                         <outlet property="subtitleLabel" destination="ZuH-zm-eqc" id="kuC-MT-ys9"/>
                         <outlet property="titleLabel" destination="E9y-IO-nY2" id="X6h-JI-Cyn"/>
                     </connections>
@@ -335,8 +344,9 @@
         <image name="best-seller" width="50" height="50"/>
         <image name="favorites" width="50" height="50"/>
         <image name="settings" width="50" height="50"/>
+        <image name="unfilled" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fip-Yv-gQn"/>
+        <segue reference="cqL-Tg-3x0"/>
     </inferredMetricsTieBreakers>
 </document>
