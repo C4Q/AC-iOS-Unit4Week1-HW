@@ -101,6 +101,23 @@ class PersistentStoreManager {
         return true
     }
     
+    
+    func isBookInFavorites(book: BookInfo) -> Bool {
+        // checking for uniqueness
+        let indexExist = favorites.index{ $0.title == book.volumeInfo.title }
+        if indexExist != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getFavoriteWithTitle(title: String) -> Favorite? {
+        let index = getFavorites().index{$0.title == title}
+        guard let indexFound = index else { return nil }
+        return favorites[indexFound]
+    }
+    
     func getFavorites() -> [Favorite] {
         return favorites
     }

@@ -59,7 +59,9 @@ class BestSellerViewController: UIViewController, UIPickerViewDelegate, UIPicker
             let detailPage = nav.childViewControllers.first as! BestSellerDetailViewController
             let selectedCell = sender as! BestSellerCollectionViewCell
             let selectedBook = selectedCell.book
+            let selectedImage = selectedCell.image
             detailPage.book = selectedBook
+            detailPage.imageCover = selectedImage
         }
     }
     
