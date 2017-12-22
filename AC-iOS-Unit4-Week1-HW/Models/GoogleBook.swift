@@ -19,10 +19,10 @@ struct GoogleBook: Codable {
 struct VolumeInfo: Codable {
     let title: String
     let subtitle: String?
-    let authors: [String]
+    let authors: [String]?
     let description: String?
-    let industryIdentifiers: [IndustryIdentifier]
-    let imageLinks: ImageLink
+    let industryIdentifiers: [IndustryIdentifier]?
+    let imageLinks: ImageLink?
 }
 
 struct IndustryIdentifier: Codable {

@@ -18,16 +18,13 @@ class BestSellerViewController: UIViewController {
     
     var categories: [String] = [] {
         didSet {
-            let currentCategory = categories[self.categoriesPickerView.selectedRow(inComponent: 0)]
-            
-            self.loadBestSellers(withCategory: currentCategory)
             categoriesPickerView.reloadComponent(0)
         }
     }
     
     var bestSellers: [BestSeller] = [] {
         didSet {
-           bestSellerCollectionView.reloadData()
+            bestSellerCollectionView.reloadData()
         }
     }
     
@@ -48,6 +45,7 @@ class BestSellerViewController: UIViewController {
             categoriesPickerView.reloadComponent(0)
         }
         
+        bestSellerCollectionView.reloadData()
     }
     
     func loadCategories() {
@@ -60,6 +58,10 @@ class BestSellerViewController: UIViewController {
                 CategoryData.manager.addCategories(categories)
                 
                 self.categories = CategoryData.manager.getCategories()
+                
+                let currentCategory = categories[self.categoriesPickerView.selectedRow(inComponent: 0)]
+                
+                self.loadBestSellers(withCategory: currentCategory)
                 
             }, errorHandler: { (appError) in
                 self.presentErrorAlert(forError: appError)
@@ -90,6 +92,11 @@ class BestSellerViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    //Navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destinationVC =
+//    }
     
 }
 

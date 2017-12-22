@@ -27,7 +27,7 @@ class BookDetailViewController: UIViewController {
     func setUpViews() {
         titleLabel.text = googleBook?.volumeInfo.title ?? "No title available"
         subtitleLabel.text = googleBook?.volumeInfo.subtitle ?? ""
-        authorLabel.text = googleBook?.volumeInfo.authors.joined(separator: ", ") ?? "No author available"
+        authorLabel.text = googleBook?.volumeInfo.authors?.joined(separator: ", ") ?? "No author available"
         descriptionTextView.text = googleBook?.volumeInfo.description ?? "No description available."
         setUpImage()
     }

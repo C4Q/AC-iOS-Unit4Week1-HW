@@ -11,7 +11,7 @@ import Foundation
 class GoogleBookAPIClient {
     private init() {}
     static let manager = GoogleBookAPIClient()
-    private let apiKey = "AIzaSyArOXpzhrDNQtJLOIGDoQFPW9cAhHGNIQ8"
+    private let apiKey = "AIzaSyAGjs_07wY8hvL2_Ib1YMf6IV9QXd4UpZc"
     func getGoogleBooks(forISBN isbn: String, completionHandler: @escaping (GoogleBook?) -> Void, errorHandler: @escaping (Error) -> Void) {
         let urlString = "https://www.googleapis.com/books/v1/volumes?key=\(apiKey)&q=+isbn:\(isbn)"
         
