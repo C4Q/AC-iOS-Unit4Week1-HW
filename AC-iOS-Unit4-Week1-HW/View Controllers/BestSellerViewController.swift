@@ -163,7 +163,6 @@ extension BestSellerViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestSellerCell", for: indexPath) as! BestSellerCollectionViewCell
         let currentBestSeller = bestSellers[indexPath.row]
         
-        //to do google book api call - maybe?
         cell.configureCell(withBestSeller: currentBestSeller)
         
         return cell
