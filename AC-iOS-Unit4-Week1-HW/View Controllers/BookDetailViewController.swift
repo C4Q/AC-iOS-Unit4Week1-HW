@@ -11,16 +11,10 @@ import UIKit
 class BookDetailViewController: UIViewController {
     
     @IBOutlet weak var bookImageView: UIImageView!
-    
     @IBOutlet weak var bookTitleLabel: UILabel!
-    
     @IBOutlet weak var bookSubtitleLabel: UILabel!
-    
     @IBOutlet weak var bookLongDescriptionTextView: UITextView!
-    
-    @IBOutlet weak var addToFavoritesButton: UIButton!
-    
-    
+    @IBOutlet weak var addToFavoritesButton: UIButton!    
     
     /// segue from collection view cell to this detail view controller
     
@@ -31,6 +25,7 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
+    
     }
     
     func loadDetails() {
@@ -45,10 +40,14 @@ class BookDetailViewController: UIViewController {
     /// Add functionality for saving to favorites
     @IBAction func addToFavoritesButtonPressed(_ sender: UIButton) {
 //        guard let image = bookImage else {return}
+        
+
+        
+        
+        
         let _ = FavoriteBookStore.manager.addToFavorites(book: detailedBook!)
 //        navigationController?.popViewController(animated: true) // pops back to the previous View Controller
 
-//    DispatchQueue.main.async {
         // UIAlertController Initializer Statement
         let alertController = UIAlertController(title: "Added to Favorites", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
@@ -59,6 +58,4 @@ class BookDetailViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
 //        }
     }
-    
-    
 }
