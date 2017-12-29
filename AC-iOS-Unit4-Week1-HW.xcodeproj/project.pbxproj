@@ -12,6 +12,7 @@
 		54F137E21FE302CD00EA22AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E01FE302CD00EA22AA /* Main.storyboard */; settings = {ASSET_TAGS = (0x7fd259e35b50, ); }; };
 		54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E31FE302CE00EA22AA /* Assets.xcassets */; };
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
+		8118F7E51FF6E8E4008B1908 /* README.me in Resources */ = {isa = PBXBuildFile; fileRef = 8118F7E41FF6E8E4008B1908 /* README.me */; };
 		813A260B1FE873B6001E2641 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813A260A1FE873B6001E2641 /* BookDetailViewController.swift */; };
 		8165B41F1FEC74FE00AAAAE2 /* FavoriteBookStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8165B41E1FEC74FE00AAAAE2 /* FavoriteBookStore.swift */; };
 		81A5469F1FE5F4D9003C9E6A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A5469E1FE5F4D9003C9E6A /* FavoritesViewController.swift */; };
@@ -36,6 +37,7 @@
 		54F137E31FE302CE00EA22AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F137E61FE302CE00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8118F7E41FF6E8E4008B1908 /* README.me */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.me; sourceTree = "<group>"; };
 		813A260A1FE873B6001E2641 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		8165B41E1FEC74FE00AAAAE2 /* FavoriteBookStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookStore.swift; sourceTree = "<group>"; };
 		81A5469E1FE5F4D9003C9E6A /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				54F137E01FE302CD00EA22AA /* Main.storyboard */,
+				8118F7E41FF6E8E4008B1908 /* README.me */,
 				81A546991FE5F338003C9E6A /* Supporting Files */,
 				81A5469D1FE5F359003C9E6A /* Model Objects */,
 				81A546AA1FE60073003C9E6A /* Clients */,
@@ -219,6 +222,7 @@
 				54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */,
 				54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */,
 				54F137E21FE302CD00EA22AA /* Main.storyboard in Resources */,
+				8118F7E51FF6E8E4008B1908 /* README.me in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,10 +38,10 @@ struct NetworkHelper { /// connects to the internet
                     errorHandler(AppError.otherError(rawError: error))
                 }
             }
-            // Optional for printing data
-            if let dataStr = String(data: data, encoding: .utf8) {
-                print(dataStr)
-            }
+//            // Optional for printing data
+//            if let dataStr = String(data: data, encoding: .utf8) {
+//                print(dataStr)
+//            }
             completionHandler(data)
             }
         }

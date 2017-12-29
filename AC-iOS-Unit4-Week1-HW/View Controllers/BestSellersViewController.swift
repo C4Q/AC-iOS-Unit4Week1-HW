@@ -17,7 +17,7 @@ class BestSellersViewController: UIViewController {
     @IBOutlet weak var bestSellersCollectionView: UICollectionView!
     @IBOutlet weak var bestSellersCategoryPickerView: UIPickerView! {
         didSet {
-            print("picker view set")
+            print("Settings Start Category Loaded")
         }
     }
     
@@ -25,12 +25,8 @@ class BestSellersViewController: UIViewController {
         didSet {
             /// load initialized by func loadCategories
             print("=============== categories SET ===============")
-//            DispatchQueue.main.async {
                 self.bestSellersCategoryPickerView.reloadAllComponents()
                 if let settingsCategory = defaults.value(forKey: "selectedCategoryIndexKey") as? Int { self.bestSellersCategoryPickerView.selectRow(settingsCategory, inComponent: 0, animated: false)
-                    
-//                }
-                    
             }
         }
     }
@@ -39,9 +35,7 @@ class BestSellersViewController: UIViewController {
         didSet {
             /// load initialized in the Category pickerView delegate didSelectRow
             print("=============== nytBooksWithISBN SET ===============")
-//            DispatchQueue.main.async {
                 self.bestSellersCollectionView.reloadData()
-//            }
         }
     }
     
@@ -56,10 +50,7 @@ class BestSellersViewController: UIViewController {
     }
     
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(true)
-    //        bestSellersCategoryPickerView.reloadAllComponents()
-    //    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)

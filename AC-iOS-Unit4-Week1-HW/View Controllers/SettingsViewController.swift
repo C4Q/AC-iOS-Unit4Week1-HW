@@ -74,7 +74,7 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let category = categories[row]
         let categoryIndex = row
         defaults.set(categoryIndex, forKey: "selectedCategoryIndexKey")
-        print("setting category set")
+        print("setting category set to \(category.listNameEncoded)")
     }
 }
 
