@@ -128,7 +128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-Ai-5Ym">
-                                <rect key="frame" x="0.0" y="470" width="375" height="118"/>
+                                <rect key="frame" x="10" y="470" width="355" height="118"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -147,9 +147,9 @@
                             <constraint firstItem="gMp-Ai-5Ym" firstAttribute="top" secondItem="3gD-88-3Eo" secondAttribute="bottom" constant="10" id="0zX-PB-KRR"/>
                             <constraint firstItem="yXu-eP-D3S" firstAttribute="centerX" secondItem="czm-2f-Ahc" secondAttribute="centerX" id="AQA-Y3-e4s"/>
                             <constraint firstItem="3gD-88-3Eo" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" constant="10" id="CBa-Cd-pWk"/>
-                            <constraint firstItem="gMp-Ai-5Ym" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" id="Hgp-Lz-PXT"/>
+                            <constraint firstItem="gMp-Ai-5Ym" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" constant="10" id="Hgp-Lz-PXT"/>
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="leading" secondItem="VO5-99-HY3" secondAttribute="leading" id="LoL-Hb-CBy"/>
-                            <constraint firstItem="VO5-99-HY3" firstAttribute="trailing" secondItem="gMp-Ai-5Ym" secondAttribute="trailing" id="NHb-al-vWo"/>
+                            <constraint firstItem="VO5-99-HY3" firstAttribute="trailing" secondItem="gMp-Ai-5Ym" secondAttribute="trailing" constant="10" id="NHb-al-vWo"/>
                             <constraint firstItem="ivv-vB-Q9C" firstAttribute="trailing" secondItem="VO5-99-HY3" secondAttribute="trailing" id="RBB-2c-6aZ"/>
                             <constraint firstItem="VO5-99-HY3" firstAttribute="trailing" secondItem="3gD-88-3Eo" secondAttribute="trailing" constant="10" id="TnM-sa-FHt"/>
                             <constraint firstItem="3gD-88-3Eo" firstAttribute="top" secondItem="wCT-oF-JVv" secondAttribute="bottom" constant="10" id="Uj7-XC-PdE"/>

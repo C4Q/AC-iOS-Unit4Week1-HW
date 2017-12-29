@@ -44,20 +44,21 @@ class BookDetailViewController: UIViewController {
     
     /// Add functionality for saving to favorites
     @IBAction func addToFavoritesButtonPressed(_ sender: UIButton) {
-        guard let image = bookImage else {return}
+//        guard let image = bookImage else {return}
         let _ = FavoriteBookStore.manager.addToFavorites(book: detailedBook!)
-        navigationController?.popViewController(animated: true)
-//        showAlert(title: "Added to Favorites", message: "Ya")
+//        navigationController?.popViewController(animated: true) // pops back to the previous View Controller
+
+//    DispatchQueue.main.async {
+        // UIAlertController Initializer Statement
+        let alertController = UIAlertController(title: "Added to Favorites", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // First button definition
+        let okAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler: nil)
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+//        }
     }
     
-    
-    /// doesn't work yet
-//    func showAlert(title: String, message: String) {
-//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "Ok", style: .default) { alert in self.tabBarController?.selectedIndex = 0 }
-//        alertController.addAction(okAction)
-//        present(alertController, animated: true, completion: nil)
-//
-//    }
     
 }

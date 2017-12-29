@@ -67,10 +67,11 @@ class FavoriteBookStore {
     func addToFavorites(book: BestSellerBook) -> Bool {
         let indexExist = favorites.index{ $0.displayName == book.displayName }
         /// how to check for uniqueness???
-//        if indexExist != nil {print("Favorite Exists"); return false }
+        //        if indexExist != nil {print("Favorite Exists"); return false }
         
         let newFavorite = BestSellerBook.init(listName: book.listName, displayName: book.displayName, weeksOnList: book.weeksOnList, isbns: book.isbns, bookDetails: book.bookDetails)
-        favorites.append(newFavorite)
+        favorites.append(newFavorite)       
+        
         return true
     }
     
