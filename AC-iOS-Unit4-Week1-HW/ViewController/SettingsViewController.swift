@@ -29,7 +29,16 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         self.settingsPickerView.delegate = self
         self.settingsPickerView.dataSource = self
         loadData()
+//        if let selectedHoroscope = UserDefaults.standard.string(forKey: selectedHoroscopeKey) {
+//            if let selectedIndex = myHoroscopeNames.index(of: selectedHoroscope) {
+//
+//                horoscopePickerView.selectRow(selectedIndex, inComponent: 0, animated: false)
+//            }
+//
+//        }
+        if let selectedCategory = UserDefaults.standard.string(forKey: selectedCategoryKey) {
         
+        }
  
     }
     
@@ -59,14 +68,10 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         return categories[row].categoryName
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        UserDefaults.standard.set(categories[row], forKey: selectedSettingKey)
+        UserDefaults.standard.set(categories[row].categoryName, forKey: selectedSettingKey)
+    
     }
     
 }
-
-
-//    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, forComponent component: Int) {
-
-
 
 

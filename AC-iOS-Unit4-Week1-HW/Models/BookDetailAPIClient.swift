@@ -20,7 +20,12 @@ struct BookDetailAPIClient {
         let completion: (Data) -> Void = {(data: Data) in
             do {
                 let bookDetailInfo = try JSONDecoder().decode(googleBookResults.self, from: data)
-                completionHandler(bookDetailInfo.items)
+                if let items = bookDetailInfo.items {
+                    completionHandler(items)
+                } else {
+                   print("nil")
+                }
+               
             }
             catch {
                 errorHandler(.couldNotParseJSON(rawError: error))
