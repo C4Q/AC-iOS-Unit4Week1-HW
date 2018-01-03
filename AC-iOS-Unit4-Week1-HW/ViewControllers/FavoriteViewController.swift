@@ -10,8 +10,10 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
     
-    var favoriteBooks = [ISBNBook]()
+    // MARK: - Properties
+    var favoriteBooks = [Book]()
     
+    // MARK: - UI & Delegate
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.delegate = self
@@ -22,6 +24,20 @@ class FavoriteViewController: UIViewController {
         }
     }
     
+    // MARK: - Storyboard Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FavDetailSegue" {
+            let destination = segue.destination as! DetailViewController
+            let selectedCell = sender as! FavoriteCell
+            let index = collectionView.indexPath(for: selectedCell)!.item
+            let book = favoriteBooks[index]
+            destination.bookName = book.bookDetails.first?.title.capitalized ?? "No title"
+            destination.bookSummary = book.isbnSummary ?? "No summaary here"
+            destination.bookImage = selectedCell.imageView.image
+        }
+    }
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -32,17 +48,12 @@ class FavoriteViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
+// MARK: - COLLECTIONVIEW
 extension FavoriteViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         if favoriteBooks.isEmpty {
             collectionView.backgroundView = {
                 let label = UILabel()
@@ -66,13 +77,10 @@ extension FavoriteViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCell", for: indexPath) as! FavoriteCell
         let index = indexPath.item
         let book = favoriteBooks[index]
-        
-        if let thumbnailUrl = book.items?.first?.volumeInfo.imageLinks.thumbnail {
-            ImageDownloader.manager.getImage(from: thumbnailUrl,
-                                             completionHandler: {cell.imageView.image = UIImage(data: $0); cell.setNeedsLayout()},
-                                             errorHandler: {print($0)})
+        if let imageFromDisk = FavoriteModel.manager.imageFromDisk(book: book) {
+            cell.imageView.image = imageFromDisk
         } else {
-            // TODO: - Set default image
+            cell.imageView.image = #imageLiteral(resourceName: "placeholderImage")//Placeholder image
         }
         return cell
     }
@@ -85,8 +93,3 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension FavoriteViewController: UICollectionViewDelegate {
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        <#code#>
-    //    }
-}

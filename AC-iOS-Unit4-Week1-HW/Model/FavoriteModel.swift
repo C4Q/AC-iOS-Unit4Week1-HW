@@ -35,3 +35,4 @@ struct FavoriteModel {
         return docImage
     }
 }
+

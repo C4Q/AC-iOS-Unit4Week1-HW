@@ -13,6 +13,9 @@
 		54F137E41FE302CE00EA22AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E31FE302CE00EA22AA /* Assets.xcassets */; };
 		54F137E71FE302CE00EA22AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */; };
 		C4A399451FE8134000610782 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A399441FE8134000610782 /* FavoriteModel.swift */; };
+		C4C0FD321FEB104900C9C594 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C0FD311FEB104900C9C594 /* SettingsViewController.swift */; };
+		C4C0FD341FEB1AE600C9C594 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C0FD331FEB1AE600C9C594 /* UserDefaultManager.swift */; };
+		C4C0FD361FEB27B600C9C594 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C0FD351FEB27B600C9C594 /* DetailViewController.swift */; };
 		C4FC52801FE3083F00EC92C1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FC527F1FE3083F00EC92C1 /* Network.swift */; };
 		C4FC52821FE3087900EC92C1 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FC52811FE3087900EC92C1 /* CategoryModel.swift */; };
 		C4FC52841FE3102E00EC92C1 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FC52831FE3102E00EC92C1 /* BookModel.swift */; };
@@ -32,6 +35,9 @@
 		54F137E61FE302CE00EA22AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54F137E81FE302CE00EA22AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4A399441FE8134000610782 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		C4C0FD311FEB104900C9C594 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C4C0FD331FEB1AE600C9C594 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		C4C0FD351FEB27B600C9C594 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C4FC527F1FE3083F00EC92C1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		C4FC52811FE3087900EC92C1 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		C4FC52831FE3102E00EC92C1 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
@@ -73,13 +79,11 @@
 			isa = PBXGroup;
 			children = (
 				54F137DC1FE302CD00EA22AA /* AppDelegate.swift */,
-				C4FC528B1FE32C7600EC92C1 /* FavoriteViewController.swift */,
-				54F137DE1FE302CD00EA22AA /* SearchViewController.swift */,
-				54F137E01FE302CD00EA22AA /* Main.storyboard */,
-				C4FC528D1FE3303500EC92C1 /* FavoriteCell.swift */,
-				C4FC52851FE314E500EC92C1 /* BookCell.swift */,
-				C4FC527F1FE3083F00EC92C1 /* Network.swift */,
 				C40EB6781FE817D900AE8E37 /* Model */,
+				C4C0FD711FEC094C00C9C594 /* ViewControllers */,
+				C4C0FD721FEC096700C9C594 /* Cells */,
+				54F137E01FE302CD00EA22AA /* Main.storyboard */,
+				C4FC527F1FE3083F00EC92C1 /* Network.swift */,
 				54F137E31FE302CE00EA22AA /* Assets.xcassets */,
 				54F137E51FE302CE00EA22AA /* LaunchScreen.storyboard */,
 				54F137E81FE302CE00EA22AA /* Info.plist */,
@@ -95,8 +99,29 @@
 				C4FC52871FE3195B00EC92C1 /* ISBNBookModel.swift */,
 				C4FC52891FE3268700EC92C1 /* KeyedArchModel.swift */,
 				C4FC52811FE3087900EC92C1 /* CategoryModel.swift */,
+				C4C0FD331FEB1AE600C9C594 /* UserDefaultManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C4C0FD711FEC094C00C9C594 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C4FC528B1FE32C7600EC92C1 /* FavoriteViewController.swift */,
+				54F137DE1FE302CD00EA22AA /* SearchViewController.swift */,
+				C4C0FD351FEB27B600C9C594 /* DetailViewController.swift */,
+				C4C0FD311FEB104900C9C594 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C4C0FD721FEC096700C9C594 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C4FC528D1FE3303500EC92C1 /* FavoriteCell.swift */,
+				C4FC52851FE314E500EC92C1 /* BookCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,8 +205,11 @@
 				C4FC52841FE3102E00EC92C1 /* BookModel.swift in Sources */,
 				C4FC528E1FE3303500EC92C1 /* FavoriteCell.swift in Sources */,
 				C4FC52801FE3083F00EC92C1 /* Network.swift in Sources */,
+				C4C0FD341FEB1AE600C9C594 /* UserDefaultManager.swift in Sources */,
 				C4A399451FE8134000610782 /* FavoriteModel.swift in Sources */,
 				C4FC528A1FE3268700EC92C1 /* KeyedArchModel.swift in Sources */,
+				C4C0FD321FEB104900C9C594 /* SettingsViewController.swift in Sources */,
+				C4C0FD361FEB27B600C9C594 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,20 @@ import Foundation
 
 struct CategoryAPIClient {
     private init() {}
-    static let manager = CategoryAPIClient()
+    
+    //ASK ABOUT THIS, WHY VAR
+    static var manager = CategoryAPIClient()
+    
+    private var allCategory = [Category]()
+    
+    func listAllCategories() -> [Category] {
+        return allCategory
+    }
+    
+    mutating func setCategories(_ categories: [Category]) {
+        allCategory = categories
+    }
+    
     
     var endpointForCategoryList: String {
         var endpoint = URLComponents(string: "https://api.nytimes.com/svc/books/v3/lists/names.json?")
@@ -21,8 +34,7 @@ struct CategoryAPIClient {
     }
     
     func endpointForBooksFromCategory(_ category: Category) -> String {
-        let categoryName = category.listName
-        let categoryWithHyphens = categoryName.replacingOccurrences(of: " ", with: "-")
+        let categoryWithHyphens = category.listNameEncoded
         
         var endpoint = URLComponents(string: "https://api.nytimes.com/svc/books/v3/lists.json")
         endpoint?.queryItems = [

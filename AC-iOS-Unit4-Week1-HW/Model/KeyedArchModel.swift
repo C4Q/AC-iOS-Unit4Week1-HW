@@ -13,7 +13,7 @@ class KeyedArchiverModel {
     static let shared = KeyedArchiverModel()
     private init() {}
     
-    static let plistPathName = "FavoriteBooks.plist"
+    static let plistPathName = "FavoriteBooksTEST.plist"
     
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -24,7 +24,7 @@ class KeyedArchiverModel {
         return KeyedArchiverModel.shared.documentsDirectory().appendingPathComponent(pathName)
     }
     
-    var favBooks = [ISBNBook]() {
+    var favBooks = [Book]() {
         didSet {
             saveFavorites()
         }
@@ -47,14 +47,14 @@ class KeyedArchiverModel {
         let path = dataFilePath(pathName: KeyedArchiverModel.plistPathName)
         do {
             let data = try Data.init(contentsOf: path)
-            favBooks = try decoder.decode([ISBNBook].self, from: data)
+            favBooks = try decoder.decode([Book].self, from: data)
         } catch {
             print("Decoder error: \(error.localizedDescription)")
         }
     }
     
     //    add
-    func addFavBook(book: ISBNBook) {
+    func addFavBook(book: Book) {
         favBooks.append(book)
     }
     
@@ -64,7 +64,7 @@ class KeyedArchiverModel {
     }
     
     //    read
-    func getFavBooks() -> [ISBNBook] {
+    func getFavBooks() -> [Book] {
         return favBooks
     }
 }

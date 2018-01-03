@@ -27,13 +27,8 @@ struct BookAPIClient {
                                               errorHandler: {print($0)})
     }
     
-    
 }
 
-struct BookWithImage {
-    let book: Book
-    let image: UIImage?
-}
 
 struct BookResult: Codable {
     let status: String
@@ -54,6 +49,7 @@ struct Book: Codable {
     let asterisk: Int
     let dagger: Int
     let amazonProductURL: String
+    var isbnSummary: String?
     let isbns: [Isbn]
     let bookDetails: [BookDetail]
     let reviews: [Review]
@@ -74,7 +70,7 @@ struct Isbn: Codable {
 
 struct BookDetail: Codable {
     let title: String
-    let description: String
+    let summary: String?
     let contributor: String
     let author: String
     let contributorNote: String
@@ -83,6 +79,12 @@ struct BookDetail: Codable {
     let publisher: String
     let primaryIsbn13: String
     let primaryIsbn10: String
+}
+
+struct BookPassedInSegue {
+    let name: String
+    let summary: String
+    let image: UIImage?
 }
 
 extension BookResult {
@@ -97,6 +99,7 @@ extension BookResult {
 
 extension Book {
     enum CodingKeys: String, CodingKey {
+        case isbnSummary
         case listName = "list_name"
         case displayName = "display_name"
         case bestsellersDate = "bestsellers_date"
@@ -133,7 +136,7 @@ extension Isbn {
 extension BookDetail {
     enum CodingKeys: String, CodingKey {
         case title = "title"
-        case description = "description"
+        case summary = "description"
         case contributor = "contributor"
         case author = "author"
         case contributorNote = "contributor_note"
