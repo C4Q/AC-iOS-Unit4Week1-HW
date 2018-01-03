@@ -22,8 +22,6 @@ struct BestSeller: Codable {
     }
 }
 
-//to do - make either BestSeller or GoogleBook conform to Equatable so you can sort and make favorites
-
 struct BookDetails: Codable {
     let description: String?
     let isbn10: String

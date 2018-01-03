@@ -16,7 +16,7 @@ class GoogleBookData {
     
     var googleBooks: [GoogleBook] = [] {
         didSet {
-            //save google books
+            saveGoogleBook()
         }
     }
     
@@ -24,8 +24,6 @@ class GoogleBookData {
     func saveGoogleBook() {
         PersistentData.manager.saveItem(googleBooks, atFileName: pListName)
     }
-    
-    //won't load or save - fix
     
     //load
     func loadGoogleBooks() {

@@ -53,7 +53,7 @@ extension FavoriteBooksViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpacing
     }

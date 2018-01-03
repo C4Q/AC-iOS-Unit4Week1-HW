@@ -28,7 +28,7 @@ class BestSellerViewController: UIViewController {
         }
     }
     
-    var currentGoogleBook: GoogleBook?
+    var googleBooks: [(isbn: String, googleBook: GoogleBook?)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +45,7 @@ class BestSellerViewController: UIViewController {
         if let categoryIndex = Settings.getCategory(), Settings.categoryChanged {
             categoriesPickerView.selectRow(categoryIndex, inComponent: 0, animated: true)
             categoriesPickerView.reloadComponent(0)
+            loadBestSellers(withCategory: categories[categoryIndex])
         }
         
         bestSellerCollectionView.reloadData()
@@ -98,10 +99,17 @@ class BestSellerViewController: UIViewController {
     
     //Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? BookDetailViewController, let cell = sender as? BestSellerCollectionViewCell {
+        if let destinationVC = segue.destination as? BookDetailViewController, let cell = sender as? BestSellerCollectionViewCell, let indexPath = bestSellerCollectionView.indexPath(for: cell) {
             
-            destinationVC.googleBook = self.currentGoogleBook
+            let currentBestSeller = bestSellers[indexPath.row]
+            
+            let usableISBN = (currentBestSeller.bookDetails[0].isbn10 != "None") ? currentBestSeller.bookDetails[0].isbn10 : currentBestSeller.bookDetails[0].isbn13
+            
+            let allMatchingGoogleBooks = googleBooks.filter{$0.isbn == usableISBN}
+            
+            destinationVC.googleBook = allMatchingGoogleBooks[0].googleBook
             destinationVC.image = cell.bookImageView.image
+     
         }
     }
     
@@ -131,6 +139,22 @@ extension BestSellerViewController: UIPickerViewDataSource {
         return categories[row]
     }
     
+}
+
+extension BestSellerViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let bestSeller = bestSellers[indexPath.row]
+        
+        let usableISBN = (bestSeller.bookDetails[0].isbn10 != "None") ? bestSeller.bookDetails[0].isbn10 : bestSeller.bookDetails[0].isbn13
+        
+        let allMatchingGoogleBooks = googleBooks.filter{$0.isbn == usableISBN}
+        
+        if allMatchingGoogleBooks.isEmpty {
+            return
+        }
+     
+        performSegue(withIdentifier: "detailedSegue", sender: collectionView.cellForItem(at: indexPath))
+    }
 }
 
 extension BestSellerViewController: UICollectionViewDelegateFlowLayout {
@@ -165,13 +189,28 @@ extension BestSellerViewController: UICollectionViewDataSource {
         cell.configureCell(withBestSeller: currentBestSeller)
         
         cell.bookImageView.image = nil
+        
+        let usableISBN = (currentBestSeller.bookDetails[0].isbn10 != "None") ? currentBestSeller.bookDetails[0].isbn10 : currentBestSeller.bookDetails[0].isbn13
+        
+        let currentISBNs = self.googleBooks.map{$0.isbn}
+        
+        if currentISBNs.contains(usableISBN) {
+            let filteredGoogleBooks = googleBooks.filter{$0.isbn == usableISBN}
+            cell.configureImageForCell(withGoogleBook: filteredGoogleBooks[0].googleBook) { (appError) in
+                self.presentErrorAlert(forError: appError)
+            }
+        }
+        
         //I know we shouldn't make the cell do so much stuff (like doing network requests to get a whole model), but I couldn't get the right google book image to load for the corresponding best seller other wise (the google books and the best sellers were never in the same order in the array) - I don't know how to use dispatch group yet, so for now I can only do this
-        //loading google book
+        
         GoogleBookAPIClient.manager.getGoogleBooks(
-            forISBN: currentBestSeller.bookDetails[0].isbn10,
+            forISBN: usableISBN,
             completionHandler: { (googleBook) in
                
-               self.currentGoogleBook = googleBook
+                let googleBookInfo: (isbn: String, googleBook: GoogleBook?) = (isbn: usableISBN, googleBook: googleBook)
+                
+                self.googleBooks.append(googleBookInfo)
+                
                 cell.configureImageForCell(withGoogleBook: googleBook) { (appError) in
                     self.presentErrorAlert(forError: appError)
                 }

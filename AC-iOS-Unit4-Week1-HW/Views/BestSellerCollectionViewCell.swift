@@ -21,6 +21,8 @@ class BestSellerCollectionViewCell: UICollectionViewCell {
     
     func configureImageForCell(withGoogleBook googleBook: GoogleBook?, errorHandler: @escaping (Error) -> Void) {
         
+        self.bookImageView.image = nil
+        
         guard let googleBook = googleBook, let imageLink = googleBook.volumeInfo.imageLinks?.thumbnail else {
             self.bookImageView.image = #imageLiteral(resourceName: "placeholder-image")
             return

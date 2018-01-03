@@ -74,7 +74,6 @@
                                             <outlet property="bestSellerTimeLabel" destination="XeH-Oe-Vqo" id="jMf-qJ-kKb"/>
                                             <outlet property="bookDescriptionLabel" destination="wAJ-WA-X4I" id="rcD-Yq-xQ4"/>
                                             <outlet property="bookImageView" destination="8rl-KX-2je" id="yKq-UU-l8n"/>
-                                            <segue destination="pEZ-Vm-kHI" kind="show" identifier="detailedSegue" id="Fip-Yv-gQn"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -96,6 +95,7 @@
                     <connections>
                         <outlet property="bestSellerCollectionView" destination="rY0-De-ITm" id="b5n-Zc-VMf"/>
                         <outlet property="categoriesPickerView" destination="3R3-DI-C9W" id="ZsV-hG-Kv2"/>
+                        <segue destination="pEZ-Vm-kHI" kind="show" identifier="detailedSegue" id="Ce3-ms-apa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
