@@ -59,6 +59,13 @@ class BestSellerViewController: UIViewController {
             DispatchQueue.main.async {
                 self.bestSellersPickerView.reloadComponent(0)
                 self.collectionView.reloadData()
+                if UserDefaultsHelper.manager.getPickerIndex() != nil {
+                    self.bestSellersPickerView.selectRow(UserDefaultsHelper.manager.getPickerIndex()!, inComponent: 0, animated: true)
+                }
+                else {
+                    self.bestSellersPickerView.selectRow(7, inComponent: 0, animated: true)
+                }
+
             }
         }
     }

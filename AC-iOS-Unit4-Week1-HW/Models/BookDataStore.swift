@@ -29,7 +29,7 @@ static let manager = BookDataStore()
 }
 
     // /documents/Favorites.plist
-    //returns the path for supplied name from the documents directory
+    //returns the path for supplied name(which is kpathname in this case, it is a string and this func lets us add that string at the end of that url)
     func dataFilePath(withPathName path: String) -> URL {
         return BookDataStore.manager.documentsDirectory().appendingPathComponent(path)
     }
@@ -47,7 +47,7 @@ static let manager = BookDataStore()
         }
     }
     //load
-    public func load() {
+    public func load() { 
         let path = dataFilePath(withPathName: BookDataStore.kPathname)
         let decoder = PropertyListDecoder()
         do {

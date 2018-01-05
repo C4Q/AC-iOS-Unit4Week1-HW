@@ -15,7 +15,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var categories = [AllCategories]() {
         didSet {
             DispatchQueue.main.async {
-               self.settingsPickerView.reloadComponent(0)
+               self.settingsPickerView.reloadAllComponents()
+                if UserDefaultsHelper.manager.getPickerIndex() != nil {
+                    self.settingsPickerView.selectRow(UserDefaultsHelper.manager.getPickerIndex()!, inComponent: 0, animated: true)
+                     }
+                else {
+                    self.settingsPickerView.selectRow(7, inComponent: 0, animated: true)
+                }
             }
         }
     }
@@ -36,16 +42,18 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //            }
 //
 //        }
-        if let selectedCategory = UserDefaults.standard.string(forKey: selectedCategoryKey) {
-        
-        }
+//        if let selectedCategory = UserDefaults.standard.string(forKey: selectedCategoryKey) {
+//1
+//        }
  
     }
     
+   
     func loadData() {
         guard let url = URL(string:"https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=44b75ac0d27a44b5a98c2919a81ffa76") else {return}
         let completion = {(onlineCategories: [AllCategories]) in
             self.categories = onlineCategories
+//            self.settingsPickerView.selectRow(UserDefaultsHelper.manager.gettingPickerIndex(), inComponent: 0, animated: true)
         }
         let printErrors = {(error: Error) in
             print(error)
@@ -68,8 +76,8 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         return categories[row].categoryName
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(categories[row].categoryName, forKey: selectedSettingKey)
-    
+         UserDefaultsHelper.manager.setPickerIndex(index: row)
+        
     }
     
 }
