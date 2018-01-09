@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             if UserDefaultHelper.manager.getCategory() != nil{
                 self.pickerView.selectRow(UserDefaultHelper.manager.getCategory()!, inComponent: 0, animated: false)
             } else{
-                self.pickerView.selectRow(1, inComponent: 0, animated: false)
+                self.pickerView.selectRow(7, inComponent: 0, animated: false)
             }
         }
     }
