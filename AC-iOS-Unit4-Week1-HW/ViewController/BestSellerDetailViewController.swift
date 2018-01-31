@@ -10,7 +10,7 @@ import UIKit
 
 class BestSellerDetailViewController: UIViewController {
 
-    var book: BooksInfo!
+    var book: BooksInfo?
     
     @IBOutlet weak var longDescription: UITextView!
     @IBOutlet weak var subtitle: UILabel!
@@ -28,12 +28,13 @@ class BestSellerDetailViewController: UIViewController {
 
     @IBAction func addToFavorite(_ sender: UIButton) {
         guard let image = detailViewImage.image else { return }
-        let _ = BookDataStore.manager.addToFavorites(book: book, andImage: image)
+        guard let unwrappedBook = book else {return}
+        let _ = BookDataStore.manager.addToFavorites(book: unwrappedBook, andImage: image)
         navigationController?.popViewController(animated: true)
     }
     
     func loadImage() {
-        guard let imageURLStr = book.volumeInfo.imageLinks?.thumbnail else {
+        guard let imageURLStr = book?.volumeInfo.imageLinks?.thumbnail else {
             return 
         }
         let completion: (UIImage) -> Void = {(onlineImage: UIImage) in

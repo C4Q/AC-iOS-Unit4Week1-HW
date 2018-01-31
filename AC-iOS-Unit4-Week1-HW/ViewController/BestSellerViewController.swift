@@ -74,6 +74,8 @@ class BestSellerViewController: UIViewController {
         guard let url = URL(string:"https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=44b75ac0d27a44b5a98c2919a81ffa76") else {return}
         let completion = {(onlineCategories: [AllCategories]) in
             self.categories = onlineCategories
+            guard let firstCategories = onlineCategories.first else {return}
+            self.loadBestSellers(fromCategoryName: firstCategories.key)
         }
         let printErrors = {(error: Error) in
             print(error)

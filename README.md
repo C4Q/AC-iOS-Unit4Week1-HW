@@ -1,7 +1,5 @@
 # Unit 4 Week 1 HW
 
-![gif](https://github.com/C4Q/AC-iOS/blob/master/homework/unit4/Unit4Week1HW/exampleGif.gif)
-
 # Overview
 
 Use the NYTimes Best Sellers Books API to load a list of best selling books in a collection view.   The user should be able to select different categories to view its best selling books.  Selecting a book should segue to a detail view controller where the user can see more information about the book and favorite the book.  Favoriting a book should save it to the user's phone.  The user should be able to view all the books that they have favorited.  Favorites should persist between launches.  The user should be able to use a Settings page to set the default category that will be loaded in the list of recent best sellers.
@@ -84,17 +82,4 @@ https://api.nytimes.com/svc/books/v3/lists.json?api-key=\(key)&list=\(hyphen-sep
 https://www.googleapis.com/books/v1/volumes?q=+isbn:0385514239
 ```
 
-# Rubric
 
-|Criterion|Points|
-|---|---|
-| App correctly uses Auto Layout for all portrait iPhones | 4 |
-| Variable Naming and Readability | 4 |
-| App follows best practices in MVC and organization | 4 |
-| Loads books into a collection view based on the picker view | 4 |
-| Collection view cell is correctly configured including the cover image | 4 |
-| Selecting a cell from the Best Sellers tab or Favorites tab segues to a detail view controller with more information | 4 |
-| Favoriting a book saves it to the File Manager and persists between launches | 4 |
-| Favorited books load appropriately in the Favorites tab | 4 |
-| Selecting a categoy in the Settings tab saves it using UserDefaults | 4 |
-| Picker views in the Settings tab and Best Sellers tab spin appropriately to the saved category (if available) | 4 |
